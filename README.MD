@@ -6,10 +6,6 @@ Drop-in Django Models into any Python WSGI framework.
 - This is not ready yet. Once it is, I'll publish to PyPi.
 - All Praise to the Django Dev Team
 
-
-## Bugs
-- Migration files are currently being saved to a directory that is relative to the library itself rather than locally in main app/project directory. 
-
 ## Getting Started
 
 Create an app directory for your models and settings (DB Connection Details) 
@@ -83,6 +79,10 @@ def get_random_person():
     return '{}'.format(person.name)
 
 ``` 
+
+## Bugs
+- Migration files are currently being saved to a directory that is relative to the library itself rather than locally in main app/project directory. 
+
 
 ## LICENSE
 MIT 
