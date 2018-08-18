@@ -1,6 +1,6 @@
 import os
 
-from django.apps import AppConfig
+from djmodels.apps import AppConfig
 
 
 class NSAppConfig(AppConfig):

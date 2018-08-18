@@ -3,14 +3,14 @@ import unittest
 from copy import copy
 from decimal import Decimal
 
-from django.conf import settings
-from django.contrib.gis.gdal import DataSource
-from django.contrib.gis.utils.layermapping import (
+from djmodels.conf import settings
+from djmodels.contrib.gis.gdal import DataSource
+from djmodels.contrib.gis.utils.layermapping import (
     InvalidDecimal, InvalidString, LayerMapError, LayerMapping,
     MissingForeignKey,
 )
-from django.db import connection
-from django.test import TestCase, override_settings
+from djmodels.db import connection
+from djmodels.test import TestCase, override_settings
 
 from .models import (
     City, County, CountyFeat, ICity1, ICity2, Interstate, Invalid, State,

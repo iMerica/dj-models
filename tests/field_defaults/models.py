@@ -11,7 +11,7 @@ field.
 
 from datetime import datetime
 
-from django.db import models
+from djmodels.db import models
 
 
 class Article(models.Model):

@@ -2,11 +2,11 @@ import unittest
 from io import StringIO
 from unittest import mock
 
-from django.db import connection
-from django.db.backends.base.creation import BaseDatabaseCreation
-from django.db.backends.mysql.creation import DatabaseCreation
-from django.db.utils import DatabaseError
-from django.test import SimpleTestCase
+from djmodels.db import connection
+from djmodels.db.backends.base.creation import BaseDatabaseCreation
+from djmodels.db.backends.mysql.creation import DatabaseCreation
+from djmodels.db.utils import DatabaseError
+from djmodels.test import SimpleTestCase
 
 
 @unittest.skipUnless(connection.vendor == 'mysql', 'MySQL tests')

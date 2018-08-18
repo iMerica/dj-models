@@ -1,6 +1,6 @@
-from django.db.models import IntegerField
-from django.db.models.functions import Chr, Left, Ord
-from django.test import TestCase
+from djmodels.db.models import IntegerField
+from djmodels.db.models.functions import Chr, Left, Ord
+from djmodels.test import TestCase
 
 from ..models import Author
 

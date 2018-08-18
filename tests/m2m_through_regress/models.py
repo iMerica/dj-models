@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
-from django.db import models
+from djmodels.contrib.auth.models import User
+from djmodels.db import models
 
 
 # Forward declared intermediate model

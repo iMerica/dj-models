@@ -1,6 +1,6 @@
-from django.core.exceptions import FieldError
-from django.db.models import Count, F, Max
-from django.test import TestCase
+from djmodels.core.exceptions import FieldError
+from djmodels.db.models import Count, F, Max
+from djmodels.test import TestCase
 
 from .models import A, B, Bar, D, DataPoint, Foo, RelatedPoint
 
@@ -142,7 +142,7 @@ class AdvancedTests(TestCase):
     def test_update_m2m_field(self):
         msg = (
             'Cannot update model field '
-            '<django.db.models.fields.related.ManyToManyField: m2m_foo> '
+            '<djmodels.db.models.fields.related.ManyToManyField: m2m_foo> '
             '(only non-relations and foreign keys permitted).'
         )
         with self.assertRaisesMessage(FieldError, msg):

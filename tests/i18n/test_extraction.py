@@ -9,17 +9,17 @@ from unittest import mock, skipIf, skipUnless
 
 from admin_scripts.tests import AdminScriptTestCase
 
-from django.core import management
-from django.core.management import execute_from_command_line
-from django.core.management.base import CommandError
-from django.core.management.commands.makemessages import (
+from djmodels.core import management
+from djmodels.core.management import execute_from_command_line
+from djmodels.core.management.base import CommandError
+from djmodels.core.management.commands.makemessages import (
     Command as MakeMessagesCommand, write_pot_file,
 )
-from django.core.management.utils import find_command
-from django.test import SimpleTestCase, override_settings
-from django.test.utils import captured_stderr, captured_stdout
-from django.utils._os import symlinks_supported
-from django.utils.translation import TranslatorCommentWarning
+from djmodels.core.management.utils import find_command
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.test.utils import captured_stderr, captured_stdout
+from djmodels.utils._os import symlinks_supported
+from djmodels.utils.translation import TranslatorCommentWarning
 
 from .utils import POFileAssertionMixin, RunInTmpDirMixin, copytree
 
@@ -34,7 +34,7 @@ class ExtractorTests(POFileAssertionMixin, RunInTmpDirMixin, SimpleTestCase):
 
     work_subdir = 'commands'
 
-    PO_FILE = 'locale/%s/LC_MESSAGES/django.po' % LOCALE
+    PO_FILE = 'locale/%s/LC_MESSAGES/djmodels.po' % LOCALE
 
     def _run_makemessages(self, **options):
         os.chdir(self.test_dir)
@@ -92,9 +92,9 @@ class ExtractorTests(POFileAssertionMixin, RunInTmpDirMixin, SimpleTestCase):
 
     def assertLocationCommentPresent(self, po_filename, line_number, *comment_parts):
         r"""
-        self.assertLocationCommentPresent('django.po', 42, 'dirA', 'dirB', 'foo.py')
+        self.assertLocationCommentPresent('djmodels.po', 42, 'dirA', 'dirB', 'foo.py')
 
-        verifies that the django.po file has a gettext-style location comment of the form
+        verifies that the djmodels.po file has a gettext-style location comment of the form
 
         `#: dirA/dirB/foo.py:42`
 
@@ -341,7 +341,7 @@ class BasicExtractorTests(ExtractorTests):
         cmd = MakeMessagesCommand()
         cmd.ignore_patterns = ['CVS', '.*', '*~', '*.pyc']
         cmd.symlinks = False
-        cmd.domain = 'django'
+        cmd.domain = 'djmodels'
         cmd.extensions = ['html', 'txt', 'py']
         cmd.verbosity = 0
         cmd.locale_paths = []
@@ -356,7 +356,7 @@ class BasicExtractorTests(ExtractorTests):
         found_exts = {os.path.splitext(tfile.file)[1] for tfile in found_files}
         self.assertEqual(found_exts.difference({'.js'}), set())
 
-    @mock.patch('django.core.management.commands.makemessages.popen_wrapper')
+    @mock.patch('djmodels.core.management.commands.makemessages.popen_wrapper')
     def test_makemessages_gettext_version(self, mocked_popen_wrapper):
         # "Normal" output:
         mocked_popen_wrapper.return_value = (
@@ -387,7 +387,7 @@ class BasicExtractorTests(ExtractorTests):
         Update of PO file doesn't corrupt it with non-UTF-8 encoding on Windows
         (#23271).
         """
-        BR_PO_BASE = 'locale/pt_BR/LC_MESSAGES/django'
+        BR_PO_BASE = 'locale/pt_BR/LC_MESSAGES/djmodels'
         shutil.copyfile(BR_PO_BASE + '.pristine', BR_PO_BASE + '.po')
         management.call_command('makemessages', locale=['pt_BR'], verbosity=0)
         self.assertTrue(os.path.exists(BR_PO_BASE + '.po'))
@@ -514,7 +514,7 @@ class SymlinkExtractorTests(ExtractorTests):
 
 class CopyPluralFormsExtractorTests(ExtractorTests):
 
-    PO_FILE_ES = 'locale/es/LC_MESSAGES/django.po'
+    PO_FILE_ES = 'locale/es/LC_MESSAGES/djmodels.po'
 
     def test_copy_plural_forms(self):
         management.call_command('makemessages', locale=[LOCALE], verbosity=0)
@@ -542,7 +542,7 @@ class CopyPluralFormsExtractorTests(ExtractorTests):
         self.assertTrue(os.path.exists(self.PO_FILE))
         with open(self.PO_FILE, 'r') as fp:
             po_contents = fp.read()
-            self.assertNotIn("#-#-#-#-#  django.pot (PACKAGE VERSION)  #-#-#-#-#\\n", po_contents)
+            self.assertNotIn("#-#-#-#-#  djmodels.pot (PACKAGE VERSION)  #-#-#-#-#\\n", po_contents)
             self.assertMsgId('First `trans`, then `blocktrans` with a plural', po_contents)
             self.assertMsgIdPlural('Plural for a `trans` and `blocktrans` collision case', po_contents)
 
@@ -626,7 +626,7 @@ class LocationCommentsTests(ExtractorTests):
         self.assertTrue(os.path.exists(self.PO_FILE))
         self.assertLocationCommentNotPresent(self.PO_FILE, None, 'test.html')
 
-    @mock.patch('django.core.management.commands.makemessages.Command.gettext_version', new=(0, 18, 99))
+    @mock.patch('djmodels.core.management.commands.makemessages.Command.gettext_version', new=(0, 18, 99))
     def test_add_location_gettext_version_check(self):
         """
         CommandError is raised when using makemessages --add-location with
@@ -639,7 +639,7 @@ class LocationCommentsTests(ExtractorTests):
 
 class KeepPotFileExtractorTests(ExtractorTests):
 
-    POT_FILE = 'locale/django.pot'
+    POT_FILE = 'locale/djmodels.pot'
 
     def test_keep_pot_disabled_by_default(self):
         management.call_command('makemessages', locale=[LOCALE], verbosity=0)
@@ -655,9 +655,9 @@ class KeepPotFileExtractorTests(ExtractorTests):
 
 
 class MultipleLocaleExtractionTests(ExtractorTests):
-    PO_FILE_PT = 'locale/pt/LC_MESSAGES/django.po'
-    PO_FILE_DE = 'locale/de/LC_MESSAGES/django.po'
-    PO_FILE_KO = 'locale/ko/LC_MESSAGES/django.po'
+    PO_FILE_PT = 'locale/pt/LC_MESSAGES/djmodels.po'
+    PO_FILE_DE = 'locale/de/LC_MESSAGES/djmodels.po'
+    PO_FILE_KO = 'locale/ko/LC_MESSAGES/djmodels.po'
     LOCALES = ['pt', 'de', 'ch']
 
     def test_multiple_locales(self):
@@ -675,7 +675,7 @@ class MultipleLocaleExtractionTests(ExtractorTests):
         # Excluding locales that do not compile
         management.call_command('makemessages', exclude=['ja', 'es_AR'], verbosity=0)
         self.assertTrue(os.path.exists(self.PO_FILE_KO))
-        self.assertFalse(os.path.exists('locale/_do_not_pick/LC_MESSAGES/django.po'))
+        self.assertFalse(os.path.exists('locale/_do_not_pick/LC_MESSAGES/djmodels.po'))
 
 
 class ExcludedLocaleExtractionTests(ExtractorTests):
@@ -683,7 +683,7 @@ class ExcludedLocaleExtractionTests(ExtractorTests):
     work_subdir = 'exclude'
 
     LOCALES = ['en', 'fr', 'it']
-    PO_FILE = 'locale/%s/LC_MESSAGES/django.po'
+    PO_FILE = 'locale/%s/LC_MESSAGES/djmodels.po'
 
     def _set_times_for_all_po_files(self):
         """
@@ -702,7 +702,7 @@ class ExcludedLocaleExtractionTests(ExtractorTests):
             # `call_command` bypasses the parser; by calling
             # `execute_from_command_line` with the help subcommand we
             # ensure that there are no issues with the parser itself.
-            execute_from_command_line(['django-admin', 'help', 'makemessages'])
+            execute_from_command_line(['djmodels-admin', 'help', 'makemessages'])
 
     def test_one_locale_excluded(self):
         management.call_command('makemessages', exclude=['it'], stdout=StringIO())
@@ -747,9 +747,9 @@ class CustomLayoutExtractionTests(ExtractorTests):
         with override_settings(LOCALE_PATHS=[os.path.join(self.test_dir, 'project_locale')]):
             management.call_command('makemessages', locale=[LOCALE], verbosity=0)
             project_de_locale = os.path.join(
-                self.test_dir, 'project_locale', 'de', 'LC_MESSAGES', 'django.po')
+                self.test_dir, 'project_locale', 'de', 'LC_MESSAGES', 'djmodels.po')
             app_de_locale = os.path.join(
-                self.test_dir, 'app_with_locale', 'locale', 'de', 'LC_MESSAGES', 'django.po')
+                self.test_dir, 'app_with_locale', 'locale', 'de', 'LC_MESSAGES', 'djmodels.po')
             self.assertTrue(os.path.exists(project_de_locale))
             self.assertTrue(os.path.exists(app_de_locale))
 

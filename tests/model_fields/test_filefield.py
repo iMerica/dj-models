@@ -2,11 +2,11 @@ import os
 import sys
 import unittest
 
-from django.core.files import temp
-from django.core.files.base import ContentFile
-from django.core.files.uploadedfile import TemporaryUploadedFile
-from django.db.utils import IntegrityError
-from django.test import TestCase, override_settings
+from djmodels.core.files import temp
+from djmodels.core.files.base import ContentFile
+from djmodels.core.files.uploadedfile import TemporaryUploadedFile
+from djmodels.db.utils import IntegrityError
+from djmodels.test import TestCase, override_settings
 
 from .models import Document
 

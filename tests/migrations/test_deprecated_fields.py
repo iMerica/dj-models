@@ -1,5 +1,5 @@
-from django.core.management import call_command
-from django.test import override_settings
+from djmodels.core.management import call_command
+from djmodels.test import override_settings
 
 from .test_base import MigrationTestBase
 

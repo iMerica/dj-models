@@ -1,13 +1,13 @@
 import datetime
 from decimal import Decimal
 
-from django.contrib.humanize.templatetags import humanize
-from django.template import Context, Template, defaultfilters
-from django.test import SimpleTestCase, modify_settings, override_settings
-from django.utils import translation
-from django.utils.html import escape
-from django.utils.timezone import get_fixed_timezone, utc
-from django.utils.translation import gettext as _
+from djmodels.contrib.humanize.templatetags import humanize
+from djmodels.template import Context, Template, defaultfilters
+from djmodels.test import SimpleTestCase, modify_settings, override_settings
+from djmodels.utils import translation
+from djmodels.utils.html import escape
+from djmodels.utils.timezone import get_fixed_timezone, utc
+from djmodels.utils.translation import gettext as _
 
 # Mock out datetime in some tests so they don't fail occasionally when they
 # run too slow. Use a fixed datetime for datetime.now(). DST change in
@@ -26,7 +26,7 @@ class MockDateTime(datetime.datetime):
             return now.replace(tzinfo=tz) + tz.utcoffset(now)
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.humanize'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.humanize'})
 class HumanizeTests(SimpleTestCase):
 
     def humanize_tester(self, test_list, result_list, method, normalize_result_func=escape):

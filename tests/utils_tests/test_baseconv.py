@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from django.utils.baseconv import (
+from djmodels.utils.baseconv import (
     BaseConverter, base2, base16, base36, base56, base62, base64,
 )
 

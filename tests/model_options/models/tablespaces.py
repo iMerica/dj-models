@@ -1,4 +1,4 @@
-from django.db import models
+from djmodels.db import models
 
 # Since the test database doesn't have tablespaces, it's impossible for Django
 # to create the tables for models where db_tablespace is set. To avoid this

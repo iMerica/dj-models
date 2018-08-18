@@ -7,23 +7,23 @@ from xml.dom.minidom import parseString
 
 import pytz
 
-from django.contrib.auth.models import User
-from django.core import serializers
-from django.core.exceptions import ImproperlyConfigured
-from django.db import connection, connections
-from django.db.models import F, Max, Min
-from django.http import HttpRequest
-from django.template import (
+from djmodels.contrib.auth.models import User
+from djmodels.core import serializers
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.db import connection, connections
+from djmodels.db.models import F, Max, Min
+from djmodels.http import HttpRequest
+from djmodels.template import (
     Context, RequestContext, Template, TemplateSyntaxError, context_processors,
 )
-from django.test import (
+from djmodels.test import (
     SimpleTestCase, TestCase, TransactionTestCase, override_settings,
     skipIfDBFeature, skipUnlessDBFeature,
 )
-from django.test.utils import requires_tz_support
-from django.urls import reverse
-from django.utils import timezone
-from django.utils.timezone import timedelta
+from djmodels.test.utils import requires_tz_support
+from djmodels.urls import reverse
+from djmodels.utils import timezone
+from djmodels.utils.timezone import timedelta
 
 from .forms import (
     EventForm, EventLocalizedForm, EventLocalizedModelForm, EventModelForm,
@@ -985,7 +985,7 @@ class TemplateTests(SimpleTestCase):
     @skipIf(sys.platform.startswith('win'), "Windows uses non-standard time zone names")
     def test_tz_template_context_processor(self):
         """
-        Test the django.template.context_processors.tz template context processor.
+        Test the djmodels.template.context_processors.tz template context processor.
         """
         tpl = Template("{{ TIME_ZONE }}")
         context = Context()

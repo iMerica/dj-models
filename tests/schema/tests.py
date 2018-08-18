@@ -4,26 +4,26 @@ import unittest
 from copy import copy
 from unittest import mock
 
-from django.db import (
+from djmodels.db import (
     DatabaseError, IntegrityError, OperationalError, connection,
 )
-from django.db.models import Model
-from django.db.models.deletion import CASCADE, PROTECT
-from django.db.models.fields import (
+from djmodels.db.models import Model
+from djmodels.db.models.deletion import CASCADE, PROTECT
+from djmodels.db.models.fields import (
     AutoField, BigAutoField, BigIntegerField, BinaryField, BooleanField,
     CharField, DateField, DateTimeField, IntegerField, PositiveIntegerField,
     SlugField, TextField, TimeField, UUIDField,
 )
-from django.db.models.fields.related import (
+from djmodels.db.models.fields.related import (
     ForeignKey, ForeignObject, ManyToManyField, OneToOneField,
 )
-from django.db.models.indexes import Index
-from django.db.transaction import TransactionManagementError, atomic
-from django.test import (
+from djmodels.db.models.indexes import Index
+from djmodels.db.transaction import TransactionManagementError, atomic
+from djmodels.test import (
     TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature,
 )
-from django.test.utils import CaptureQueriesContext, isolate_apps
-from django.utils import timezone
+from djmodels.test.utils import CaptureQueriesContext, isolate_apps
+from djmodels.utils import timezone
 
 from .fields import (
     CustomManyToManyField, InheritedManyToManyField, MediumBlobField,
@@ -1586,7 +1586,7 @@ class SchemaTests(TransactionTestCase):
         new_field = CharField(max_length=255, unique=True)
         new_field.model = Author
         new_field.set_attributes_from_name('name')
-        with self.assertLogs('django.db.backends.schema', 'DEBUG') as cm:
+        with self.assertLogs('djmodels.db.backends.schema', 'DEBUG') as cm:
             with connection.schema_editor() as editor:
                 editor.alter_field(Author, Author._meta.get_field('name'), new_field)
         # One SQL statement is executed to alter the field.
@@ -1619,7 +1619,7 @@ class SchemaTests(TransactionTestCase):
         new_field = SlugField(max_length=75, unique=True)
         new_field.model = Tag
         new_field.set_attributes_from_name('slug')
-        with self.assertLogs('django.db.backends.schema', 'DEBUG') as cm:
+        with self.assertLogs('djmodels.db.backends.schema', 'DEBUG') as cm:
             with connection.schema_editor() as editor:
                 editor.alter_field(Tag, Tag._meta.get_field('slug'), new_field)
         # One SQL statement is executed to alter the field.
@@ -2503,8 +2503,8 @@ class SchemaTests(TransactionTestCase):
             editor.alter_field(Node, old_field, new_field, strict=True)
         self.assertForeignKeyExists(Node, 'parent_id', Node._meta.db_table)
 
-    @mock.patch('django.db.backends.base.schema.datetime')
-    @mock.patch('django.db.backends.base.schema.timezone')
+    @mock.patch('djmodels.db.backends.base.schema.datetime')
+    @mock.patch('djmodels.db.backends.base.schema.timezone')
     def test_add_datefield_and_datetimefield_use_effective_default(self, mocked_datetime, mocked_tz):
         """
         effective_default() should be used for DateField, DateTimeField, and

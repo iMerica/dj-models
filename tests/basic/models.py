@@ -3,7 +3,7 @@ Bare-bones model
 
 This is a basic model with only two non-primary-key fields.
 """
-from django.db import models
+from djmodels.db import models
 
 
 class Article(models.Model):

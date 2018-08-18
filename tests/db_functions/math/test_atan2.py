@@ -1,8 +1,8 @@
 import math
 from decimal import Decimal
 
-from django.db.models.functions import ATan2
-from django.test import TestCase
+from djmodels.db.models.functions import ATan2
+from djmodels.test import TestCase
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

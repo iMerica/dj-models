@@ -1,15 +1,15 @@
 import os
 
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-from django.http import HttpResponsePermanentRedirect
-from django.middleware.locale import LocaleMiddleware
-from django.template import Context, Template
-from django.test import SimpleTestCase, override_settings
-from django.test.client import RequestFactory
-from django.test.utils import override_script_prefix
-from django.urls import clear_url_caches, reverse, translate_url
-from django.utils import translation
+from djmodels.conf import settings
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.http import HttpResponsePermanentRedirect
+from djmodels.middleware.locale import LocaleMiddleware
+from djmodels.template import Context, Template
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.test.client import RequestFactory
+from djmodels.test.utils import override_script_prefix
+from djmodels.urls import clear_url_caches, reverse, translate_url
+from djmodels.utils import translation
 
 
 class PermanentRedirectLocaleMiddleWare(LocaleMiddleware):
@@ -28,8 +28,8 @@ class PermanentRedirectLocaleMiddleWare(LocaleMiddleware):
         ('pt-br', 'Brazilian Portuguese'),
     ],
     MIDDLEWARE=[
-        'django.middleware.locale.LocaleMiddleware',
-        'django.middleware.common.CommonMiddleware',
+        'djmodels.middleware.locale.LocaleMiddleware',
+        'djmodels.middleware.common.CommonMiddleware',
     ],
     ROOT_URLCONF='i18n.patterns.urls.default',
     TEMPLATES=[{
@@ -227,7 +227,7 @@ class URLRedirectTests(URLTestCaseBase):
     @override_settings(
         MIDDLEWARE=[
             'i18n.patterns.tests.PermanentRedirectLocaleMiddleWare',
-            'django.middleware.common.CommonMiddleware',
+            'djmodels.middleware.common.CommonMiddleware',
         ],
     )
     def test_custom_redirect_class(self):

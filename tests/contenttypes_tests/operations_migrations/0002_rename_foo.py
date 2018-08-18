@@ -1,4 +1,4 @@
-from django.db import migrations
+from djmodels.db import migrations
 
 
 def assert_foo_contenttype_not_cached(apps, schema_editor):

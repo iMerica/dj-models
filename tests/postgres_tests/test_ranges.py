@@ -1,19 +1,19 @@
 import datetime
 import json
 
-from django import forms
-from django.core import exceptions, serializers
-from django.db.models import DateField, DateTimeField, F, Func, Value
-from django.test import override_settings
-from django.utils import timezone
+from djmodels import forms
+from djmodels.core import exceptions, serializers
+from djmodels.db.models import DateField, DateTimeField, F, Func, Value
+from djmodels.test import override_settings
+from djmodels.utils import timezone
 
 from . import PostgreSQLTestCase
 from .models import RangeLookupsModel, RangesModel
 
 try:
     from psycopg2.extras import DateRange, DateTimeTZRange, NumericRange
-    from django.contrib.postgres import fields as pg_fields, forms as pg_forms
-    from django.contrib.postgres.validators import (
+    from djmodels.contrib.postgres import fields as pg_fields, forms as pg_forms
+    from djmodels.contrib.postgres.validators import (
         RangeMaxValueValidator, RangeMinValueValidator,
     )
 except ImportError:

@@ -1,8 +1,8 @@
 from copy import copy, deepcopy
 
-from django.core.checks.templates import E001, E002
-from django.test import SimpleTestCase
-from django.test.utils import override_settings
+from djmodels.core.checks.templates import E001, E002
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import override_settings
 
 
 class CheckTemplateSettingsAppDirsTest(SimpleTestCase):
@@ -11,14 +11,14 @@ class CheckTemplateSettingsAppDirsTest(SimpleTestCase):
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'APP_DIRS': True,
             'OPTIONS': {
-                'loaders': ['django.template.loaders.filesystem.Loader'],
+                'loaders': ['djmodels.template.loaders.filesystem.Loader'],
             },
         },
     ]
 
     @property
     def func(self):
-        from django.core.checks.templates import check_setting_app_dirs_loaders
+        from djmodels.core.checks.templates import check_setting_app_dirs_loaders
         return check_setting_app_dirs_loaders
 
     @override_settings(TEMPLATES=TEMPLATES_APP_DIRS_AND_LOADERS)
@@ -69,7 +69,7 @@ class CheckTemplateStringIfInvalidTest(SimpleTestCase):
 
     @property
     def func(self):
-        from django.core.checks.templates import check_string_if_invalid_is_string
+        from djmodels.core.checks.templates import check_string_if_invalid_is_string
         return check_string_if_invalid_is_string
 
     @override_settings(TEMPLATES=TEMPLATES_STRING_IF_INVALID)

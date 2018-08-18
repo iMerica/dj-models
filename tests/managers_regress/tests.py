@@ -1,7 +1,7 @@
-from django.db import models
-from django.template import Context, Template
-from django.test import TestCase, override_settings
-from django.test.utils import isolate_apps
+from djmodels.db import models
+from djmodels.template import Context, Template
+from djmodels.test import TestCase, override_settings
+from djmodels.test.utils import isolate_apps
 
 from .models import (
     AbstractBase1, AbstractBase2, AbstractBase3, Child1, Child2, Child3,

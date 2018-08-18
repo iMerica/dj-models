@@ -1,7 +1,7 @@
 import copy
 
-from django.contrib.gis.db.models.sql import AreaField, DistanceField
-from django.test import SimpleTestCase
+from djmodels.contrib.gis.db.models.sql import AreaField, DistanceField
+from djmodels.test import SimpleTestCase
 
 
 class FieldsTests(SimpleTestCase):

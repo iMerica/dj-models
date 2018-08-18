@@ -1,7 +1,7 @@
-from django.conf.urls import url
-from django.contrib.gis import views as gis_views
-from django.contrib.gis.sitemaps import views as gis_sitemap_views
-from django.contrib.sitemaps import views as sitemap_views
+from djmodels.conf.urls import url
+from djmodels.contrib.gis import views as gis_views
+from djmodels.contrib.gis.sitemaps import views as gis_sitemap_views
+from djmodels.contrib.sitemaps import views as sitemap_views
 
 from .feeds import feed_dict
 from .sitemaps import sitemaps
@@ -17,8 +17,8 @@ urlpatterns += [
 urlpatterns += [
     url(r'^sitemaps/kml/(?P<label>\w+)/(?P<model>\w+)/(?P<field_name>\w+)\.kml$',
         gis_sitemap_views.kml,
-        name='django.contrib.gis.sitemaps.views.kml'),
+        name='djmodels.contrib.gis.sitemaps.views.kml'),
     url(r'^sitemaps/kml/(?P<label>\w+)/(?P<model>\w+)/(?P<field_name>\w+)\.kmz$',
         gis_sitemap_views.kmz,
-        name='django.contrib.gis.sitemaps.views.kmz'),
+        name='djmodels.contrib.gis.sitemaps.views.kmz'),
 ]

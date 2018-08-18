@@ -1,9 +1,9 @@
-from django.contrib.contenttypes.fields import (
+from djmodels.contrib.contenttypes.fields import (
     GenericForeignKey, GenericRelation,
 )
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
-from django.db.models.deletion import ProtectedError
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.db import models
+from djmodels.db.models.deletion import ProtectedError
 
 __all__ = ('Link', 'Place', 'Restaurant', 'Person', 'Address',
            'CharLink', 'TextLink', 'OddRelation1', 'OddRelation2',

@@ -1,9 +1,9 @@
 import unittest
 
-from django.db import connection
-from django.db.models.fields import BooleanField, NullBooleanField
-from django.db.utils import DatabaseError
-from django.test import TransactionTestCase
+from djmodels.db import connection
+from djmodels.db.models.fields import BooleanField, NullBooleanField
+from djmodels.db.utils import DatabaseError
+from djmodels.test import TransactionTestCase
 
 from ..models import Square
 
@@ -24,7 +24,7 @@ class Tests(unittest.TestCase):
 
     def test_cursor_var(self):
         """Cursor variables can be passed as query parameters."""
-        from django.db.backends.oracle.base import Database
+        from djmodels.db.backends.oracle.base import Database
         with connection.cursor() as cursor:
             var = cursor.var(Database.STRING)
             cursor.execute("BEGIN %s := 'X'; END; ", [var])

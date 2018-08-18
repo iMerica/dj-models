@@ -1,11 +1,11 @@
 """
-Tests for stuff in django.utils.datastructures.
+Tests for stuff in djmodels.utils.datastructures.
 """
 
 import copy
 
-from django.test import SimpleTestCase
-from django.utils.datastructures import (
+from djmodels.test import SimpleTestCase
+from djmodels.utils.datastructures import (
     DictWrapper, ImmutableList, MultiValueDict, MultiValueDictKeyError,
     OrderedSet,
 )

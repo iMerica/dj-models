@@ -1,5 +1,5 @@
 
-from django.db import models
+from djmodels.db import models
 
 GENDER_CHOICES = (
     ('M', 'Male'),

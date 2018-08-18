@@ -3,10 +3,10 @@ import time
 import unittest
 from datetime import date, datetime
 
-from django.core.exceptions import FieldError
-from django.db import connection, models
-from django.test import TestCase, override_settings
-from django.utils import timezone
+from djmodels.core.exceptions import FieldError
+from djmodels.db import connection, models
+from djmodels.test import TestCase, override_settings
+from djmodels.utils import timezone
 
 from .models import Article, Author, MySQLUnixTimestamp
 

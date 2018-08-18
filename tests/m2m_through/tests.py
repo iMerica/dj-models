@@ -1,7 +1,7 @@
 from datetime import datetime
 from operator import attrgetter
 
-from django.test import TestCase
+from djmodels.test import TestCase
 
 from .models import (
     CustomMembership, Employee, Event, Friendship, Group, Ingredient,

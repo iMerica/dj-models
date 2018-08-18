@@ -4,11 +4,11 @@ The following classes are for testing basic data marshalling, including
 NULL values, where allowed.
 The basic idea is to have a model for each Django data type.
 """
-from django.contrib.contenttypes.fields import (
+from djmodels.contrib.contenttypes.fields import (
     GenericForeignKey, GenericRelation,
 )
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.db import models
 
 from .base import BaseModel
 

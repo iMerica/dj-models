@@ -2,15 +2,15 @@
 Indirection layer for PostgreSQL-specific fields, so the tests don't fail when
 run with a backend other than PostgreSQL.
 """
-from django.db import models
+from djmodels.db import models
 
 try:
-    from django.contrib.postgres.fields import (
+    from djmodels.contrib.postgres.fields import (
         ArrayField, BigIntegerRangeField, CICharField, CIEmailField,
         CITextField, DateRangeField, DateTimeRangeField, FloatRangeField,
         HStoreField, IntegerRangeField, JSONField,
     )
-    from django.contrib.postgres.search import SearchVectorField
+    from djmodels.contrib.postgres.search import SearchVectorField
 except ImportError:
     class DummyArrayField(models.Field):
         def __init__(self, base_field, size=None, **kwargs):

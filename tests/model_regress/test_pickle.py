@@ -1,8 +1,8 @@
 import pickle
 
-from django.db import DJANGO_VERSION_PICKLE_KEY, models
-from django.test import TestCase
-from django.utils.version import get_version
+from djmodels.db import DJANGO_VERSION_PICKLE_KEY, models
+from djmodels.test import TestCase
+from djmodels.utils.version import get_version
 
 
 class ModelPickleTestCase(TestCase):

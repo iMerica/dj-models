@@ -1,7 +1,7 @@
 import datetime
 import uuid
 
-from django.db import models
+from djmodels.db import models
 
 
 class Author(models.Model):

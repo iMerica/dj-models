@@ -1,5 +1,5 @@
-from django.db.models import F, Q
-from django.test import SimpleTestCase
+from djmodels.db.models import F, Q
+from djmodels.test import SimpleTestCase
 
 
 class QTests(SimpleTestCase):
@@ -30,7 +30,7 @@ class QTests(SimpleTestCase):
     def test_deconstruct(self):
         q = Q(price__gt=F('discounted_price'))
         path, args, kwargs = q.deconstruct()
-        self.assertEqual(path, 'django.db.models.Q')
+        self.assertEqual(path, 'djmodels.db.models.Q')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {'price__gt': F('discounted_price')})
 

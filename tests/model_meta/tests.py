@@ -1,11 +1,11 @@
-from django.apps import apps
-from django.contrib.contenttypes.fields import (
+from djmodels.apps import apps
+from djmodels.contrib.contenttypes.fields import (
     GenericForeignKey, GenericRelation,
 )
-from django.core.exceptions import FieldDoesNotExist
-from django.db.models.fields import CharField, Field, related
-from django.db.models.options import EMPTY_RELATION_TREE, IMMUTABLE_WARNING
-from django.test import SimpleTestCase
+from djmodels.core.exceptions import FieldDoesNotExist
+from djmodels.db.models.fields import CharField, Field, related
+from djmodels.db.models.options import EMPTY_RELATION_TREE, IMMUTABLE_WARNING
+from djmodels.test import SimpleTestCase
 
 from .models import (
     AbstractPerson, BasePerson, Child, CommonAncestor, FirstParent, Person,

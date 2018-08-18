@@ -1,6 +1,6 @@
-from django.db.models import CharField
-from django.db.models.functions import LTrim, RTrim, Trim
-from django.test import TestCase
+from djmodels.db.models import CharField
+from djmodels.db.models.functions import LTrim, RTrim, Trim
+from djmodels.test import TestCase
 
 from ..models import Author
 

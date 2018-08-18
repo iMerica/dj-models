@@ -1,11 +1,11 @@
 import datetime
 from operator import attrgetter
 
-from django.core.exceptions import ValidationError
-from django.db import router
-from django.db.models.sql import InsertQuery
-from django.test import TestCase, skipUnlessDBFeature
-from django.utils.timezone import get_fixed_timezone
+from djmodels.core.exceptions import ValidationError
+from djmodels.db import router
+from djmodels.db.models.sql import InsertQuery
+from djmodels.test import TestCase, skipUnlessDBFeature
+from djmodels.utils.timezone import get_fixed_timezone
 
 from .models import (
     Article, Department, Event, Model1, Model2, Model3, NonAutoPK, Party,

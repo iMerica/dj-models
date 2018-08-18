@@ -2,10 +2,10 @@ import unittest
 from io import StringIO
 from unittest import mock
 
-from django.db import connection
-from django.db.backends.oracle.creation import DatabaseCreation
-from django.db.utils import DatabaseError
-from django.test import TestCase
+from djmodels.db import connection
+from djmodels.db.backends.oracle.creation import DatabaseCreation
+from djmodels.db.utils import DatabaseError
+from djmodels.test import TestCase
 
 
 @unittest.skipUnless(connection.vendor == 'oracle', 'Oracle tests')

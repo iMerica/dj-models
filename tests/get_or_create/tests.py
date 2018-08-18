@@ -3,10 +3,10 @@ import traceback
 from datetime import date, datetime, timedelta
 from threading import Thread
 
-from django.core.exceptions import FieldError
-from django.db import DatabaseError, IntegrityError, connection
-from django.test import TestCase, TransactionTestCase, skipUnlessDBFeature
-from django.utils.functional import lazy
+from djmodels.core.exceptions import FieldError
+from djmodels.db import DatabaseError, IntegrityError, connection
+from djmodels.test import TestCase, TransactionTestCase, skipUnlessDBFeature
+from djmodels.utils.functional import lazy
 
 from .models import (
     Author, Book, DefaultPerson, ManualPrimaryKeyTest, Person, Profile,

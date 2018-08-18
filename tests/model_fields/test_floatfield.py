@@ -1,5 +1,5 @@
-from django.db import transaction
-from django.test import TestCase
+from djmodels.db import transaction
+from djmodels.test import TestCase
 
 from .models import FloatModel
 

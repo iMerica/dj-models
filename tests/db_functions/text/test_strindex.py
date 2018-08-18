@@ -1,7 +1,7 @@
-from django.db.models import Value
-from django.db.models.functions import StrIndex
-from django.test import TestCase
-from django.utils import timezone
+from djmodels.db.models import Value
+from djmodels.db.models.functions import StrIndex
+from djmodels.test import TestCase
+from djmodels.utils import timezone
 
 from ..models import Article, Author
 

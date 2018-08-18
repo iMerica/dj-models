@@ -1,6 +1,6 @@
-from django.db.models import F, Value
-from django.db.models.functions import Concat, Replace
-from django.test import TestCase
+from djmodels.db.models import F, Value
+from djmodels.db.models.functions import Concat, Replace
+from djmodels.test import TestCase
 
 from ..models import Author
 

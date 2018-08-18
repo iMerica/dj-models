@@ -1,14 +1,14 @@
 import datetime
 from decimal import Decimal
 
-from django.core.exceptions import FieldDoesNotExist, FieldError
-from django.db.models import (
+from djmodels.core.exceptions import FieldDoesNotExist, FieldError
+from djmodels.db.models import (
     BooleanField, CharField, Count, DateTimeField, ExpressionWrapper, F, Func,
     IntegerField, NullBooleanField, OuterRef, Q, Subquery, Sum, Value,
 )
-from django.db.models.expressions import RawSQL
-from django.db.models.functions import Length, Lower
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.db.models.expressions import RawSQL
+from djmodels.db.models.functions import Length, Lower
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from .models import (
     Author, Book, Company, DepartmentStore, Employee, Publisher, Store, Ticket,
@@ -23,7 +23,7 @@ def cxOracle_py3_bug(func):
     we mark them as expected failures until someone fixes them in #23843.
     """
     from unittest import expectedFailure
-    from django.db import connection
+    from djmodels.db import connection
     return expectedFailure(func) if connection.vendor == 'oracle' else func
 
 

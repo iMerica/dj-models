@@ -1,7 +1,7 @@
-from django.db.backends.ddl_references import (
+from djmodels.db.backends.ddl_references import (
     Columns, ForeignKeyName, IndexName, Statement, Table,
 )
-from django.test import SimpleTestCase
+from djmodels.test import SimpleTestCase
 
 
 class TableTests(SimpleTestCase):

@@ -1,10 +1,10 @@
 import datetime
 import unittest
 
-from django.apps.registry import Apps
-from django.core.exceptions import ValidationError
-from django.db import models
-from django.test import TestCase
+from djmodels.apps.registry import Apps
+from djmodels.core.exceptions import ValidationError
+from djmodels.db import models
+from djmodels.test import TestCase
 
 from .models import (
     CustomPKModel, FlexibleDatePost, ModelToValidate, Post, UniqueErrorsModel,

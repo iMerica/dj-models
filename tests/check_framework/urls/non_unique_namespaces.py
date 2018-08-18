@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from djmodels.conf.urls import include, url
 
 common_url_patterns = ([
     url(r'^app-ns1/', include([])),

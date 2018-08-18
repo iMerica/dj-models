@@ -2,8 +2,8 @@ import os
 import signal
 from unittest import mock
 
-from django.db.backends.postgresql.client import DatabaseClient
-from django.test import SimpleTestCase
+from djmodels.db.backends.postgresql.client import DatabaseClient
+from djmodels.test import SimpleTestCase
 
 
 class PostgreSqlDbshellCommandTestCase(SimpleTestCase):

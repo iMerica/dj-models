@@ -1,6 +1,6 @@
 import re
 
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from .utils import SpatialRefSys, oracle, postgis, spatialite
 
@@ -122,7 +122,7 @@ class SpatialRefSysTest(TestCase):
         Test adding a new entry in the SpatialRefSys model using the
         add_srs_entry utility.
         """
-        from django.contrib.gis.utils import add_srs_entry
+        from djmodels.contrib.gis.utils import add_srs_entry
 
         add_srs_entry(3857)
         self.assertTrue(

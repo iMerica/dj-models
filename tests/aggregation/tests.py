@@ -2,15 +2,15 @@ import datetime
 import re
 from decimal import Decimal
 
-from django.core.exceptions import FieldError
-from django.db import connection
-from django.db.models import (
+from djmodels.core.exceptions import FieldError
+from djmodels.db import connection
+from djmodels.db.models import (
     Avg, Count, DecimalField, DurationField, F, FloatField, Func, IntegerField,
     Max, Min, Sum, Value,
 )
-from django.test import TestCase
-from django.test.utils import Approximate, CaptureQueriesContext
-from django.utils import timezone
+from djmodels.test import TestCase
+from djmodels.test.utils import Approximate, CaptureQueriesContext
+from djmodels.utils import timezone
 
 from .models import Author, Book, Publisher, Store
 

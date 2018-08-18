@@ -1,17 +1,17 @@
 import datetime
 from unittest import skipIf, skipUnless
 
-from django.core.exceptions import FieldError
-from django.db import NotSupportedError, connection
-from django.db.models import (
+from djmodels.core.exceptions import FieldError
+from djmodels.db import NotSupportedError, connection
+from djmodels.db.models import (
     F, RowRange, Value, ValueRange, Window, WindowFrame,
 )
-from django.db.models.aggregates import Avg, Max, Min, Sum
-from django.db.models.functions import (
+from djmodels.db.models.aggregates import Avg, Max, Min, Sum
+from djmodels.db.models.functions import (
     CumeDist, DenseRank, ExtractYear, FirstValue, Lag, LastValue, Lead,
     NthValue, Ntile, PercentRank, Rank, RowNumber, Upper,
 )
-from django.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from djmodels.test import SimpleTestCase, TestCase, skipUnlessDBFeature
 
 from .models import Employee
 

@@ -1,14 +1,14 @@
 from datetime import datetime
 
-from django.core.exceptions import FieldError
-from django.db.models import CharField, F, Q
-from django.db.models.expressions import SimpleCol
-from django.db.models.fields.related_lookups import RelatedIsNull
-from django.db.models.functions import Lower
-from django.db.models.lookups import Exact, GreaterThan, IsNull, LessThan
-from django.db.models.sql.query import Query
-from django.db.models.sql.where import OR
-from django.test import TestCase
+from djmodels.core.exceptions import FieldError
+from djmodels.db.models import CharField, F, Q
+from djmodels.db.models.expressions import SimpleCol
+from djmodels.db.models.fields.related_lookups import RelatedIsNull
+from djmodels.db.models.functions import Lower
+from djmodels.db.models.lookups import Exact, GreaterThan, IsNull, LessThan
+from djmodels.db.models.sql.query import Query
+from djmodels.db.models.sql.where import OR
+from djmodels.test import TestCase
 
 from .models import Author, Item, ObjectC, Ranking
 

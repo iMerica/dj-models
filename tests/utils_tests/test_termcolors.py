@@ -1,6 +1,6 @@
 import unittest
 
-from django.utils.termcolors import (
+from djmodels.utils.termcolors import (
     DARK_PALETTE, DEFAULT_PALETTE, LIGHT_PALETTE, NOCOLOR_PALETTE, PALETTES,
     colorize, parse_color_setting,
 )

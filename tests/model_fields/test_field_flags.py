@@ -1,9 +1,9 @@
-from django import test
-from django.contrib.contenttypes.fields import (
+from djmodels import test
+from djmodels.contrib.contenttypes.fields import (
     GenericForeignKey, GenericRelation,
 )
-from django.db import models
-from django.db.models.fields.related import (
+from djmodels.db import models
+from djmodels.db.models.fields.related import (
     ForeignKey, ForeignObject, ForeignObjectRel, ManyToManyField, ManyToOneRel,
     OneToOneField,
 )

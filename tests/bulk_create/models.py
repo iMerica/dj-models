@@ -2,8 +2,8 @@ import datetime
 import uuid
 from decimal import Decimal
 
-from django.db import models
-from django.utils import timezone
+from djmodels.db import models
+from djmodels.utils import timezone
 
 try:
     from PIL import Image

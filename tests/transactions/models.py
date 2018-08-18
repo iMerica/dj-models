@@ -6,7 +6,7 @@ each transaction upon a write, but you can decorate a function to get
 commit-on-success behavior. Alternatively, you can manage the transaction
 manually.
 """
-from django.db import models
+from djmodels.db import models
 
 
 class Reporter(models.Model):

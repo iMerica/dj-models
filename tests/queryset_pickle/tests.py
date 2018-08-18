@@ -1,9 +1,9 @@
 import datetime
 import pickle
 
-from django.db import models
-from django.test import TestCase
-from django.utils.version import get_version
+from djmodels.db import models
+from djmodels.test import TestCase
+from djmodels.utils.version import get_version
 
 from .models import Container, Event, Group, Happening, M2MModel
 

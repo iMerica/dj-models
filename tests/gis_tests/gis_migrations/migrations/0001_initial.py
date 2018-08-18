@@ -1,5 +1,5 @@
-from django.contrib.gis.db import models
-from django.db import connection, migrations
+from djmodels.contrib.gis.db import models
+from djmodels.db import connection, migrations
 
 ops = [
     migrations.CreateModel(

@@ -1,5 +1,5 @@
-from django.db.models.base import ModelState, ModelStateFieldsCacheDescriptor
-from django.test import SimpleTestCase
+from djmodels.db.models.base import ModelState, ModelStateFieldsCacheDescriptor
+from djmodels.test import SimpleTestCase
 
 
 class ModelStateTests(SimpleTestCase):

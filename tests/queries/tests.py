@@ -4,13 +4,13 @@ import unittest
 from collections import OrderedDict
 from operator import attrgetter
 
-from django.core.exceptions import EmptyResultSet, FieldError
-from django.db import DEFAULT_DB_ALIAS, connection
-from django.db.models import Count, F, Q
-from django.db.models.sql.constants import LOUTER
-from django.db.models.sql.where import NothingNode, WhereNode
-from django.test import TestCase, skipUnlessDBFeature
-from django.test.utils import CaptureQueriesContext
+from djmodels.core.exceptions import EmptyResultSet, FieldError
+from djmodels.db import DEFAULT_DB_ALIAS, connection
+from djmodels.db.models import Count, F, Q
+from djmodels.db.models.sql.constants import LOUTER
+from djmodels.db.models.sql.where import NothingNode, WhereNode
+from djmodels.test import TestCase, skipUnlessDBFeature
+from djmodels.test.utils import CaptureQueriesContext
 
 from .models import (
     FK1, Annotation, Article, Author, BaseA, Book, CategoryItem,

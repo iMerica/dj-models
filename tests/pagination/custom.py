@@ -1,4 +1,4 @@
-from django.core.paginator import Page, Paginator
+from djmodels.core.paginator import Page, Paginator
 
 
 class ValidAdjacentNumsPage(Page):

@@ -7,12 +7,12 @@ from unittest import mock
 
 import _thread
 
-from django import conf
-from django.contrib import admin
-from django.test import SimpleTestCase, override_settings
-from django.test.utils import extend_sys_path
-from django.utils import autoreload
-from django.utils.translation import trans_real
+from djmodels import conf
+from djmodels.contrib import admin
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.test.utils import extend_sys_path
+from djmodels.utils import autoreload
+from djmodels.utils.translation import trans_real
 
 LOCALE_PATH = os.path.join(os.path.dirname(__file__), 'locale')
 
@@ -49,7 +49,7 @@ class TestFilenameGenerator(SimpleTestCase):
         gen_filenames() yields the built-in Django locale files.
         """
         django_dir = os.path.join(os.path.dirname(conf.__file__), 'locale')
-        django_mo = os.path.join(django_dir, 'nl', 'LC_MESSAGES', 'django.mo')
+        django_mo = os.path.join(django_dir, 'nl', 'LC_MESSAGES', 'djmodels.mo')
         self.assertFileFound(django_mo)
 
     @override_settings(LOCALE_PATHS=[LOCALE_PATH])
@@ -57,7 +57,7 @@ class TestFilenameGenerator(SimpleTestCase):
         """
         gen_filenames also yields from LOCALE_PATHS locales.
         """
-        locale_paths_mo = os.path.join(LOCALE_PATH, 'nl', 'LC_MESSAGES', 'django.mo')
+        locale_paths_mo = os.path.join(LOCALE_PATH, 'nl', 'LC_MESSAGES', 'djmodels.mo')
         self.assertFileFound(locale_paths_mo)
 
     @override_settings(INSTALLED_APPS=[])
@@ -68,19 +68,19 @@ class TestFilenameGenerator(SimpleTestCase):
         old_cwd = os.getcwd()
         os.chdir(os.path.dirname(__file__))
         current_dir = os.path.join(os.path.dirname(__file__), 'locale')
-        current_dir_mo = os.path.join(current_dir, 'nl', 'LC_MESSAGES', 'django.mo')
+        current_dir_mo = os.path.join(current_dir, 'nl', 'LC_MESSAGES', 'djmodels.mo')
         try:
             self.assertFileFound(current_dir_mo)
         finally:
             os.chdir(old_cwd)
 
-    @override_settings(INSTALLED_APPS=['django.contrib.admin'])
+    @override_settings(INSTALLED_APPS=['djmodels.contrib.admin'])
     def test_app_locales(self):
         """
         gen_filenames() also yields from locale dirs in installed apps.
         """
         admin_dir = os.path.join(os.path.dirname(admin.__file__), 'locale')
-        admin_mo = os.path.join(admin_dir, 'nl', 'LC_MESSAGES', 'django.mo')
+        admin_mo = os.path.join(admin_dir, 'nl', 'LC_MESSAGES', 'djmodels.mo')
         self.assertFileFound(admin_mo)
 
     @override_settings(USE_I18N=False)
@@ -90,7 +90,7 @@ class TestFilenameGenerator(SimpleTestCase):
         locale files.
         """
         django_dir = os.path.join(os.path.dirname(conf.__file__), 'locale')
-        django_mo = os.path.join(django_dir, 'nl', 'LC_MESSAGES', 'django.mo')
+        django_mo = os.path.join(django_dir, 'nl', 'LC_MESSAGES', 'djmodels.mo')
         self.assertFileNotFound(django_mo)
 
     def test_paths_are_native_strings(self):
@@ -204,7 +204,7 @@ class CleanFilesTests(SimpleTestCase):
     }
 
     def _run_tests(self, mock_files_exist=True):
-        with mock.patch('django.utils.autoreload.os.path.exists', return_value=mock_files_exist):
+        with mock.patch('djmodels.utils.autoreload.os.path.exists', return_value=mock_files_exist):
             for description, values in self.TEST_MAP.items():
                 filenames, expected_returned_filenames = values
                 self.assertEqual(
@@ -258,11 +258,11 @@ class RestartWithReloaderTests(SimpleTestCase):
     executable = '/usr/bin/python'
 
     def patch_autoreload(self, argv):
-        patch_call = mock.patch('django.utils.autoreload.subprocess.call', return_value=0)
+        patch_call = mock.patch('djmodels.utils.autoreload.subprocess.call', return_value=0)
         patches = [
-            mock.patch('django.utils.autoreload.sys.argv', argv),
-            mock.patch('django.utils.autoreload.sys.executable', self.executable),
-            mock.patch('django.utils.autoreload.sys.warnoptions', ['all']),
+            mock.patch('djmodels.utils.autoreload.sys.argv', argv),
+            mock.patch('djmodels.utils.autoreload.sys.executable', self.executable),
+            mock.patch('djmodels.utils.autoreload.sys.warnoptions', ['all']),
         ]
         for p in patches:
             p.start()
@@ -279,10 +279,10 @@ class RestartWithReloaderTests(SimpleTestCase):
         self.assertEqual(mock_call.call_args[0][0], [self.executable, '-Wall'] + argv)
 
     def test_python_m_django(self):
-        main = '/usr/lib/pythonX.Y/site-packages/django/__main__.py'
+        main = '/usr/lib/pythonX.Y/site-packages/djmodels/__main__.py'
         argv = [main, 'runserver']
         mock_call = self.patch_autoreload(argv)
-        with mock.patch('django.__main__.__file__', main):
+        with mock.patch('djmodels.__main__.__file__', main):
             autoreload.restart_with_reloader()
             self.assertEqual(mock_call.call_count, 1)
-            self.assertEqual(mock_call.call_args[0][0], [self.executable, '-Wall', '-m', 'django'] + argv[1:])
+            self.assertEqual(mock_call.call_args[0][0], [self.executable, '-Wall', '-m', 'djmodels'] + argv[1:])

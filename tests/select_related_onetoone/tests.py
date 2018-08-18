@@ -1,6 +1,6 @@
-from django.core.exceptions import FieldError
-from django.db.models import FilteredRelation
-from django.test import SimpleTestCase, TestCase
+from djmodels.core.exceptions import FieldError
+from djmodels.db.models import FilteredRelation
+from djmodels.test import SimpleTestCase, TestCase
 
 from .models import (
     AdvancedUserStat, Child1, Child2, Child3, Child4, Image, LinkedList,

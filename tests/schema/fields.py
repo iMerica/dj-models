@@ -1,7 +1,7 @@
 from functools import partial
 
-from django.db import models
-from django.db.models.fields.related import (
+from djmodels.db import models
+from djmodels.db.models.fields.related import (
     RECURSIVE_RELATIONSHIP_CONSTANT, ManyToManyDescriptor, ManyToManyField,
     ManyToManyRel, RelatedField, create_many_to_many_intermediary_model,
 )

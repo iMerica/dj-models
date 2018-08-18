@@ -4,15 +4,15 @@ from decimal import Decimal
 from operator import attrgetter
 from unittest import mock
 
-from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import FieldError
-from django.db import connection
-from django.db.models import (
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.core.exceptions import FieldError
+from djmodels.db import connection
+from djmodels.db.models import (
     Avg, Case, Count, DecimalField, F, IntegerField, Max, Q, StdDev, Sum,
     Value, Variance, When,
 )
-from django.test import TestCase, skipUnlessAnyDBFeature, skipUnlessDBFeature
-from django.test.utils import Approximate
+from djmodels.test import TestCase, skipUnlessAnyDBFeature, skipUnlessDBFeature
+from djmodels.test.utils import Approximate
 
 from .models import (
     Alfa, Author, Book, Bravo, Charlie, Clues, Entries, HardbackBook, ItemTag,
@@ -1339,7 +1339,7 @@ class AggregationTests(TestCase):
             content_type=ContentType.objects.get_for_model(django_book),
         )
         ItemTag.objects.create(
-            object_id=django_book.id, tag='django',
+            object_id=django_book.id, tag='djmodels',
             content_type=ContentType.objects.get_for_model(django_book),
         )
         # Assign a tag to model with same PK as the book above. If the JOIN

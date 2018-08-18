@@ -1,22 +1,22 @@
-from django.apps import apps
-from django.apps.registry import Apps
-from django.conf import settings
-from django.contrib.sites import models
-from django.contrib.sites.management import create_default_site
-from django.contrib.sites.middleware import CurrentSiteMiddleware
-from django.contrib.sites.models import Site, clear_site_cache
-from django.contrib.sites.requests import RequestSite
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from django.db.models.signals import post_migrate
-from django.http import HttpRequest, HttpResponse
-from django.test import (
+from djmodels.apps import apps
+from djmodels.apps.registry import Apps
+from djmodels.conf import settings
+from djmodels.contrib.sites import models
+from djmodels.contrib.sites.management import create_default_site
+from djmodels.contrib.sites.middleware import CurrentSiteMiddleware
+from djmodels.contrib.sites.models import Site, clear_site_cache
+from djmodels.contrib.sites.requests import RequestSite
+from djmodels.contrib.sites.shortcuts import get_current_site
+from djmodels.core.exceptions import ObjectDoesNotExist, ValidationError
+from djmodels.db.models.signals import post_migrate
+from djmodels.http import HttpRequest, HttpResponse
+from djmodels.test import (
     SimpleTestCase, TestCase, modify_settings, override_settings,
 )
-from django.test.utils import captured_stdout
+from djmodels.test.utils import captured_stdout
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.sites'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.sites'})
 class SitesFrameworkTests(TestCase):
     multi_db = True
 
@@ -77,7 +77,7 @@ class SitesFrameworkTests(TestCase):
             get_current_site(request)
 
         # A RequestSite is returned if the sites framework is not installed
-        with self.modify_settings(INSTALLED_APPS={'remove': 'django.contrib.sites'}):
+        with self.modify_settings(INSTALLED_APPS={'remove': 'djmodels.contrib.sites'}):
             site = get_current_site(request)
             self.assertIsInstance(site, RequestSite)
             self.assertEqual(site.name, "example.com")
@@ -133,7 +133,7 @@ class SitesFrameworkTests(TestCase):
             get_current_site(request)
 
         # Ensure domain for RequestSite always matches host header
-        with self.modify_settings(INSTALLED_APPS={'remove': 'django.contrib.sites'}):
+        with self.modify_settings(INSTALLED_APPS={'remove': 'djmodels.contrib.sites'}):
             request.META = {'HTTP_HOST': 'example.com'}
             site = get_current_site(request)
             self.assertEqual(site.name, 'example.com')
@@ -237,7 +237,7 @@ class JustOtherRouter:
         return db == 'other'
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.sites'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.sites'})
 class CreateDefaultSiteTests(TestCase):
     multi_db = True
 

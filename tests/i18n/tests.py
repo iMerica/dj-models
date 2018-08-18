@@ -10,23 +10,23 @@ from importlib import import_module
 from threading import local
 from unittest import mock
 
-from django import forms
-from django.apps import AppConfig
-from django.conf import settings
-from django.conf.locale import LANG_INFO
-from django.conf.urls.i18n import i18n_patterns
-from django.template import Context, Template
-from django.test import (
+from djmodels import forms
+from djmodels.apps import AppConfig
+from djmodels.conf import settings
+from djmodels.conf.locale import LANG_INFO
+from djmodels.conf.urls.i18n import i18n_patterns
+from djmodels.template import Context, Template
+from djmodels.test import (
     RequestFactory, SimpleTestCase, TestCase, override_settings,
 )
-from django.utils import translation
-from django.utils.formats import (
+from djmodels.utils import translation
+from djmodels.utils.formats import (
     date_format, get_format, get_format_modules, iter_format_modules, localize,
     localize_input, reset_format_cache, sanitize_separators, time_format,
 )
-from django.utils.numberformat import format as nformat
-from django.utils.safestring import SafeText, mark_safe
-from django.utils.translation import (
+from djmodels.utils.numberformat import format as nformat
+from djmodels.utils.safestring import SafeText, mark_safe
+from djmodels.utils.translation import (
     LANGUAGE_SESSION_KEY, activate, check_for_language, deactivate,
     get_language, get_language_bidi, get_language_from_request,
     get_language_info, gettext, gettext_lazy, ngettext, ngettext_lazy,
@@ -50,7 +50,7 @@ class AppModuleStub:
 
 @contextmanager
 def patch_formats(lang, **settings):
-    from django.utils.formats import _format_cache
+    from djmodels.utils.formats import _format_cache
 
     # Populate _format_cache with temporary values
     for key, value in settings.items():
@@ -961,7 +961,7 @@ class FormattingTests(SimpleTestCase):
 
     def test_sanitize_separators(self):
         """
-        Tests django.utils.formats.sanitize_separators.
+        Tests djmodels.utils.formats.sanitize_separators.
         """
         # Non-strings are untouched
         self.assertEqual(sanitize_separators(123), 123)
@@ -1002,7 +1002,7 @@ class FormattingTests(SimpleTestCase):
         """
         # Importing some format modules so that we can compare the returned
         # modules with these expected modules
-        default_mod = import_module('django.conf.locale.de.formats')
+        default_mod = import_module('djmodels.conf.locale.de.formats')
         test_mod = import_module('i18n.other.locale.de.formats')
         test_mod2 = import_module('i18n.other2.locale.de.formats')
 
@@ -1027,8 +1027,8 @@ class FormattingTests(SimpleTestCase):
         Tests the iter_format_modules function always yields format modules in
         a stable and correct order in presence of both base ll and ll_CC formats.
         """
-        en_format_mod = import_module('django.conf.locale.en.formats')
-        en_gb_format_mod = import_module('django.conf.locale.en_GB.formats')
+        en_format_mod = import_module('djmodels.conf.locale.en.formats')
+        en_gb_format_mod = import_module('djmodels.conf.locale.en_GB.formats')
         self.assertEqual(list(iter_format_modules('en-gb')), [en_gb_format_mod, en_format_mod])
 
     def test_get_format_modules_lang(self):
@@ -1450,7 +1450,7 @@ class AppResolutionOrderI18NTests(ResolutionOrderI18NTests):
             # Doesn't work because it's added later in the list.
             self.assertGettext('Date/time', 'Datum/Zeit')
 
-            with self.modify_settings(INSTALLED_APPS={'remove': 'django.contrib.admin.apps.SimpleAdminConfig'}):
+            with self.modify_settings(INSTALLED_APPS={'remove': 'djmodels.contrib.admin.apps.SimpleAdminConfig'}):
                 # Force refreshing translations.
                 activate('de')
 
@@ -1545,8 +1545,8 @@ class TestLanguageInfo(SimpleTestCase):
         ('fr', 'French'),
     ],
     MIDDLEWARE=[
-        'django.middleware.locale.LocaleMiddleware',
-        'django.middleware.common.CommonMiddleware',
+        'djmodels.middleware.locale.LocaleMiddleware',
+        'djmodels.middleware.common.CommonMiddleware',
     ],
     ROOT_URLCONF='i18n.urls',
 )
@@ -1561,9 +1561,9 @@ class LocaleMiddlewareTests(TestCase):
 
     @override_settings(
         MIDDLEWARE=[
-            'django.contrib.sessions.middleware.SessionMiddleware',
-            'django.middleware.locale.LocaleMiddleware',
-            'django.middleware.common.CommonMiddleware',
+            'djmodels.contrib.sessions.middleware.SessionMiddleware',
+            'djmodels.middleware.locale.LocaleMiddleware',
+            'djmodels.middleware.common.CommonMiddleware',
         ],
     )
     def test_language_not_saved_to_session(self):
@@ -1583,8 +1583,8 @@ class LocaleMiddlewareTests(TestCase):
         ('fr', 'French'),
     ],
     MIDDLEWARE=[
-        'django.middleware.locale.LocaleMiddleware',
-        'django.middleware.common.CommonMiddleware',
+        'djmodels.middleware.locale.LocaleMiddleware',
+        'djmodels.middleware.common.CommonMiddleware',
     ],
     ROOT_URLCONF='i18n.urls_default_unprefixed',
     LANGUAGE_CODE='en',
@@ -1634,8 +1634,8 @@ class UnprefixedDefaultLanguageTests(SimpleTestCase):
         ('pt-br', 'Portuguese (Brazil)'),
     ],
     MIDDLEWARE=[
-        'django.middleware.locale.LocaleMiddleware',
-        'django.middleware.common.CommonMiddleware',
+        'djmodels.middleware.locale.LocaleMiddleware',
+        'djmodels.middleware.common.CommonMiddleware',
     ],
     ROOT_URLCONF='i18n.urls'
 )
@@ -1745,9 +1745,9 @@ class NonDjangoLanguageTests(SimpleTestCase):
     def test_check_for_langauge(self):
         with tempfile.TemporaryDirectory() as app_dir:
             os.makedirs(os.path.join(app_dir, 'locale', 'dummy_Lang', 'LC_MESSAGES'))
-            open(os.path.join(app_dir, 'locale', 'dummy_Lang', 'LC_MESSAGES', 'django.mo'), 'w').close()
+            open(os.path.join(app_dir, 'locale', 'dummy_Lang', 'LC_MESSAGES', 'djmodels.mo'), 'w').close()
             app_config = AppConfig('dummy_app', AppModuleStub(__path__=[app_dir]))
-            with mock.patch('django.apps.apps.get_app_configs', return_value=[app_config]):
+            with mock.patch('djmodels.apps.apps.get_app_configs', return_value=[app_config]):
                 self.assertIs(check_for_language('dummy-lang'), True)
 
     @override_settings(

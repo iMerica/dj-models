@@ -1,10 +1,10 @@
 import unittest
 from datetime import datetime
 
-from django.test import SimpleTestCase, ignore_warnings
-from django.utils.datastructures import MultiValueDict
-from django.utils.deprecation import RemovedInDjango30Warning
-from django.utils.http import (
+from djmodels.test import SimpleTestCase, ignore_warnings
+from djmodels.utils.datastructures import MultiValueDict
+from djmodels.utils.deprecation import RemovedInDjango30Warning
+from djmodels.utils.http import (
     base36_to_int, cookie_date, escape_leading_slashes, http_date,
     int_to_base36, is_safe_url, is_same_domain, parse_etags, parse_http_date,
     quote_etag, urlencode, urlquote, urlquote_plus, urlsafe_base64_decode,
@@ -95,7 +95,7 @@ class Base36IntTests(SimpleTestCase):
                 base36_to_int(n)
 
     def test_values(self):
-        for n, b36 in [(0, '0'), (1, '1'), (42, '16'), (818469960, 'django')]:
+        for n, b36 in [(0, '0'), (1, '1'), (42, '16'), (818469960, 'djmodels')]:
             self.assertEqual(int_to_base36(n), b36)
             self.assertEqual(base36_to_int(b36), n)
 

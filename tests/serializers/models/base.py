@@ -1,12 +1,12 @@
 """
 Serialization
 
-``django.core.serializers`` provides interfaces to converting Django
+``djmodels.core.serializers`` provides interfaces to converting Django
 ``QuerySet`` objects to and from "flat" data (i.e. strings).
 """
 from decimal import Decimal
 
-from django.db import models
+from djmodels.db import models
 
 
 class CategoryMetaDataManager(models.Manager):

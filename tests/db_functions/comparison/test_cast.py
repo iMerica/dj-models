@@ -2,11 +2,11 @@ import datetime
 import decimal
 import unittest
 
-from django.db import connection, models
-from django.db.models import Avg
-from django.db.models.expressions import Value
-from django.db.models.functions import Cast
-from django.test import (
+from djmodels.db import connection, models
+from djmodels.db.models import Avg
+from djmodels.db.models.expressions import Value
+from djmodels.db.models.functions import Cast
+from djmodels.test import (
     TestCase, ignore_warnings, override_settings, skipUnlessDBFeature,
 )
 
@@ -31,7 +31,7 @@ class CastTests(TestCase):
         self.assertEqual(numbers.get().cast_string, '1')
 
     # Silence "Truncated incorrect CHAR(1) value: 'Bob'".
-    @ignore_warnings(module='django.db.backends.mysql.base')
+    @ignore_warnings(module='djmodels.db.backends.mysql.base')
     @skipUnlessDBFeature('supports_cast_with_precision')
     def test_cast_to_char_field_with_max_length(self):
         names = Author.objects.annotate(cast_string=Cast('name', models.CharField(max_length=1)))

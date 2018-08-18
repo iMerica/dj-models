@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 
-from django.utils.archive import Archive, extract
+from djmodels.utils.archive import Archive, extract
 
 TEST_DIR = os.path.join(os.path.dirname(__file__), 'archives')
 

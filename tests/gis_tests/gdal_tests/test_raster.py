@@ -2,11 +2,11 @@ import os
 import struct
 import tempfile
 
-from django.contrib.gis.gdal import GDAL_VERSION, GDALRaster
-from django.contrib.gis.gdal.error import GDALException
-from django.contrib.gis.gdal.raster.band import GDALBand
-from django.contrib.gis.shortcuts import numpy
-from django.test import SimpleTestCase
+from djmodels.contrib.gis.gdal import GDAL_VERSION, GDALRaster
+from djmodels.contrib.gis.gdal.error import GDALException
+from djmodels.contrib.gis.gdal.raster.band import GDALBand
+from djmodels.contrib.gis.shortcuts import numpy
+from djmodels.test import SimpleTestCase
 
 from ..data.rasters.textrasters import JSON_RASTER
 

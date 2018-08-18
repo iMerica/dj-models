@@ -1,9 +1,9 @@
-from django import forms
-from django.contrib.contenttypes.forms import generic_inlineformset_factory
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
-from django.test import TestCase
-from django.test.utils import isolate_apps
+from djmodels import forms
+from djmodels.contrib.contenttypes.forms import generic_inlineformset_factory
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.db import models
+from djmodels.test import TestCase
+from djmodels.test.utils import isolate_apps
 
 from .models import (
     Animal, ForProxyModelModel, Gecko, Mineral, ProxyRelatedModel, TaggedItem,

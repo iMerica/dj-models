@@ -1,6 +1,6 @@
-from django.db.models.aggregates import Sum
-from django.db.models.expressions import F
-from django.test import TestCase
+from djmodels.db.models.aggregates import Sum
+from djmodels.db.models.expressions import F
+from djmodels.test import TestCase
 
 from .models import Product, Stock
 

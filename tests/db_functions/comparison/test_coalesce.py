@@ -1,7 +1,7 @@
-from django.db.models import TextField
-from django.db.models.functions import Coalesce, Lower
-from django.test import TestCase
-from django.utils import timezone
+from djmodels.db.models import TextField
+from djmodels.db.models.functions import Coalesce, Lower
+from djmodels.test import TestCase
+from djmodels.utils import timezone
 
 from ..models import Article, Author
 

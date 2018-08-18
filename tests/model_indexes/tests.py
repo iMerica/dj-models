@@ -1,7 +1,7 @@
-from django.conf import settings
-from django.db import connection, models
-from django.test import SimpleTestCase, skipUnlessDBFeature
-from django.test.utils import isolate_apps
+from djmodels.conf import settings
+from djmodels.db import connection, models
+from djmodels.test import SimpleTestCase, skipUnlessDBFeature
+from djmodels.test.utils import isolate_apps
 
 from .models import Book, ChildModel1, ChildModel2
 
@@ -103,7 +103,7 @@ class IndexesTests(SimpleTestCase):
         index = models.Index(fields=['title'], db_tablespace='idx_tbls')
         index.set_name_with_model(Book)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.db.models.Index')
+        self.assertEqual(path, 'djmodels.db.models.Index')
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,

@@ -1,13 +1,13 @@
 import unittest
 
-from django.contrib.gis.db.models.functions import (
+from djmodels.contrib.gis.db.models.functions import (
     Area, Distance, Length, Perimeter, Transform, Union,
 )
-from django.contrib.gis.geos import GEOSGeometry, LineString, Point
-from django.contrib.gis.measure import D  # alias for Distance
-from django.db import NotSupportedError, connection
-from django.db.models import F, Q
-from django.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from djmodels.contrib.gis.geos import GEOSGeometry, LineString, Point
+from djmodels.contrib.gis.measure import D  # alias for Distance
+from djmodels.db import NotSupportedError, connection
+from djmodels.db.models import F, Q
+from djmodels.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from ..utils import (
     FuncTestMixin, mysql, no_oracle, oracle, postgis, spatialite,

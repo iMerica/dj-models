@@ -1,10 +1,10 @@
 import decimal
 
-from django.db import NotSupportedError, connection
-from django.db.backends.base.operations import BaseDatabaseOperations
-from django.db.models import DurationField
-from django.test import SimpleTestCase, override_settings, skipIfDBFeature
-from django.utils import timezone
+from djmodels.db import NotSupportedError, connection
+from djmodels.db.backends.base.operations import BaseDatabaseOperations
+from djmodels.db.models import DurationField
+from djmodels.test import SimpleTestCase, override_settings, skipIfDBFeature
+from djmodels.utils import timezone
 
 
 class DatabaseOperationTests(SimpleTestCase):

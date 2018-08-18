@@ -1,11 +1,11 @@
-from django.conf import settings
-from django.core.checks.messages import Warning
-from django.core.checks.urls import (
+from djmodels.conf import settings
+from djmodels.core.checks.messages import Warning
+from djmodels.core.checks.urls import (
     E006, check_url_config, check_url_namespaces_unique, check_url_settings,
     get_warning_for_invalid_pattern,
 )
-from django.test import SimpleTestCase
-from django.test.utils import override_settings
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import override_settings
 
 
 class CheckUrlConfigTests(SimpleTestCase):

@@ -1,6 +1,6 @@
-from django.db.models import CharField, Value as V
-from django.db.models.functions import Lower, StrIndex, Substr, Upper
-from django.test import TestCase
+from djmodels.db.models import CharField, Value as V
+from djmodels.db.models.functions import Lower, StrIndex, Substr, Upper
+from djmodels.test import TestCase
 
 from ..models import Author
 

@@ -1,4 +1,4 @@
-from django.urls import path
+from djmodels.urls import path
 
 urlpatterns = [
     path(r'(?P<named-group>\d+)', lambda x: x),

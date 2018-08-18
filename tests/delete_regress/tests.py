@@ -1,7 +1,7 @@
 import datetime
 
-from django.db import connection, models, transaction
-from django.test import TestCase, TransactionTestCase, skipUnlessDBFeature
+from djmodels.db import connection, models, transaction
+from djmodels.test import TestCase, TransactionTestCase, skipUnlessDBFeature
 
 from .models import (
     Award, AwardNote, Book, Child, Contact, Eaten, Email, File, Food, FooFile,

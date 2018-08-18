@@ -9,7 +9,7 @@ For each field that has ``choices``, a model instance gets a
 field. This method returns the "human-readable" value of the field.
 """
 
-from django.db import models
+from djmodels.db import models
 
 GENDER_CHOICES = (
     ('M', 'Male'),

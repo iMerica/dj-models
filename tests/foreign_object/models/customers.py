@@ -1,5 +1,5 @@
-from django.db import models
-from django.db.models.fields.related import ForeignObject
+from djmodels.db import models
+from djmodels.db.models.fields.related import ForeignObject
 
 
 class Address(models.Model):

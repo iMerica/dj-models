@@ -1,16 +1,16 @@
 import datetime
 from decimal import Decimal
 
-from django.db.models.fields import (
+from djmodels.db.models.fields import (
     AutoField, BinaryField, BooleanField, CharField, DateField, DateTimeField,
     DecimalField, EmailField, FilePathField, FloatField, GenericIPAddressField,
     IntegerField, IPAddressField, NullBooleanField, PositiveIntegerField,
     PositiveSmallIntegerField, SlugField, SmallIntegerField, TextField,
     TimeField, URLField,
 )
-from django.db.models.fields.files import FileField, ImageField
-from django.test import SimpleTestCase
-from django.utils.functional import lazy
+from djmodels.db.models.fields.files import FileField, ImageField
+from djmodels.test import SimpleTestCase
+from djmodels.utils.functional import lazy
 
 
 class PromiseTest(SimpleTestCase):

@@ -1,8 +1,8 @@
 import datetime
 from collections import OrderedDict
 
-from django.contrib.auth.models import User
-from django.test import TestCase
+from djmodels.contrib.auth.models import User
+from djmodels.test import TestCase
 
 from .models import Order, RevisionableModel, TestObject
 

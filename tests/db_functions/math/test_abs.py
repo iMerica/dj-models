@@ -1,8 +1,8 @@
 from decimal import Decimal
 
-from django.db.models import DecimalField
-from django.db.models.functions import Abs
-from django.test import TestCase
+from djmodels.db.models import DecimalField
+from djmodels.db.models.functions import Abs
+from djmodels.test import TestCase
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

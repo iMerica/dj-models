@@ -1,5 +1,5 @@
 """Models for test_natural.py"""
-from django.db import models
+from djmodels.db import models
 
 
 class NaturalKeyAnchorManager(models.Manager):

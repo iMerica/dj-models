@@ -1,9 +1,9 @@
 from datetime import date
 from decimal import Decimal
 
-from django.db.models.query import RawQuerySet
-from django.db.models.query_utils import InvalidQuery
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.db.models.query import RawQuerySet
+from djmodels.db.models.query_utils import InvalidQuery
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from .models import (
     Author, Book, BookFkAsPk, Coffee, FriendlyAuthor, MixedCaseIDColumn,

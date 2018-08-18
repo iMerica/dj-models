@@ -1,13 +1,13 @@
 import unittest
 
-from django.conf import settings
-from django.core.checks import Error, Warning
-from django.core.checks.model_checks import _check_lazy_references
-from django.core.exceptions import ImproperlyConfigured
-from django.db import connection, connections, models
-from django.db.models.signals import post_init
-from django.test import SimpleTestCase
-from django.test.utils import isolate_apps, override_settings
+from djmodels.conf import settings
+from djmodels.core.checks import Error, Warning
+from djmodels.core.checks.model_checks import _check_lazy_references
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.db import connection, connections, models
+from djmodels.db.models.signals import post_init
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import isolate_apps, override_settings
 
 
 def get_max_column_name_length():
@@ -901,7 +901,7 @@ class OtherModelTests(SimpleTestCase):
 
         self.assertEqual(C.check(), [])
 
-    @isolate_apps('django.contrib.auth', kwarg_name='apps')
+    @isolate_apps('djmodels.contrib.auth', kwarg_name='apps')
     def test_lazy_reference_checks(self, apps):
         class DummyModel(models.Model):
             author = models.ForeignKey('Author', models.CASCADE)

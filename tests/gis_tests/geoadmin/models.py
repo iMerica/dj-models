@@ -1,4 +1,4 @@
-from django.contrib.gis.db import models
+from djmodels.contrib.gis.db import models
 
 from ..admin import admin
 

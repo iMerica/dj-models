@@ -1,5 +1,5 @@
-from django.db.models.query_utils import InvalidQuery
-from django.test import TestCase
+from djmodels.db.models.query_utils import InvalidQuery
+from djmodels.test import TestCase
 
 from .models import (
     BigChild, Child, ChildProxy, Primary, RefreshPrimaryProxy, Secondary,

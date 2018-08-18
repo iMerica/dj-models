@@ -4,7 +4,7 @@ import sys
 import warnings
 from unittest import TestCase
 
-from django.utils.functional import LazyObject, SimpleLazyObject, empty
+from djmodels.utils.functional import LazyObject, SimpleLazyObject, empty
 
 from .models import Category, CategoryInfo
 

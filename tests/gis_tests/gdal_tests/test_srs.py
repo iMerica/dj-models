@@ -1,6 +1,6 @@
 import unittest
 
-from django.contrib.gis.gdal import (
+from djmodels.contrib.gis.gdal import (
     CoordTransform, GDALException, SpatialReference, SRSException,
 )
 

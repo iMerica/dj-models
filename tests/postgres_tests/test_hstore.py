@@ -1,21 +1,21 @@
 import json
 
-from django.core import checks, exceptions, serializers
-from django.forms import Form
-from django.test.utils import isolate_apps, modify_settings
+from djmodels.core import checks, exceptions, serializers
+from djmodels.forms import Form
+from djmodels.test.utils import isolate_apps, modify_settings
 
 from . import PostgreSQLTestCase
 from .models import HStoreModel, PostgreSQLModel
 
 try:
-    from django.contrib.postgres import forms
-    from django.contrib.postgres.fields import HStoreField
-    from django.contrib.postgres.validators import KeysValidator
+    from djmodels.contrib.postgres import forms
+    from djmodels.contrib.postgres.fields import HStoreField
+    from djmodels.contrib.postgres.validators import KeysValidator
 except ImportError:
     pass
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.postgres'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.postgres'})
 class HStoreTestCase(PostgreSQLTestCase):
     pass
 
@@ -369,6 +369,6 @@ class TestValidator(HStoreTestCase):
         }
         validator = KeysValidator(keys=['a', 'b'], strict=True, messages=messages)
         path, args, kwargs = validator.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.validators.KeysValidator')
+        self.assertEqual(path, 'djmodels.contrib.postgres.validators.KeysValidator')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {'keys': ['a', 'b'], 'strict': True, 'messages': messages})

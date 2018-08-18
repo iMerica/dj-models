@@ -1,9 +1,9 @@
 import pickle
 
-from django import forms
-from django.db import models
-from django.test import SimpleTestCase, TestCase
-from django.utils.functional import lazy
+from djmodels import forms
+from djmodels.db import models
+from djmodels.test import SimpleTestCase, TestCase
+from djmodels.utils.functional import lazy
 
 from .models import (
     Foo, RenamedField, VerboseNameField, Whiz, WhizIter, WhizIterEmpty,
@@ -35,9 +35,9 @@ class BasicFieldTests(TestCase):
         __repr__() of a field displays its name.
         """
         f = Foo._meta.get_field('a')
-        self.assertEqual(repr(f), '<django.db.models.fields.CharField: a>')
+        self.assertEqual(repr(f), '<djmodels.db.models.fields.CharField: a>')
         f = models.fields.CharField()
-        self.assertEqual(repr(f), '<django.db.models.fields.CharField>')
+        self.assertEqual(repr(f), '<djmodels.db.models.fields.CharField>')
 
     def test_field_repr_nested(self):
         """__repr__() uses __qualname__ for nested class support."""
@@ -74,7 +74,7 @@ class BasicFieldTests(TestCase):
 
     def test_field_str(self):
         f = models.Field()
-        self.assertEqual(str(f), '<django.db.models.fields.Field>')
+        self.assertEqual(str(f), '<djmodels.db.models.fields.Field>')
         f = Foo._meta.get_field('a')
         self.assertEqual(str(f), 'model_fields.Foo.a')
 

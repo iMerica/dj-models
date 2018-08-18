@@ -1,5 +1,5 @@
-from django.conf.urls import url
-from django.urls import path
+from djmodels.conf.urls import url
+from djmodels.urls import path
 
 from . import views
 

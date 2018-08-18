@@ -1,5 +1,5 @@
-from django.db import IntegrityError, connection, transaction
-from django.test import TestCase
+from djmodels.db import IntegrityError, connection, transaction
+from djmodels.test import TestCase
 
 from .models import (
     Bar, Director, Favorites, HiddenPointer, ManualPrimaryKey, MultiModel,

@@ -1,26 +1,26 @@
 from functools import update_wrapper, wraps
 from unittest import TestCase
 
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import (
+from djmodels.contrib.admin.views.decorators import staff_member_required
+from djmodels.contrib.auth.decorators import (
     login_required, permission_required, user_passes_test,
 )
-from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed
-from django.middleware.clickjacking import XFrameOptionsMiddleware
-from django.test import SimpleTestCase
-from django.utils.decorators import method_decorator
-from django.utils.functional import keep_lazy, keep_lazy_text, lazy
-from django.utils.safestring import mark_safe
-from django.views.decorators.cache import (
+from djmodels.http import HttpRequest, HttpResponse, HttpResponseNotAllowed
+from djmodels.middleware.clickjacking import XFrameOptionsMiddleware
+from djmodels.test import SimpleTestCase
+from djmodels.utils.decorators import method_decorator
+from djmodels.utils.functional import keep_lazy, keep_lazy_text, lazy
+from djmodels.utils.safestring import mark_safe
+from djmodels.views.decorators.cache import (
     cache_control, cache_page, never_cache,
 )
-from django.views.decorators.clickjacking import (
+from djmodels.views.decorators.clickjacking import (
     xframe_options_deny, xframe_options_exempt, xframe_options_sameorigin,
 )
-from django.views.decorators.http import (
+from djmodels.views.decorators.http import (
     condition, require_GET, require_http_methods, require_POST, require_safe,
 )
-from django.views.decorators.vary import vary_on_cookie, vary_on_headers
+from djmodels.views.decorators.vary import vary_on_cookie, vary_on_headers
 
 
 def fully_decorated(request):
@@ -44,37 +44,37 @@ def compose(*functions):
 
 
 full_decorator = compose(
-    # django.views.decorators.http
+    # djmodels.views.decorators.http
     require_http_methods(["GET"]),
     require_GET,
     require_POST,
     require_safe,
     condition(lambda r: None, lambda r: None),
 
-    # django.views.decorators.vary
+    # djmodels.views.decorators.vary
     vary_on_headers('Accept-language'),
     vary_on_cookie,
 
-    # django.views.decorators.cache
+    # djmodels.views.decorators.cache
     cache_page(60 * 15),
     cache_control(private=True),
     never_cache,
 
-    # django.contrib.auth.decorators
+    # djmodels.contrib.auth.decorators
     # Apply user_passes_test twice to check #9474
     user_passes_test(lambda u: True),
     login_required,
     permission_required('change_world'),
 
-    # django.contrib.admin.views.decorators
+    # djmodels.contrib.admin.views.decorators
     staff_member_required,
 
-    # django.utils.functional
+    # djmodels.utils.functional
     keep_lazy(HttpResponse),
     keep_lazy_text,
     lazy,
 
-    # django.utils.safestring
+    # djmodels.utils.safestring
     mark_safe,
 )
 

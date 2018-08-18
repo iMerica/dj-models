@@ -1,5 +1,5 @@
-from django.conf.urls import url
-from django.http import FileResponse, HttpResponse
+from djmodels.conf.urls import url
+from djmodels.http import FileResponse, HttpResponse
 
 
 def helloworld(request):

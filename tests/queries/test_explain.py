@@ -1,9 +1,9 @@
 import unittest
 
-from django.db import NotSupportedError, connection, transaction
-from django.db.models import Count
-from django.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
-from django.test.utils import CaptureQueriesContext
+from djmodels.db import NotSupportedError, connection, transaction
+from djmodels.db.models import Count
+from djmodels.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from djmodels.test.utils import CaptureQueriesContext
 
 from .models import Tag
 

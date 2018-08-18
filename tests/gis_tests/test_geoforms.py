@@ -1,11 +1,11 @@
 import re
 
-from django.contrib.gis import forms
-from django.contrib.gis.forms import BaseGeometryWidget, OpenLayersWidget
-from django.contrib.gis.geos import GEOSGeometry
-from django.forms import ValidationError
-from django.test import SimpleTestCase, override_settings
-from django.utils.html import escape
+from djmodels.contrib.gis import forms
+from djmodels.contrib.gis.forms import BaseGeometryWidget, OpenLayersWidget
+from djmodels.contrib.gis.geos import GEOSGeometry
+from djmodels.forms import ValidationError
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.utils.html import escape
 
 
 class GeometryFieldTest(SimpleTestCase):
@@ -119,7 +119,7 @@ class GeometryFieldTest(SimpleTestCase):
             'pt3': 'PNT(0)',  # invalid
         })
 
-        with self.assertLogs('django.contrib.gis', 'ERROR') as logger_calls:
+        with self.assertLogs('djmodels.contrib.gis', 'ERROR') as logger_calls:
             output = str(form)
 
         # The first point can't use assertInHTML() due to non-deterministic

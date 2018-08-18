@@ -1,11 +1,11 @@
 import os
 import re
 
-from django.contrib.gis.gdal import (
+from djmodels.contrib.gis.gdal import (
     GDAL_VERSION, DataSource, Envelope, GDALException, OGRGeometry,
 )
-from django.contrib.gis.gdal.field import OFTInteger, OFTReal, OFTString
-from django.test import SimpleTestCase
+from djmodels.contrib.gis.gdal.field import OFTInteger, OFTReal, OFTString
+from djmodels.test import SimpleTestCase
 
 from ..test_data import TEST_DATA, TestDS, get_ds_file
 

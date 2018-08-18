@@ -1,6 +1,6 @@
-from django.core.checks.caches import E001
-from django.test import SimpleTestCase
-from django.test.utils import override_settings
+from djmodels.core.checks.caches import E001
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import override_settings
 
 
 class CheckCacheSettingsAppDirsTest(SimpleTestCase):
@@ -17,7 +17,7 @@ class CheckCacheSettingsAppDirsTest(SimpleTestCase):
 
     @property
     def func(self):
-        from django.core.checks.caches import check_default_cache_is_configured
+        from djmodels.core.checks.caches import check_default_cache_is_configured
         return check_default_cache_is_configured
 
     @override_settings(CACHES=VALID_CACHES_CONFIGURATION)

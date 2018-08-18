@@ -1,16 +1,16 @@
 import copy
 
-from django.db import DEFAULT_DB_ALIAS, connections
-from django.db.backends.base.creation import (
+from djmodels.db import DEFAULT_DB_ALIAS, connections
+from djmodels.db.backends.base.creation import (
     TEST_DATABASE_PREFIX, BaseDatabaseCreation,
 )
-from django.test import SimpleTestCase
+from djmodels.test import SimpleTestCase
 
 
 class TestDbSignatureTests(SimpleTestCase):
 
     def get_connection_copy(self):
-        # Get a copy of the default connection. (Can't use django.db.connection
+        # Get a copy of the default connection. (Can't use djmodels.db.connection
         # because it'll modify the default connection itself.)
         test_connection = copy.copy(connections[DEFAULT_DB_ALIAS])
         test_connection.settings_dict = copy.copy(connections[DEFAULT_DB_ALIAS].settings_dict)

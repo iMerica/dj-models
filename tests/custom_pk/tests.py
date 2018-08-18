@@ -1,5 +1,5 @@
-from django.db import IntegrityError, transaction
-from django.test import TestCase, skipIfDBFeature
+from djmodels.db import IntegrityError, transaction
+from djmodels.test import TestCase, skipIfDBFeature
 
 from .models import Bar, Business, Employee, Foo
 

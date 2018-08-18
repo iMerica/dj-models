@@ -1,8 +1,8 @@
 from io import StringIO
 
-from django.contrib.auth.models import User
-from django.core import management
-from django.test import TestCase
+from djmodels.contrib.auth.models import User
+from djmodels.core import management
+from djmodels.test import TestCase
 
 from .models import (
     Car, CarDriver, Driver, Group, Membership, Person, UserMembership,
@@ -143,7 +143,7 @@ class M2MThroughSerializationTestCase(TestCase):
         management.call_command("dumpdata", "m2m_through_regress", format="xml", indent=2, stdout=out)
         self.assertXMLEqual(out.getvalue().strip(), """
 <?xml version="1.0" encoding="utf-8"?>
-<django-objects version="1.0">
+<djmodels-objects version="1.0">
   <object pk="%(m_pk)s" model="m2m_through_regress.membership">
     <field to="m2m_through_regress.person" name="person" rel="ManyToOneRel">%(p_pk)s</field>
     <field to="m2m_through_regress.group" name="group" rel="ManyToOneRel">%(g_pk)s</field>
@@ -155,7 +155,7 @@ class M2MThroughSerializationTestCase(TestCase):
   <object pk="%(g_pk)s" model="m2m_through_regress.group">
     <field type="CharField" name="name">Roll</field>
   </object>
-</django-objects>
+</djmodels-objects>
         """.strip() % pks)
 
 

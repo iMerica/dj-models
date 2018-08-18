@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from django.test import SimpleTestCase, TestCase as DjangoTestCase
+from djmodels.test import SimpleTestCase, TestCase as DjangoTestCase
 
 
 class DjangoCase1(DjangoTestCase):

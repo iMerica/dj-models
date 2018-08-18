@@ -1,12 +1,12 @@
-from django.contrib.gis import admin
-from django.contrib.gis.geos import Point
-from django.test import TestCase, override_settings
+from djmodels.contrib.gis import admin
+from djmodels.contrib.gis.geos import Point
+from djmodels.test import TestCase, override_settings
 
 from .admin import UnmodifiableAdmin
 from .models import City, site
 
 
-@override_settings(ROOT_URLCONF='django.contrib.gis.tests.geoadmin.urls')
+@override_settings(ROOT_URLCONF='djmodels.contrib.gis.tests.geoadmin.urls')
 class GeoAdminTest(TestCase):
 
     def test_ensure_geographic_media(self):
@@ -73,7 +73,7 @@ class GeoAdminTest(TestCase):
         geoadmin = site._registry[City]
         form = geoadmin.get_changelist_form(None)({'point': ''})
         with self.assertRaisesMessage(AssertionError, 'no logs'):
-            with self.assertLogs('django.contrib.gis', 'ERROR'):
+            with self.assertLogs('djmodels.contrib.gis', 'ERROR'):
                 output = str(form['point'])
         self.assertInHTML(
             '<textarea id="id_point" class="vWKTField required" cols="150"'
@@ -84,7 +84,7 @@ class GeoAdminTest(TestCase):
     def test_olwidget_invalid_string(self):
         geoadmin = site._registry[City]
         form = geoadmin.get_changelist_form(None)({'point': 'INVALID()'})
-        with self.assertLogs('django.contrib.gis', 'ERROR') as cm:
+        with self.assertLogs('djmodels.contrib.gis', 'ERROR') as cm:
             output = str(form['point'])
         self.assertInHTML(
             '<textarea id="id_point" class="vWKTField required" cols="150"'

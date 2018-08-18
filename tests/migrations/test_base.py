@@ -4,12 +4,12 @@ import tempfile
 from contextlib import contextmanager
 from importlib import import_module
 
-from django.apps import apps
-from django.db import connections
-from django.db.migrations.recorder import MigrationRecorder
-from django.test import TransactionTestCase
-from django.test.utils import extend_sys_path
-from django.utils.module_loading import module_dir
+from djmodels.apps import apps
+from djmodels.db import connections
+from djmodels.db.migrations.recorder import MigrationRecorder
+from djmodels.test import TransactionTestCase
+from djmodels.test.utils import extend_sys_path
+from djmodels.utils.module_loading import module_dir
 
 
 class MigrationTestBase(TransactionTestCase):

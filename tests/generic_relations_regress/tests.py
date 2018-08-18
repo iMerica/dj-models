@@ -1,8 +1,8 @@
-from django.db.models import Q, Sum
-from django.db.models.deletion import ProtectedError
-from django.db.utils import IntegrityError
-from django.forms.models import modelform_factory
-from django.test import TestCase, skipIfDBFeature
+from djmodels.db.models import Q, Sum
+from djmodels.db.models.deletion import ProtectedError
+from djmodels.db.utils import IntegrityError
+from djmodels.forms.models import modelform_factory
+from djmodels.test import TestCase, skipIfDBFeature
 
 from .models import (
     A, Address, B, Board, C, Cafe, CharLink, Company, Contact, Content, D,

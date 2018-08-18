@@ -1,9 +1,9 @@
 from operator import attrgetter
 
-from django.db import IntegrityError, NotSupportedError, connection
-from django.db.models import FileField, Value
-from django.db.models.functions import Lower
-from django.test import (
+from djmodels.db import IntegrityError, NotSupportedError, connection
+from djmodels.db.models import FileField, Value
+from djmodels.db.models.functions import Lower
+from djmodels.test import (
     TestCase, override_settings, skipIfDBFeature, skipUnlessDBFeature,
 )
 

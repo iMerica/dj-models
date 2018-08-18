@@ -1,6 +1,6 @@
-from django.db.models import Exists, F, IntegerField, OuterRef, Value
-from django.db.utils import DatabaseError, NotSupportedError
-from django.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from djmodels.db.models import Exists, F, IntegerField, OuterRef, Value
+from djmodels.db.utils import DatabaseError, NotSupportedError
+from djmodels.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from .models import Number, ReservedName
 

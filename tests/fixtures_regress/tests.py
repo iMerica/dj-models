@@ -4,12 +4,12 @@ import os
 import re
 from io import StringIO
 
-from django.core import management, serializers
-from django.core.exceptions import ImproperlyConfigured
-from django.core.serializers.base import DeserializationError
-from django.db import IntegrityError, transaction
-from django.db.models import signals
-from django.test import (
+from djmodels.core import management, serializers
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.core.serializers.base import DeserializationError
+from djmodels.db import IntegrityError, transaction
+from djmodels.db.models import signals
+from djmodels.test import (
     TestCase, TransactionTestCase, override_settings, skipIfDBFeature,
     skipUnlessDBFeature,
 )

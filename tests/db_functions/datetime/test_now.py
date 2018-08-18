@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 
-from django.db.models.functions import Now
-from django.test import TestCase
-from django.utils import timezone
+from djmodels.db.models.functions import Now
+from djmodels.test import TestCase
+from djmodels.utils import timezone
 
 from ..models import Article
 

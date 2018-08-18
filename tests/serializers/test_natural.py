@@ -1,6 +1,6 @@
-from django.core import serializers
-from django.db import connection
-from django.test import TestCase
+from djmodels.core import serializers
+from djmodels.db import connection
+from djmodels.test import TestCase
 
 from .models import Child, FKDataNaturalKey, NaturalKeyAnchor, NaturalKeyThing
 from .tests import register_tests

@@ -3,8 +3,8 @@ from datetime import (
     time as original_time,
 )
 
-from django.test import SimpleTestCase
-from django.utils.datetime_safe import date, datetime, time
+from djmodels.test import SimpleTestCase
+from djmodels.utils.datetime_safe import date, datetime, time
 
 
 class DatetimeTests(SimpleTestCase):

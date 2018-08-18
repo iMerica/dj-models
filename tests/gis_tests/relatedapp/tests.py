@@ -1,9 +1,9 @@
-from django.contrib.gis.db.models import Collect, Count, Extent, F, Union
-from django.contrib.gis.geos import GEOSGeometry, MultiPoint, Point
-from django.db import NotSupportedError, connection
-from django.test import TestCase, skipUnlessDBFeature
-from django.test.utils import override_settings
-from django.utils import timezone
+from djmodels.contrib.gis.db.models import Collect, Count, Extent, F, Union
+from djmodels.contrib.gis.geos import GEOSGeometry, MultiPoint, Point
+from djmodels.db import NotSupportedError, connection
+from djmodels.test import TestCase, skipUnlessDBFeature
+from djmodels.test.utils import override_settings
+from djmodels.utils import timezone
 
 from ..utils import no_oracle
 from .models import (

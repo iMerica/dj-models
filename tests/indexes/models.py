@@ -1,4 +1,4 @@
-from django.db import connection, models
+from djmodels.db import connection, models
 
 
 class CurrentTranslation(models.ForeignObject):

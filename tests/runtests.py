@@ -9,18 +9,18 @@ import sys
 import tempfile
 import warnings
 
-import django
-from django.apps import apps
-from django.conf import settings
-from django.db import connection, connections
-from django.test import TestCase, TransactionTestCase
-from django.test.runner import default_test_processes
-from django.test.selenium import SeleniumTestCaseBase
-from django.test.utils import get_runner
-from django.utils.deprecation import (
+import djmodels
+from djmodels.apps import apps
+from djmodels.conf import settings
+from djmodels.db import connection, connections
+from djmodels.test import TestCase, TransactionTestCase
+from djmodels.test.runner import default_test_processes
+from djmodels.test.selenium import SeleniumTestCaseBase
+from djmodels.test.utils import get_runner
+from djmodels.utils.deprecation import (
     RemovedInDjango30Warning, RemovedInDjango31Warning,
 )
-from django.utils.log import DEFAULT_LOGGING
+from djmodels.utils.log import DEFAULT_LOGGING
 
 try:
     import MySQLdb
@@ -59,29 +59,29 @@ SUBDIRS_TO_SKIP = [
 ]
 
 ALWAYS_INSTALLED_APPS = [
-    'django.contrib.contenttypes',
-    'django.contrib.auth',
-    'django.contrib.sites',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.admin.apps.SimpleAdminConfig',
-    'django.contrib.staticfiles',
+    'djmodels.contrib.contenttypes',
+    'djmodels.contrib.auth',
+    'djmodels.contrib.sites',
+    'djmodels.contrib.sessions',
+    'djmodels.contrib.messages',
+    'djmodels.contrib.admin.apps.SimpleAdminConfig',
+    'djmodels.contrib.staticfiles',
 ]
 
 ALWAYS_MIDDLEWARE = [
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'djmodels.contrib.sessions.middleware.SessionMiddleware',
+    'djmodels.middleware.common.CommonMiddleware',
+    'djmodels.middleware.csrf.CsrfViewMiddleware',
+    'djmodels.contrib.auth.middleware.AuthenticationMiddleware',
+    'djmodels.contrib.messages.middleware.MessageMiddleware',
 ]
 
 # Need to add the associated contrib app to INSTALLED_APPS in some cases to
 # avoid "RuntimeError: Model class X doesn't declare an explicit app_label
 # and isn't in an application in INSTALLED_APPS."
 CONTRIB_TESTS_TO_APPS = {
-    'flatpages_tests': 'django.contrib.flatpages',
-    'redirects_tests': 'django.contrib.redirects',
+    'flatpages_tests': 'djmodels.contrib.flatpages',
+    'redirects_tests': 'djmodels.contrib.redirects',
 }
 
 
@@ -116,7 +116,7 @@ def setup(verbosity, test_labels, parallel):
         test_labels_set.add('.'.join(bits))
 
     if verbosity >= 1:
-        msg = "Testing against Django installed in '%s'" % os.path.dirname(django.__file__)
+        msg = "Testing against Django installed in '%s'" % os.path.dirname(djmodels.__file__)
         max_parallel = default_test_processes() if parallel == 0 else parallel
         if max_parallel > 1:
             msg += " with up to %d processes" % max_parallel
@@ -170,17 +170,17 @@ def setup(verbosity, test_labels, parallel):
     log_config = copy.deepcopy(DEFAULT_LOGGING)
     # Filter out non-error logging so we don't have to capture it in lots of
     # tests.
-    log_config['loggers']['django']['level'] = 'ERROR'
+    log_config['loggers']['djmodels']['level'] = 'ERROR'
     settings.LOGGING = log_config
     settings.SILENCED_SYSTEM_CHECKS = [
         'fields.W342',  # ForeignKey(unique=True) -> OneToOneField
     ]
 
     # Load all the ALWAYS_INSTALLED_APPS.
-    django.setup()
+    djmodels.setup()
 
     # It would be nice to put this validation earlier but it must come after
-    # django.setup() so that connection.features.gis_enabled can be accessed
+    # djmodels.setup() so that connection.features.gis_enabled can be accessed
     # without raising AppRegistryNotReady when running gis_tests in isolation
     # on some backends (e.g. PostGIS).
     if 'gis_tests' in test_labels_set and not connection.features.gis_enabled:
@@ -215,7 +215,7 @@ def setup(verbosity, test_labels, parallel):
 
     # Add contrib.gis to INSTALLED_APPS if needed (rather than requiring
     # @override_settings(INSTALLED_APPS=...) on all test cases.
-    gis = 'django.contrib.gis'
+    gis = 'djmodels.contrib.gis'
     if connection.features.gis_enabled and gis not in settings.INSTALLED_APPS:
         if verbosity >= 2:
             print("Importing application %s" % gis)
@@ -240,7 +240,7 @@ def teardown(state):
 
 def actual_test_processes(parallel):
     if parallel == 0:
-        # This doesn't work before django.setup() on some databases.
+        # This doesn't work before djmodels.setup() on some databases.
         if all(conn.features.can_clone_databases for conn in connections.all()):
             return default_test_processes()
         else:
@@ -270,7 +270,7 @@ def django_tests(verbosity, interactive, failfast, keepdb, reverse,
 
     # Run the test suite, including the extra validation tests.
     if not hasattr(settings, 'TEST_RUNNER'):
-        settings.TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+        settings.TEST_RUNNER = 'djmodels.test.runner.DiscoverRunner'
     TestRunner = get_runner(settings)
 
     test_runner = TestRunner(

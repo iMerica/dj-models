@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from django.db.models import Value
-from django.db.models.fields import DateTimeField
-from django.db.models.lookups import YearComparisonLookup
-from django.test import SimpleTestCase
+from djmodels.db.models import Value
+from djmodels.db.models.fields import DateTimeField
+from djmodels.db.models.lookups import YearComparisonLookup
+from djmodels.test import SimpleTestCase
 
 
 class YearComparisonLookupTests(SimpleTestCase):

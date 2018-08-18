@@ -1,7 +1,7 @@
 import hashlib
 import unittest
 
-from django.utils.crypto import constant_time_compare, pbkdf2
+from djmodels.utils.crypto import constant_time_compare, pbkdf2
 
 
 class TestUtilsCryptoMisc(unittest.TestCase):

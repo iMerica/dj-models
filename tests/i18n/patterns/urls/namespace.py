@@ -1,7 +1,7 @@
-from django.conf.urls import url
-from django.urls import path
-from django.utils.translation import gettext_lazy as _
-from django.views.generic import TemplateView
+from djmodels.conf.urls import url
+from djmodels.urls import path
+from djmodels.utils.translation import gettext_lazy as _
+from djmodels.views.generic import TemplateView
 
 view = TemplateView.as_view(template_name='dummy.html')
 

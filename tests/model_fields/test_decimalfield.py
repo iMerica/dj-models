@@ -1,10 +1,10 @@
 import unittest
 from decimal import Decimal
 
-from django.core import validators
-from django.core.exceptions import ValidationError
-from django.db import connection, models
-from django.test import TestCase
+from djmodels.core import validators
+from djmodels.core.exceptions import ValidationError
+from djmodels.db import connection, models
+from djmodels.test import TestCase
 
 from .models import BigD, Foo
 

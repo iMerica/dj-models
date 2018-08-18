@@ -1,12 +1,12 @@
 from unittest import skipIf
 
-from django.contrib.gis.db.models import fields
-from django.contrib.gis.geos import MultiPolygon, Polygon
-from django.core.exceptions import ImproperlyConfigured
-from django.db import connection, migrations, models
-from django.db.migrations.migration import Migration
-from django.db.migrations.state import ProjectState
-from django.test import (
+from djmodels.contrib.gis.db.models import fields
+from djmodels.contrib.gis.geos import MultiPolygon, Polygon
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.db import connection, migrations, models
+from djmodels.db.migrations.migration import Migration
+from djmodels.db.migrations.state import ProjectState
+from djmodels.test import (
     TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature,
 )
 

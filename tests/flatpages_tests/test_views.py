@@ -1,8 +1,8 @@
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.contrib.flatpages.models import FlatPage
-from django.contrib.sites.models import Site
-from django.test import TestCase, modify_settings, override_settings
+from djmodels.conf import settings
+from djmodels.contrib.auth.models import User
+from djmodels.contrib.flatpages.models import FlatPage
+from djmodels.contrib.sites.models import Site
+from djmodels.test import TestCase, modify_settings, override_settings
 
 from .settings import FLATPAGES_TEMPLATES
 
@@ -37,16 +37,16 @@ class TestDataMixin:
         cls.fp4.sites.add(cls.site1)
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.flatpages'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.flatpages'})
 @override_settings(
     LOGIN_URL='/accounts/login/',
     MIDDLEWARE=[
-        'django.middleware.common.CommonMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        # no 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
+        'djmodels.middleware.common.CommonMiddleware',
+        'djmodels.contrib.sessions.middleware.SessionMiddleware',
+        'djmodels.middleware.csrf.CsrfViewMiddleware',
+        'djmodels.contrib.auth.middleware.AuthenticationMiddleware',
+        'djmodels.contrib.messages.middleware.MessageMiddleware',
+        # no 'djmodels.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
     ],
     ROOT_URLCONF='flatpages_tests.urls',
     TEMPLATES=FLATPAGES_TEMPLATES,
@@ -101,17 +101,17 @@ class FlatpageViewTests(TestDataMixin, TestCase):
         self.assertContains(response, "<p>Isn't it special!</p>")
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.flatpages'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.flatpages'})
 @override_settings(
     APPEND_SLASH=True,
     LOGIN_URL='/accounts/login/',
     MIDDLEWARE=[
-        'django.middleware.common.CommonMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        # no 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
+        'djmodels.middleware.common.CommonMiddleware',
+        'djmodels.contrib.sessions.middleware.SessionMiddleware',
+        'djmodels.middleware.csrf.CsrfViewMiddleware',
+        'djmodels.contrib.auth.middleware.AuthenticationMiddleware',
+        'djmodels.contrib.messages.middleware.MessageMiddleware',
+        # no 'djmodels.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
     ],
     ROOT_URLCONF='flatpages_tests.urls',
     TEMPLATES=FLATPAGES_TEMPLATES,

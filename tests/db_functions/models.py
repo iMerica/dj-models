@@ -1,7 +1,7 @@
 """
 Tests for built in Function expressions.
 """
-from django.db import models
+from djmodels.db import models
 
 
 class Author(models.Model):

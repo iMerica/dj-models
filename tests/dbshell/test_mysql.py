@@ -1,5 +1,5 @@
-from django.db.backends.mysql.client import DatabaseClient
-from django.test import SimpleTestCase
+from djmodels.db.backends.mysql.client import DatabaseClient
+from djmodels.test import SimpleTestCase
 
 
 class MySqlDbshellCommandTestCase(SimpleTestCase):

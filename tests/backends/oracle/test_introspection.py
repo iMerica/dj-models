@@ -1,7 +1,7 @@
 import unittest
 
-from django.db import connection
-from django.test import TransactionTestCase
+from djmodels.db import connection
+from djmodels.test import TransactionTestCase
 
 from ..models import Person
 

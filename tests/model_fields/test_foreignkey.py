@@ -1,10 +1,10 @@
 from decimal import Decimal
 
-from django.apps import apps
-from django.core import checks
-from django.db import models
-from django.test import TestCase, skipIfDBFeature
-from django.test.utils import isolate_apps
+from djmodels.apps import apps
+from djmodels.core import checks
+from djmodels.db import models
+from djmodels.test import TestCase, skipIfDBFeature
+from djmodels.test.utils import isolate_apps
 
 from .models import Bar, FkToChar, Foo, PrimaryKeyCharModel
 

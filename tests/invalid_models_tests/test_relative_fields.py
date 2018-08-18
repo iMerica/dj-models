@@ -1,8 +1,8 @@
-from django.core.checks import Error, Warning as DjangoWarning
-from django.db import models
-from django.db.models.fields.related import ForeignObject
-from django.test.testcases import SimpleTestCase, skipIfDBFeature
-from django.test.utils import isolate_apps, override_settings
+from djmodels.core.checks import Error, Warning as DjangoWarning
+from djmodels.db import models
+from djmodels.db.models.fields.related import ForeignObject
+from djmodels.test.testcases import SimpleTestCase, skipIfDBFeature
+from djmodels.test.utils import isolate_apps, override_settings
 
 
 @isolate_apps('invalid_models_tests')

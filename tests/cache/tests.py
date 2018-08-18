@@ -12,33 +12,33 @@ import time
 import unittest
 from unittest import mock
 
-from django.conf import settings
-from django.core import management, signals
-from django.core.cache import (
+from djmodels.conf import settings
+from djmodels.core import management, signals
+from djmodels.core.cache import (
     DEFAULT_CACHE_ALIAS, CacheKeyWarning, cache, caches,
 )
-from django.core.cache.utils import make_template_fragment_key
-from django.db import close_old_connections, connection, connections
-from django.http import (
+from djmodels.core.cache.utils import make_template_fragment_key
+from djmodels.db import close_old_connections, connection, connections
+from djmodels.http import (
     HttpRequest, HttpResponse, HttpResponseNotModified, StreamingHttpResponse,
 )
-from django.middleware.cache import (
+from djmodels.middleware.cache import (
     CacheMiddleware, FetchFromCacheMiddleware, UpdateCacheMiddleware,
 )
-from django.middleware.csrf import CsrfViewMiddleware
-from django.template import engines
-from django.template.context_processors import csrf
-from django.template.response import TemplateResponse
-from django.test import (
+from djmodels.middleware.csrf import CsrfViewMiddleware
+from djmodels.template import engines
+from djmodels.template.context_processors import csrf
+from djmodels.template.response import TemplateResponse
+from djmodels.test import (
     RequestFactory, SimpleTestCase, TestCase, TransactionTestCase,
     override_settings,
 )
-from django.test.signals import setting_changed
-from django.utils import timezone, translation
-from django.utils.cache import (
+from djmodels.test.signals import setting_changed
+from djmodels.utils import timezone, translation
+from djmodels.utils.cache import (
     get_cache_key, learn_cache_key, patch_cache_control, patch_vary_headers,
 )
-from django.views.decorators.cache import cache_control, cache_page
+from djmodels.views.decorators.cache import cache_control, cache_page
 
 from .models import Poll, expensive_calculation
 
@@ -979,7 +979,7 @@ class BaseCacheTests:
 
 
 @override_settings(CACHES=caches_setting_for_tests(
-    BACKEND='django.core.cache.backends.db.DatabaseCache',
+    BACKEND='djmodels.core.cache.backends.db.DatabaseCache',
     # Spaces are used in the table name to ensure quoting/escaping is working
     LOCATION='test cache table'
 ))
@@ -1028,7 +1028,7 @@ class DBCacheTests(BaseCacheTests, TransactionTestCase):
         self.assertEqual(out.getvalue(), "Cache table 'test cache table' already exists.\n" * len(settings.CACHES))
 
     @override_settings(CACHES=caches_setting_for_tests(
-        BACKEND='django.core.cache.backends.db.DatabaseCache',
+        BACKEND='djmodels.core.cache.backends.db.DatabaseCache',
         # Use another table name to avoid the 'table already exists' message.
         LOCATION='createcachetable_dry_run_mode'
     ))
@@ -1118,13 +1118,13 @@ class PicklingSideEffect:
 
 
 limit_locmem_entries = override_settings(CACHES=caches_setting_for_tests(
-    BACKEND='django.core.cache.backends.locmem.LocMemCache',
+    BACKEND='djmodels.core.cache.backends.locmem.LocMemCache',
     OPTIONS={'MAX_ENTRIES': 9},
 ))
 
 
 @override_settings(CACHES=caches_setting_for_tests(
-    BACKEND='django.core.cache.backends.locmem.LocMemCache',
+    BACKEND='djmodels.core.cache.backends.locmem.LocMemCache',
 ))
 class LocMemCacheTests(BaseCacheTests, TestCase):
 
@@ -1228,8 +1228,8 @@ configured_caches = {}
 for _cache_params in settings.CACHES.values():
     configured_caches[_cache_params['BACKEND']] = _cache_params
 
-MemcachedCache_params = configured_caches.get('django.core.cache.backends.memcached.MemcachedCache')
-PyLibMCCache_params = configured_caches.get('django.core.cache.backends.memcached.PyLibMCCache')
+MemcachedCache_params = configured_caches.get('djmodels.core.cache.backends.memcached.MemcachedCache')
+PyLibMCCache_params = configured_caches.get('djmodels.core.cache.backends.memcached.PyLibMCCache')
 
 # The memcached backends don't support cull-related options like `MAX_ENTRIES`.
 memcached_excluded_caches = {'cull', 'zero_cull'}
@@ -1402,7 +1402,7 @@ class PyLibMCCacheTests(BaseMemcachedTests, TestCase):
 
 
 @override_settings(CACHES=caches_setting_for_tests(
-    BACKEND='django.core.cache.backends.filebased.FileBasedCache',
+    BACKEND='djmodels.core.cache.backends.filebased.FileBasedCache',
 ))
 class FileBasedCacheTests(BaseCacheTests, TestCase):
     """
@@ -1524,7 +1524,7 @@ class DefaultNonExpiringCacheKeyTests(SimpleTestCase):
         """The default expiration time of a cache key is 5 minutes.
 
         This value is defined in
-        django.core.cache.backends.base.BaseCache.__init__().
+        djmodels.core.cache.backends.base.BaseCache.__init__().
         """
         self.assertEqual(300, self.DEFAULT_TIMEOUT)
 
@@ -1583,7 +1583,7 @@ class DefaultNonExpiringCacheKeyTests(SimpleTestCase):
     ALLOWED_HOSTS=['.example.com'],
 )
 class CacheUtils(SimpleTestCase):
-    """TestCase for django.utils.cache functions."""
+    """TestCase for djmodels.utils.cache functions."""
 
     def setUp(self):
         self.host = 'www.example.com'
@@ -2046,7 +2046,7 @@ class CacheMiddlewareTest(SimpleTestCase):
 
         self.assertEqual(as_view_decorator.cache_timeout, 30)  # Timeout value for 'default' cache, i.e. 30
         self.assertEqual(as_view_decorator.key_prefix, '')
-        # Value of DEFAULT_CACHE_ALIAS from django.core.cache
+        # Value of DEFAULT_CACHE_ALIAS from djmodels.core.cache
         self.assertEqual(as_view_decorator.cache_alias, 'default')
 
         # Next, test with custom values:
@@ -2248,7 +2248,7 @@ class TestWithTemplateResponse(SimpleTestCase):
         )
         for initial_vary, newheaders, resulting_vary in headers:
             with self.subTest(initial_vary=initial_vary, newheaders=newheaders):
-                template = engines['django'].from_string("This is a test")
+                template = engines['djmodels'].from_string("This is a test")
                 response = TemplateResponse(HttpRequest(), template)
                 if initial_vary is not None:
                     response['Vary'] = initial_vary
@@ -2257,7 +2257,7 @@ class TestWithTemplateResponse(SimpleTestCase):
 
     def test_get_cache_key(self):
         request = self.factory.get(self.path)
-        template = engines['django'].from_string("This is a test")
+        template = engines['djmodels'].from_string("This is a test")
         response = TemplateResponse(HttpRequest(), template)
         key_prefix = 'localprefix'
         # Expect None if no headers have been set yet.
@@ -2280,7 +2280,7 @@ class TestWithTemplateResponse(SimpleTestCase):
 
     def test_get_cache_key_with_query(self):
         request = self.factory.get(self.path, {'test': 1})
-        template = engines['django'].from_string("This is a test")
+        template = engines['djmodels'].from_string("This is a test")
         response = TemplateResponse(HttpRequest(), template)
         # Expect None if no headers have been set yet.
         self.assertIsNone(get_cache_key(request))

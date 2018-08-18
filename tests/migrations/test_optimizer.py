@@ -1,7 +1,7 @@
-from django.db import migrations, models
-from django.db.migrations import operations
-from django.db.migrations.optimizer import MigrationOptimizer
-from django.test import SimpleTestCase
+from djmodels.db import migrations, models
+from djmodels.db.migrations import operations
+from djmodels.db.migrations.optimizer import MigrationOptimizer
+from djmodels.test import SimpleTestCase
 
 from .models import EmptyManager, UnicodeModel
 

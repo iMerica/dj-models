@@ -1,5 +1,5 @@
-from django.core.exceptions import FieldError
-from django.test import SimpleTestCase, TestCase
+from djmodels.core.exceptions import FieldError
+from djmodels.test import SimpleTestCase, TestCase
 
 from .models import (
     Bookmark, Domain, Family, Genus, HybridSpecies, Kingdom, Klass, Order,

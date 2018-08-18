@@ -1,10 +1,10 @@
 import unittest
 from datetime import date, datetime, time, timedelta
 
-from django.utils.dateparse import (
+from djmodels.utils.dateparse import (
     parse_date, parse_datetime, parse_duration, parse_time,
 )
-from django.utils.timezone import get_fixed_timezone
+from djmodels.utils.timezone import get_fixed_timezone
 
 
 class DateParseTests(unittest.TestCase):

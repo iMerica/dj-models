@@ -1,12 +1,12 @@
 import os
 import re
 
-from django.contrib.gis.db.models import Extent3D, Union
-from django.contrib.gis.db.models.functions import (
+from djmodels.contrib.gis.db.models import Extent3D, Union
+from djmodels.contrib.gis.db.models.functions import (
     AsGeoJSON, AsKML, Length, Perimeter, Scale, Translate,
 )
-from django.contrib.gis.geos import GEOSGeometry, LineString, Point, Polygon
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.contrib.gis.geos import GEOSGeometry, LineString, Point, Polygon
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from ..utils import FuncTestMixin
 from .models import (
@@ -142,7 +142,7 @@ class Geo3DTest(Geo3DLoadingHelper, TestCase):
         Testing LayerMapping on 3D models.
         """
         # Import here as GDAL is required for those imports
-        from django.contrib.gis.utils import LayerMapping, LayerMapError
+        from djmodels.contrib.gis.utils import LayerMapping, LayerMapError
 
         point_mapping = {'point': 'POINT'}
         mpoint_mapping = {'mpoint': 'MULTIPOINT'}

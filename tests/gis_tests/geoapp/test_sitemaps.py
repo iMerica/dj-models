@@ -2,14 +2,14 @@ import zipfile
 from io import BytesIO
 from xml.dom import minidom
 
-from django.conf import settings
-from django.contrib.sites.models import Site
-from django.test import TestCase, modify_settings, override_settings
+from djmodels.conf import settings
+from djmodels.contrib.sites.models import Site
+from djmodels.test import TestCase, modify_settings, override_settings
 
 from .models import City, Country
 
 
-@modify_settings(INSTALLED_APPS={'append': ['django.contrib.sites', 'django.contrib.sitemaps']})
+@modify_settings(INSTALLED_APPS={'append': ['djmodels.contrib.sites', 'djmodels.contrib.sitemaps']})
 @override_settings(ROOT_URLCONF='gis_tests.geoapp.urls')
 class GeoSitemapTest(TestCase):
 

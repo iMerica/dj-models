@@ -1,6 +1,6 @@
-from django.db.models import CharField, Value as V
-from django.db.models.functions import Coalesce, Length, Upper
-from django.test import TestCase
+from djmodels.db.models import CharField, Value as V
+from djmodels.db.models.functions import Coalesce, Length, Upper
+from djmodels.test import TestCase
 
 from .models import Author
 

@@ -1,9 +1,9 @@
 from datetime import datetime
 from operator import attrgetter
 
-from django.db.models import DateTimeField, F, Max, OuterRef, Subquery
-from django.db.models.functions import Upper
-from django.test import TestCase
+from djmodels.db.models import DateTimeField, F, Max, OuterRef, Subquery
+from djmodels.db.models.functions import Upper
+from djmodels.test import TestCase
 
 from .models import Article, Author, OrderedByFArticle, Reference
 

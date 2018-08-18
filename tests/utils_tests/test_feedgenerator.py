@@ -1,9 +1,9 @@
 import datetime
 import unittest
 
-from django.test import TestCase
-from django.utils import feedgenerator
-from django.utils.timezone import get_fixed_timezone, utc
+from djmodels.test import TestCase
+from djmodels.utils import feedgenerator
+from djmodels.utils.timezone import get_fixed_timezone, utc
 
 
 class FeedgeneratorTest(unittest.TestCase):
@@ -25,10 +25,10 @@ class FeedgeneratorTest(unittest.TestCase):
         """
         self.assertEqual(
             feedgenerator.get_tag_uri(
-                'http://www.example.org:8000/2008/11/14/django#headline',
+                'http://www.example.org:8000/2008/11/14/djmodels#headline',
                 datetime.datetime(2008, 11, 14, 13, 37, 0),
             ),
-            'tag:www.example.org,2008-11-14:/2008/11/14/django/headline')
+            'tag:www.example.org,2008-11-14:/2008/11/14/djmodels/headline')
 
     def test_rfc2822_date(self):
         """

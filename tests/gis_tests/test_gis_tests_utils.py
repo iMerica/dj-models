@@ -1,6 +1,6 @@
-from django.db import connection, models
-from django.db.models.expressions import Func
-from django.test import SimpleTestCase
+from djmodels.db import connection, models
+from djmodels.db.models.expressions import Func
+from djmodels.test import SimpleTestCase
 
 from .utils import FuncTestMixin
 

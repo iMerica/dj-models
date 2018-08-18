@@ -1,12 +1,12 @@
 import unittest
 
-from django.core.checks import Error, Warning as DjangoWarning
-from django.db import connection, models
-from django.test import SimpleTestCase, TestCase, skipIfDBFeature
-from django.test.utils import isolate_apps, override_settings
-from django.utils.functional import lazy
-from django.utils.timezone import now
-from django.utils.translation import gettext_lazy as _
+from djmodels.core.checks import Error, Warning as DjangoWarning
+from djmodels.db import connection, models
+from djmodels.test import SimpleTestCase, TestCase, skipIfDBFeature
+from djmodels.test.utils import isolate_apps, override_settings
+from djmodels.utils.functional import lazy
+from djmodels.utils.timezone import now
+from djmodels.utils.translation import gettext_lazy as _
 
 
 @isolate_apps('invalid_models_tests')
@@ -289,7 +289,7 @@ class CharFieldTests(TestCase):
     @unittest.skipUnless(connection.vendor == 'mysql',
                          "Test valid only for MySQL")
     def test_too_long_char_field_under_mysql(self):
-        from django.db.backends.mysql.validation import DatabaseValidation
+        from djmodels.db.backends.mysql.validation import DatabaseValidation
 
         class Model(models.Model):
             field = models.CharField(unique=True, max_length=256)
@@ -348,7 +348,7 @@ class DateFieldTests(TestCase):
                 hint='It seems you set a fixed date / time / datetime '
                      'value as default for this field. This may not be '
                      'what you want. If you want to have the current date '
-                     'as default, use `django.utils.timezone.now`',
+                     'as default, use `djmodels.utils.timezone.now`',
                 obj=field_dt,
                 id='fields.W161',
             ),
@@ -357,7 +357,7 @@ class DateFieldTests(TestCase):
                 hint='It seems you set a fixed date / time / datetime '
                      'value as default for this field. This may not be '
                      'what you want. If you want to have the current date '
-                     'as default, use `django.utils.timezone.now`',
+                     'as default, use `djmodels.utils.timezone.now`',
                 obj=field_d,
                 id='fields.W161',
             )
@@ -390,7 +390,7 @@ class DateTimeFieldTests(TestCase):
                 hint='It seems you set a fixed date / time / datetime '
                      'value as default for this field. This may not be '
                      'what you want. If you want to have the current date '
-                     'as default, use `django.utils.timezone.now`',
+                     'as default, use `djmodels.utils.timezone.now`',
                 obj=field_dt,
                 id='fields.W161',
             ),
@@ -399,7 +399,7 @@ class DateTimeFieldTests(TestCase):
                 hint='It seems you set a fixed date / time / datetime '
                      'value as default for this field. This may not be '
                      'what you want. If you want to have the current date '
-                     'as default, use `django.utils.timezone.now`',
+                     'as default, use `djmodels.utils.timezone.now`',
                 obj=field_d,
                 id='fields.W161',
             )
@@ -646,7 +646,7 @@ class TimeFieldTests(TestCase):
                 hint='It seems you set a fixed date / time / datetime '
                      'value as default for this field. This may not be '
                      'what you want. If you want to have the current date '
-                     'as default, use `django.utils.timezone.now`',
+                     'as default, use `djmodels.utils.timezone.now`',
                 obj=field_dt,
                 id='fields.W161',
             ),
@@ -655,7 +655,7 @@ class TimeFieldTests(TestCase):
                 hint='It seems you set a fixed date / time / datetime '
                      'value as default for this field. This may not be '
                      'what you want. If you want to have the current date '
-                     'as default, use `django.utils.timezone.now`',
+                     'as default, use `djmodels.utils.timezone.now`',
                 obj=field_t,
                 id='fields.W161',
             )

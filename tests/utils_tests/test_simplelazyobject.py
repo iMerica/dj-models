@@ -1,8 +1,8 @@
 import pickle
 
-from django.contrib.auth.models import User
-from django.test import TestCase
-from django.utils.functional import SimpleLazyObject
+from djmodels.contrib.auth.models import User
+from djmodels.test import TestCase
+from djmodels.utils.functional import SimpleLazyObject
 
 
 class TestUtilsSimpleLazyObjectDjangoTestCase(TestCase):

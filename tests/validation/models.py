@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from django.core.exceptions import ValidationError
-from django.db import models
+from djmodels.core.exceptions import ValidationError
+from djmodels.db import models
 
 
 def validate_answer_to_universe(value):

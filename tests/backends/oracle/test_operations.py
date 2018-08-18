@@ -1,6 +1,6 @@
 import unittest
 
-from django.db import connection
+from djmodels.db import connection
 
 
 @unittest.skipUnless(connection.vendor == 'oracle', 'Oracle tests')

@@ -1,10 +1,10 @@
-from django.db.migrations.exceptions import (
+from djmodels.db.migrations.exceptions import (
     CircularDependencyError, NodeNotFoundError,
 )
-from django.db.migrations.graph import (
+from djmodels.db.migrations.graph import (
     RECURSION_DEPTH_WARNING, DummyNode, MigrationGraph, Node,
 )
-from django.test import SimpleTestCase
+from djmodels.test import SimpleTestCase
 
 
 class GraphTests(SimpleTestCase):

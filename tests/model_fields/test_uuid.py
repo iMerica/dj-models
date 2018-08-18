@@ -1,9 +1,9 @@
 import json
 import uuid
 
-from django.core import exceptions, serializers
-from django.db import IntegrityError, models
-from django.test import (
+from djmodels.core import exceptions, serializers
+from djmodels.db import IntegrityError, models
+from djmodels.test import (
     SimpleTestCase, TestCase, TransactionTestCase, skipUnlessDBFeature,
 )
 

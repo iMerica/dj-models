@@ -1,7 +1,7 @@
-from django.apps import apps
-from django.conf import settings
-from django.db import connection
-from django.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from djmodels.apps import apps
+from djmodels.conf import settings
+from djmodels.db import connection
+from djmodels.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from .models.tablespaces import (
     Article, ArticleRef, Authors, Reviewers, Scientist, ScientistRef,

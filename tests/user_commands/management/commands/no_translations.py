@@ -1,5 +1,5 @@
-from django.core.management.base import BaseCommand, no_translations
-from django.utils import translation
+from djmodels.core.management.base import BaseCommand, no_translations
+from djmodels.utils import translation
 
 
 class Command(BaseCommand):

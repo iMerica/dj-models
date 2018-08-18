@@ -1,4 +1,4 @@
-from django.db import models
+from djmodels.db import models
 
 
 class C1(models.Model):

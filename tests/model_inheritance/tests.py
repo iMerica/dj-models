@@ -1,11 +1,11 @@
 import unittest
 from operator import attrgetter
 
-from django.core.exceptions import FieldError, ValidationError
-from django.db import connection, models
-from django.test import SimpleTestCase, TestCase
-from django.test.utils import CaptureQueriesContext, isolate_apps
-from django.utils.version import PY36
+from djmodels.core.exceptions import FieldError, ValidationError
+from djmodels.db import connection, models
+from djmodels.test import SimpleTestCase, TestCase
+from djmodels.test.utils import CaptureQueriesContext, isolate_apps
+from djmodels.utils.version import PY36
 
 from .models import (
     Base, Chef, CommonInfo, GrandChild, GrandParent, ItalianRestaurant,

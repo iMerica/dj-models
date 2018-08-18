@@ -1,8 +1,8 @@
 from unittest import mock, skipUnless
 
-from django.db import connection
-from django.db.backends.mysql.features import DatabaseFeatures
-from django.test import TestCase
+from djmodels.db import connection
+from djmodels.db.backends.mysql.features import DatabaseFeatures
+from djmodels.test import TestCase
 
 
 @skipUnless(connection.vendor == 'mysql', 'MySQL tests')
@@ -12,10 +12,10 @@ class TestFeatures(TestCase):
         """
         All storage engines except MyISAM support transactions.
         """
-        with mock.patch('django.db.connection.features._mysql_storage_engine', 'InnoDB'):
+        with mock.patch('djmodels.db.connection.features._mysql_storage_engine', 'InnoDB'):
             self.assertTrue(connection.features.supports_transactions)
         del connection.features.supports_transactions
-        with mock.patch('django.db.connection.features._mysql_storage_engine', 'MyISAM'):
+        with mock.patch('djmodels.db.connection.features._mysql_storage_engine', 'MyISAM'):
             self.assertFalse(connection.features.supports_transactions)
         del connection.features.supports_transactions
 

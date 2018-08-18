@@ -1,15 +1,15 @@
 import tempfile
 from io import StringIO
 
-from django.contrib.gis import gdal
-from django.contrib.gis.db.models import Extent, MakeLine, Union, functions
-from django.contrib.gis.geos import (
+from djmodels.contrib.gis import gdal
+from djmodels.contrib.gis.db.models import Extent, MakeLine, Union, functions
+from djmodels.contrib.gis.geos import (
     GeometryCollection, GEOSGeometry, LinearRing, LineString, MultiLineString,
     MultiPoint, MultiPolygon, Point, Polygon, fromstr,
 )
-from django.core.management import call_command
-from django.db import NotSupportedError, connection
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.core.management import call_command
+from djmodels.db import NotSupportedError, connection
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from ..utils import (
     mysql, no_oracle, oracle, postgis, skipUnlessGISLookup, spatialite,

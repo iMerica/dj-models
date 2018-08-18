@@ -1,10 +1,10 @@
-from django.core.exceptions import (
+from djmodels.core.exceptions import (
     DisallowedHost, PermissionDenied, SuspiciousOperation,
 )
-from django.http import (
+from djmodels.http import (
     Http404, HttpResponse, HttpResponseRedirect, HttpResponseServerError,
 )
-from django.http.multipartparser import MultiPartParserError
+from djmodels.http.multipartparser import MultiPartParserError
 
 
 def innocent(request):

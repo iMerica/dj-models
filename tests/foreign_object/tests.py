@@ -1,12 +1,12 @@
 import datetime
 from operator import attrgetter
 
-from django.core.exceptions import FieldError
-from django.db import models
-from django.db.models.fields.related import ForeignObject
-from django.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from django.test.utils import isolate_apps
-from django.utils import translation
+from djmodels.core.exceptions import FieldError
+from djmodels.db import models
+from djmodels.db.models.fields.related import ForeignObject
+from djmodels.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from djmodels.test.utils import isolate_apps
+from djmodels.utils import translation
 
 from .models import (
     Article, ArticleIdea, ArticleTag, ArticleTranslation, Country, Friendship,

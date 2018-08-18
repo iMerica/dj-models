@@ -1,15 +1,15 @@
-from django.apps.registry import Apps
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.db import models
-from django.db.migrations.exceptions import InvalidBasesError
-from django.db.migrations.operations import (
+from djmodels.apps.registry import Apps
+from djmodels.contrib.contenttypes.fields import GenericForeignKey
+from djmodels.db import models
+from djmodels.db.migrations.exceptions import InvalidBasesError
+from djmodels.db.migrations.operations import (
     AddField, AlterField, DeleteModel, RemoveField,
 )
-from django.db.migrations.state import (
+from djmodels.db.migrations.state import (
     ModelState, ProjectState, get_related_models_recursive,
 )
-from django.test import SimpleTestCase, override_settings
-from django.test.utils import isolate_apps
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.test.utils import isolate_apps
 
 from .models import (
     FoodManager, FoodQuerySet, ModelWithCustomBase, NoMigrationFoodManager,
@@ -519,7 +519,7 @@ class StateTests(SimpleTestCase):
         """
         class A(models.Model):
             class Meta:
-                app_label = "django.contrib.auth"
+                app_label = "djmodels.contrib.auth"
 
         class B(models.Model):
             class Meta:
@@ -1084,7 +1084,7 @@ class ModelStateTests(SimpleTestCase):
         self.assertEqual([name for name, mgr in food_state.managers], ['food_mgr'])
         self.assertEqual(food_state.managers[0][1].args, ('a', 'b', 1, 2))
 
-    @isolate_apps('migrations', 'django.contrib.contenttypes')
+    @isolate_apps('migrations', 'djmodels.contrib.contenttypes')
     def test_order_with_respect_to_private_field(self):
         class PrivateFieldModel(models.Model):
             content_type = models.ForeignKey('contenttypes.ContentType', models.CASCADE)

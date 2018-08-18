@@ -1,10 +1,10 @@
 import unittest
 from unittest import mock
 
-from django.core.checks import Tags, run_checks
-from django.core.checks.registry import CheckRegistry
-from django.db import connection
-from django.test import TestCase
+from djmodels.core.checks import Tags, run_checks
+from djmodels.core.checks.registry import CheckRegistry
+from djmodels.db import connection
+from djmodels.test import TestCase
 
 
 class DatabaseCheckTests(TestCase):
@@ -12,7 +12,7 @@ class DatabaseCheckTests(TestCase):
 
     @property
     def func(self):
-        from django.core.checks.database import check_database_backends
+        from djmodels.core.checks.database import check_database_backends
         return check_database_backends
 
     def test_database_checks_not_run_by_default(self):
@@ -31,7 +31,7 @@ class DatabaseCheckTests(TestCase):
         self.assertEqual(errors2, [5])
 
     def test_database_checks_called(self):
-        with mock.patch('django.db.backends.base.validation.BaseDatabaseValidation.check') as mocked_check:
+        with mock.patch('djmodels.db.backends.base.validation.BaseDatabaseValidation.check') as mocked_check:
             run_checks(tags=[Tags.database])
             self.assertTrue(mocked_check.called)
 
@@ -44,7 +44,7 @@ class DatabaseCheckTests(TestCase):
         ]
         for response in good_sql_modes:
             with mock.patch(
-                'django.db.backends.utils.CursorWrapper.fetchone', create=True,
+                'djmodels.db.backends.utils.CursorWrapper.fetchone', create=True,
                 return_value=(response,)
             ):
                 self.assertEqual(self.func(None), [])
@@ -52,7 +52,7 @@ class DatabaseCheckTests(TestCase):
         bad_sql_modes = ['', 'WHATEVER']
         for response in bad_sql_modes:
             with mock.patch(
-                'django.db.backends.utils.CursorWrapper.fetchone', create=True,
+                'djmodels.db.backends.utils.CursorWrapper.fetchone', create=True,
                 return_value=(response,)
             ):
                 # One warning for each database alias

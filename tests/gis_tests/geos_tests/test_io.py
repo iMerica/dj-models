@@ -1,9 +1,9 @@
 import binascii
 
-from django.contrib.gis.geos import (
+from djmodels.contrib.gis.geos import (
     GEOSGeometry, Point, Polygon, WKBReader, WKBWriter, WKTReader, WKTWriter,
 )
-from django.test import SimpleTestCase
+from djmodels.test import SimpleTestCase
 
 
 class GEOSIOTest(SimpleTestCase):

@@ -1,7 +1,7 @@
 import math
 
-from django.db.models.functions import Pi
-from django.test import TestCase
+from djmodels.db.models.functions import Pi
+from djmodels.test import TestCase
 
 from ..models import FloatModel
 

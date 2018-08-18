@@ -1,7 +1,7 @@
-from django.core import checks
-from django.db import models
-from django.test import SimpleTestCase
-from django.test.utils import isolate_apps
+from djmodels.core import checks
+from djmodels.db import models
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import isolate_apps
 
 
 @isolate_apps('check_framework')

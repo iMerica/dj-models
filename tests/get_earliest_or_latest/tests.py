@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from django.test import TestCase
-from django.utils.deprecation import RemovedInDjango30Warning
+from djmodels.test import TestCase
+from djmodels.utils.deprecation import RemovedInDjango30Warning
 
 from .models import Article, IndexErrorArticle, Person
 

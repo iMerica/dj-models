@@ -1,14 +1,14 @@
 import json
 
-from django.db.models.expressions import F, Value
-from django.test.testcases import skipUnlessDBFeature
-from django.test.utils import Approximate
+from djmodels.db.models.expressions import F, Value
+from djmodels.test.testcases import skipUnlessDBFeature
+from djmodels.test.utils import Approximate
 
 from . import PostgreSQLTestCase
 from .models import AggregateTestModel, StatTestModel
 
 try:
-    from django.contrib.postgres.aggregates import (
+    from djmodels.contrib.postgres.aggregates import (
         ArrayAgg, BitAnd, BitOr, BoolAnd, BoolOr, Corr, CovarPop, JSONBAgg,
         RegrAvgX, RegrAvgY, RegrCount, RegrIntercept, RegrR2, RegrSlope,
         RegrSXX, RegrSXY, RegrSYY, StatAggregate, StringAgg,

@@ -1,6 +1,6 @@
-from django.db import models
-from django.test import SimpleTestCase
-from django.test.utils import isolate_apps
+from djmodels.db import models
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import isolate_apps
 
 
 @isolate_apps('model_meta')

@@ -1,6 +1,6 @@
-from django import get_version
-from django.test import SimpleTestCase
-from django.utils.version import get_version_tuple
+from djmodels import get_version
+from djmodels.test import SimpleTestCase
+from djmodels.utils.version import get_version_tuple
 
 
 class VersionTests(SimpleTestCase):

@@ -9,10 +9,10 @@ There are two reasons you might want to customize a ``Manager``: to add extra
 returns.
 """
 
-from django.contrib.contenttypes.fields import (
+from djmodels.contrib.contenttypes.fields import (
     GenericForeignKey, GenericRelation,
 )
-from django.db import models
+from djmodels.db import models
 
 
 class PersonManager(models.Manager):

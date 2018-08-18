@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
-from django.contrib.contenttypes.fields import (
+from djmodels.contrib.auth.models import User
+from djmodels.contrib.contenttypes.fields import (
     GenericForeignKey, GenericRelation,
 )
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.db import models
 
 
 class Review(models.Model):

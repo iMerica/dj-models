@@ -1,9 +1,9 @@
 import datetime
 import unittest
 
-from django.test.utils import requires_tz_support
-from django.utils import timezone
-from django.utils.timesince import timesince, timeuntil
+from djmodels.test.utils import requires_tz_support
+from djmodels.utils import timezone
+from djmodels.utils.timesince import timesince, timeuntil
 
 
 class TimesinceTests(unittest.TestCase):

@@ -3,15 +3,15 @@ import re
 from datetime import date
 from decimal import Decimal
 
-from django import forms
-from django.core.exceptions import ImproperlyConfigured
-from django.db import models
-from django.forms.models import (
+from djmodels import forms
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.db import models
+from djmodels.forms.models import (
     BaseModelFormSet, _get_foreign_key, inlineformset_factory,
     modelformset_factory,
 )
-from django.http import QueryDict
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.http import QueryDict
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from .models import (
     AlternateBook, Author, AuthorMeeting, BetterAuthor, Book, BookWithCustomPK,
@@ -1461,7 +1461,7 @@ class ModelFormsetTest(TestCase):
 
     def test_inlineformset_with_arrayfield(self):
         class SimpleArrayField(forms.CharField):
-            """A proxy for django.contrib.postgres.forms.SimpleArrayField."""
+            """A proxy for djmodels.contrib.postgres.forms.SimpleArrayField."""
             def to_python(self, value):
                 value = super().to_python(value)
                 return value.split(',') if value else []

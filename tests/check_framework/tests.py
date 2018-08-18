@@ -1,15 +1,15 @@
 import sys
 from io import StringIO
 
-from django.apps import apps
-from django.core import checks
-from django.core.checks import Error, Warning
-from django.core.checks.registry import CheckRegistry
-from django.core.management import call_command
-from django.core.management.base import CommandError
-from django.db import models
-from django.test import SimpleTestCase
-from django.test.utils import (
+from djmodels.apps import apps
+from djmodels.core import checks
+from djmodels.core.checks import Error, Warning
+from djmodels.core.checks.registry import CheckRegistry
+from djmodels.core.management import call_command
+from djmodels.core.management.base import CommandError
+from djmodels.db import models
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import (
     isolate_apps, override_settings, override_system_checks,
 )
 

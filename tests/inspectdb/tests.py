@@ -2,10 +2,10 @@ import re
 from io import StringIO
 from unittest import mock, skipUnless
 
-from django.core.management import call_command
-from django.db import connection
-from django.db.backends.base.introspection import TableInfo
-from django.test import TestCase, TransactionTestCase, skipUnlessDBFeature
+from djmodels.core.management import call_command
+from djmodels.db import connection
+from djmodels.db.backends.base.introspection import TableInfo
+from djmodels.test import TestCase, TransactionTestCase, skipUnlessDBFeature
 
 from .models import PeopleMoreData
 
@@ -275,7 +275,7 @@ class InspectDBTestCase(TestCase):
         be visible in the output.
         """
         out = StringIO()
-        with mock.patch('django.db.connection.introspection.get_table_list',
+        with mock.patch('djmodels.db.connection.introspection.get_table_list',
                         return_value=[TableInfo(name='nonexistent', type='t')]):
             call_command('inspectdb', stdout=out)
         output = out.getvalue()

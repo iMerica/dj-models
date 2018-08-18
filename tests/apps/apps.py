@@ -1,13 +1,13 @@
-from django.apps import AppConfig
+from djmodels.apps import AppConfig
 
 
 class MyAdmin(AppConfig):
-    name = 'django.contrib.admin'
+    name = 'djmodels.contrib.admin'
     verbose_name = "Admin sweet admin."
 
 
 class MyAuth(AppConfig):
-    name = 'django.contrib.auth'
+    name = 'djmodels.contrib.auth'
     label = 'myauth'
     verbose_name = "All your password are belong to us."
 

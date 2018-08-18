@@ -1,5 +1,5 @@
-from django.conf import settings
-from django.db import migrations, models
+from djmodels.conf import settings
+from djmodels.db import migrations, models
 
 
 class Migration(migrations.Migration):

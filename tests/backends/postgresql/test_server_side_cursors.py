@@ -3,8 +3,8 @@ import unittest
 from collections import namedtuple
 from contextlib import contextmanager
 
-from django.db import connection, models
-from django.test import TestCase
+from djmodels.db import connection, models
+from djmodels.test import TestCase
 
 from ..models import Person
 

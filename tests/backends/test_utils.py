@@ -1,12 +1,12 @@
-"""Tests for django.db.backends.utils"""
+"""Tests for djmodels.db.backends.utils"""
 from decimal import Decimal, Rounded
 
-from django.db import connection
-from django.db.backends.utils import (
+from djmodels.db import connection
+from djmodels.db.backends.utils import (
     format_number, split_identifier, truncate_name,
 )
-from django.db.utils import NotSupportedError
-from django.test import (
+from djmodels.db.utils import NotSupportedError
+from djmodels.test import (
     SimpleTestCase, TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature,
 )
 

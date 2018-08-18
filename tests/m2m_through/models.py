@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.db import models
+from djmodels.db import models
 
 
 # M2M described on one of the models

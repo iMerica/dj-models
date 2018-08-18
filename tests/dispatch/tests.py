@@ -4,9 +4,9 @@ import time
 import weakref
 from types import TracebackType
 
-from django.dispatch import Signal, receiver
-from django.test import SimpleTestCase
-from django.test.utils import override_settings
+from djmodels.dispatch import Signal, receiver
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import override_settings
 
 if sys.platform.startswith('java'):
     def garbage_collect():

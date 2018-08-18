@@ -1,8 +1,8 @@
 import datetime
 
-from django.core import signing
-from django.test import SimpleTestCase
-from django.test.utils import freeze_time
+from djmodels.core import signing
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import freeze_time
 
 
 class TestSigner(SimpleTestCase):

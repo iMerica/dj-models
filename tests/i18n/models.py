@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+from djmodels.db import models
+from djmodels.utils.translation import gettext_lazy as _
 
 
 class TestModel(models.Model):

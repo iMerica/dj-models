@@ -1,15 +1,15 @@
 import unittest
 
-from django.core.exceptions import FieldDoesNotExist
-from django.db import connection, migrations, models, transaction
-from django.db.migrations.migration import Migration
-from django.db.migrations.operations import CreateModel
-from django.db.migrations.operations.fields import FieldOperation
-from django.db.migrations.state import ModelState, ProjectState
-from django.db.models.fields import NOT_PROVIDED
-from django.db.transaction import atomic
-from django.db.utils import IntegrityError
-from django.test import SimpleTestCase, override_settings, skipUnlessDBFeature
+from djmodels.core.exceptions import FieldDoesNotExist
+from djmodels.db import connection, migrations, models, transaction
+from djmodels.db.migrations.migration import Migration
+from djmodels.db.migrations.operations import CreateModel
+from djmodels.db.migrations.operations.fields import FieldOperation
+from djmodels.db.migrations.state import ModelState, ProjectState
+from djmodels.db.models.fields import NOT_PROVIDED
+from djmodels.db.transaction import atomic
+from djmodels.db.utils import IntegrityError
+from djmodels.test import SimpleTestCase, override_settings, skipUnlessDBFeature
 
 from .models import FoodManager, FoodQuerySet, UnicodeModel
 from .test_base import MigrationTestBase
@@ -264,7 +264,7 @@ class OperationTests(OperationTestBase):
                 fields=[],
                 bases=(UnicodeModel, 'migrations.UnicodeModel',),
             )
-        message = "Found duplicate value <class 'django.db.models.base.Model'> in CreateModel bases argument."
+        message = "Found duplicate value <class 'djmodels.db.models.base.Model'> in CreateModel bases argument."
         with self.assertRaisesMessage(ValueError, message):
             migrations.CreateModel(
                 "Pony",
@@ -2058,11 +2058,8 @@ class OperationTests(OperationTestBase):
             # Use a multi-line string with a comment to test splitting on SQLite and MySQL respectively
             "CREATE TABLE i_love_ponies (id int, special_thing varchar(15));\n"
             "INSERT INTO i_love_ponies (id, special_thing) VALUES (1, 'i love ponies'); -- this is magic!\n"
-            "INSERT INTO i_love_ponies (id, special_thing) VALUES (2, 'i love django');\n"
-            "UPDATE i_love_ponies SET special_thing = 'Ponies' WHERE special_thing LIKE '%%ponies';"
-            "UPDATE i_love_ponies SET special_thing = 'Django' WHERE special_thing LIKE '%django';",
-
-            # Run delete queries to test for parameter substitution failure
+            "INSERT INTO i_love_ponies (id, special_thing) VALUES (2, djmodelsdjmodels            "UPDATE i_love_ponies SET special_thing = 'Ponies' WHERE special_thing LIKE '%%ponies';"
+            "UPDATE i_love_ponies SET special_thing = 'Django' WHERE special_thing LIKE djmodels;djmodels          # Run delete queries to test for parameter substitution failure
             # reported in #23426
             "DELETE FROM i_love_ponies WHERE special_thing LIKE '%Django%';"
             "DELETE FROM i_love_ponies WHERE special_thing LIKE '%%Ponies%%';"

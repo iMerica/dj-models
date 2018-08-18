@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from django.core.exceptions import SuspiciousFileOperation
-from django.utils._os import safe_join
+from djmodels.core.exceptions import SuspiciousFileOperation
+from djmodels.utils._os import safe_join
 
 
 class SafeJoinTests(unittest.TestCase):

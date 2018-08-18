@@ -1,11 +1,11 @@
 import datetime
 
-from django import forms
-from django.core.validators import ValidationError
-from django.forms.models import ModelChoiceIterator
-from django.forms.widgets import CheckboxSelectMultiple
-from django.template import Context, Template
-from django.test import TestCase
+from djmodels import forms
+from djmodels.core.validators import ValidationError
+from djmodels.forms.models import ModelChoiceIterator
+from djmodels.forms.widgets import CheckboxSelectMultiple
+from djmodels.template import Context, Template
+from djmodels.test import TestCase
 
 from .models import Article, Author, Book, Category, Writer
 

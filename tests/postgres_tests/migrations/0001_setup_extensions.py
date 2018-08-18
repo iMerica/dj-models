@@ -1,9 +1,9 @@
 from unittest import mock
 
-from django.db import migrations
+from djmodels.db import migrations
 
 try:
-    from django.contrib.postgres.operations import (
+    from djmodels.contrib.postgres.operations import (
         BtreeGinExtension, BtreeGistExtension, CITextExtension,
         CreateExtension, CryptoExtension, HStoreExtension, TrigramExtension,
         UnaccentExtension,

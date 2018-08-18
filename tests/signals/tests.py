@@ -1,11 +1,11 @@
 from unittest import mock
 
-from django.apps.registry import Apps
-from django.db import models
-from django.db.models import signals
-from django.dispatch import receiver
-from django.test import TestCase
-from django.test.utils import isolate_apps
+from djmodels.apps.registry import Apps
+from djmodels.db import models
+from djmodels.db.models import signals
+from djmodels.dispatch import receiver
+from djmodels.test import TestCase
+from djmodels.test.utils import isolate_apps
 
 from .models import Author, Book, Car, Person
 

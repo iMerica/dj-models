@@ -1,8 +1,8 @@
 from unittest import skipIf
 
-from django import forms
-from django.db import connection, models
-from django.test import TestCase
+from djmodels import forms
+from djmodels.db import connection, models
+from djmodels.test import TestCase
 
 from .models import Post
 

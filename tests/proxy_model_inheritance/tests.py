@@ -1,8 +1,8 @@
 import os
 
-from django.core.management import call_command
-from django.test import TestCase, TransactionTestCase
-from django.test.utils import extend_sys_path
+from djmodels.core.management import call_command
+from djmodels.test import TestCase, TransactionTestCase
+from djmodels.test.utils import extend_sys_path
 
 from .models import (
     ConcreteModel, ConcreteModelSubclass, ConcreteModelSubclassProxy,

@@ -1,6 +1,6 @@
-from django.core.exceptions import ValidationError
-from django.db import models
-from django.test import TestCase
+from djmodels.core.exceptions import ValidationError
+from djmodels.db import models
+from djmodels.test import TestCase
 
 from .models import GenericIPAddress
 

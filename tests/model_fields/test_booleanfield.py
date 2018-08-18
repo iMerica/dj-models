@@ -1,7 +1,7 @@
-from django import forms
-from django.core.exceptions import ValidationError
-from django.db import IntegrityError, models, transaction
-from django.test import SimpleTestCase, TestCase
+from djmodels import forms
+from djmodels.core.exceptions import ValidationError
+from djmodels.db import IntegrityError, models, transaction
+from djmodels.test import SimpleTestCase, TestCase
 
 from .models import BooleanModel, FksToBooleans, NullBooleanModel
 

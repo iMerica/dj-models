@@ -1,7 +1,7 @@
 import datetime
 
-from django.test import TestCase, skipIfDBFeature
-from django.utils.timezone import utc
+from djmodels.test import TestCase, skipIfDBFeature
+from djmodels.utils.timezone import utc
 
 from .models import Donut, RumBaba
 

@@ -1,5 +1,5 @@
-from django.apps.registry import Apps
-from django.db import models
+from djmodels.apps.registry import Apps
+from djmodels.db import models
 
 
 class CustomModelBase(models.base.ModelBase):

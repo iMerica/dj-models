@@ -1,7 +1,7 @@
-from django.db import connection, transaction
-from django.db.models import Case, Count, F, FilteredRelation, Q, When
-from django.test import TestCase
-from django.test.testcases import skipUnlessDBFeature
+from djmodels.db import connection, transaction
+from djmodels.db.models import Case, Count, F, FilteredRelation, Q, When
+from djmodels.test import TestCase
+from djmodels.test.testcases import skipUnlessDBFeature
 
 from .models import Author, Book, Borrower, Editor, RentalSession, Reservation
 

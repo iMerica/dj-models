@@ -7,7 +7,7 @@ appropriately behind the scenes, so your database won't complain about
 reserved-name usage.
 """
 
-from django.db import models
+from djmodels.db import models
 
 
 class Thing(models.Model):

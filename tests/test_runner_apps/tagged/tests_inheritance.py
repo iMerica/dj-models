@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from django.test import tag
+from djmodels.test import tag
 
 
 @tag('foo')

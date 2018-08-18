@@ -1,4 +1,4 @@
-from django.db import DEFAULT_DB_ALIAS
+from djmodels.db import DEFAULT_DB_ALIAS
 
 
 class TestRouter:

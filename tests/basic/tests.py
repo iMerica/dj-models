@@ -1,14 +1,14 @@
 import threading
 from datetime import datetime, timedelta
 
-from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
-from django.db import DEFAULT_DB_ALIAS, DatabaseError, connections
-from django.db.models.manager import BaseManager
-from django.db.models.query import EmptyQuerySet, QuerySet
-from django.test import (
+from djmodels.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+from djmodels.db import DEFAULT_DB_ALIAS, DatabaseError, connections
+from djmodels.db.models.manager import BaseManager
+from djmodels.db.models.query import EmptyQuerySet, QuerySet
+from djmodels.test import (
     SimpleTestCase, TestCase, TransactionTestCase, skipUnlessDBFeature,
 )
-from django.utils.translation import gettext_lazy
+from djmodels.utils.translation import gettext_lazy
 
 from .models import Article, ArticleSelectOnSave, FeaturedArticle, SelfRef
 

@@ -1,9 +1,9 @@
 import unittest
 
-from django.core import validators
-from django.core.exceptions import ValidationError
-from django.db import IntegrityError, connection, models
-from django.test import SimpleTestCase, TestCase
+from djmodels.core import validators
+from djmodels.core.exceptions import ValidationError
+from djmodels.db import IntegrityError, connection, models
+from djmodels.test import SimpleTestCase, TestCase
 
 from .models import (
     BigIntegerModel, IntegerModel, PositiveIntegerModel,

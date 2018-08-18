@@ -1,6 +1,6 @@
-from django.db.models import CharField, Max
-from django.db.models.functions import Lower
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.db.models import CharField, Max
+from djmodels.db.models.functions import Lower
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from .models import Celebrity, Fan, Staff, StaffTag, Tag
 

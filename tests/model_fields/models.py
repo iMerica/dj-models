@@ -2,14 +2,14 @@ import os
 import tempfile
 import uuid
 
-from django.contrib.contenttypes.fields import (
+from djmodels.contrib.contenttypes.fields import (
     GenericForeignKey, GenericRelation,
 )
-from django.contrib.contenttypes.models import ContentType
-from django.core.files.storage import FileSystemStorage
-from django.db import models
-from django.db.models.fields.files import ImageField, ImageFieldFile
-from django.db.models.fields.related import (
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.core.files.storage import FileSystemStorage
+from djmodels.db import models
+from djmodels.db.models.fields.files import ImageField, ImageFieldFile
+from djmodels.db.models.fields.related import (
     ForeignKey, ForeignObject, ManyToManyField, OneToOneField,
 )
 

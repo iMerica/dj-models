@@ -1,10 +1,10 @@
 from unittest import skipUnless
 
-from django.contrib.gis.db.models import F, GeometryField, Value, functions
-from django.contrib.gis.geos import Point, Polygon
-from django.db import connection
-from django.db.models import Count, Min
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.contrib.gis.db.models import F, GeometryField, Value, functions
+from djmodels.contrib.gis.geos import Point, Polygon
+from djmodels.db import connection
+from djmodels.db.models import Count, Min
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from ..utils import postgis
 from .models import City, ManyPointModel, MultiFields

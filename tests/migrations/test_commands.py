@@ -5,16 +5,16 @@ import os
 import sys
 from unittest import mock
 
-from django.apps import apps
-from django.core.management import CommandError, call_command
-from django.db import (
+from djmodels.apps import apps
+from djmodels.core.management import CommandError, call_command
+from djmodels.db import (
     ConnectionHandler, DatabaseError, connection, connections, models,
 )
-from django.db.backends.base.schema import BaseDatabaseSchemaEditor
-from django.db.backends.utils import truncate_name
-from django.db.migrations.exceptions import InconsistentMigrationHistory
-from django.db.migrations.recorder import MigrationRecorder
-from django.test import TestCase, override_settings
+from djmodels.db.backends.base.schema import BaseDatabaseSchemaEditor
+from djmodels.db.backends.utils import truncate_name
+from djmodels.db.migrations.exceptions import InconsistentMigrationHistory
+from djmodels.db.migrations.recorder import MigrationRecorder
+from djmodels.test import TestCase, override_settings
 
 from .models import UnicodeModel, UnserializableModel
 from .routers import TestRouter
@@ -64,8 +64,8 @@ class MigrateTests(MigrationTestBase):
         self.assertTableNotExists("migrations_book")
 
     @override_settings(INSTALLED_APPS=[
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
+        'djmodels.contrib.auth',
+        'djmodels.contrib.contenttypes',
         'migrations.migrations_test_apps.migrated_app',
     ])
     def test_migrate_with_system_checks(self):
@@ -153,7 +153,7 @@ class MigrateTests(MigrationTestBase):
             call_command("migrate", "migrations", "0001", verbosity=0)
         # Run initial migration with an explicit --fake-initial
         out = io.StringIO()
-        with mock.patch('django.core.management.color.supports_color', lambda *args: False):
+        with mock.patch('djmodels.core.management.color.supports_color', lambda *args: False):
             call_command("migrate", "migrations", "0001", fake_initial=True, stdout=out, verbosity=1)
             call_command("migrate", "migrations", "0001", fake_initial=True, verbosity=0, database="other")
         self.assertIn(
@@ -205,7 +205,7 @@ class MigrateTests(MigrationTestBase):
         call_command("migrate", "migrations", "0002", verbosity=0)
         call_command("migrate", "migrations", "zero", fake=True, verbosity=0)
         out = io.StringIO()
-        with mock.patch('django.core.management.color.supports_color', lambda *args: False):
+        with mock.patch('djmodels.core.management.color.supports_color', lambda *args: False):
             call_command("migrate", "migrations", "0002", fake_initial=True, stdout=out, verbosity=1)
         value = out.getvalue().lower()
         self.assertIn("migrations.0001_initial... faked", value)
@@ -230,7 +230,7 @@ class MigrateTests(MigrationTestBase):
         applied.
         """
         out = io.StringIO()
-        with mock.patch('django.core.management.color.supports_color', lambda *args: True):
+        with mock.patch('djmodels.core.management.color.supports_color', lambda *args: True):
             call_command("showmigrations", format='list', stdout=out, verbosity=0, no_color=False)
         self.assertEqual(
             '\x1b[1mmigrations\n\x1b[0m'
@@ -781,7 +781,7 @@ class MakeMigrationsTests(MigrationTestBase):
 
     def test_makemigrations_empty_connections(self):
         empty_connections = ConnectionHandler({'default': {}})
-        with mock.patch('django.core.management.commands.makemigrations.connections', new=empty_connections):
+        with mock.patch('djmodels.core.management.commands.makemigrations.connections', new=empty_connections):
             # with no apps
             out = io.StringIO()
             call_command('makemigrations', stdout=out)
@@ -1001,7 +1001,7 @@ class MakeMigrationsTests(MigrationTestBase):
                 self.assertTrue(os.path.exists(merge_file))
             self.assertIn("Created new merge migration", out.getvalue())
 
-    @mock.patch('django.db.migrations.utils.datetime')
+    @mock.patch('djmodels.db.migrations.utils.datetime')
     def test_makemigrations_default_merge_name(self, mock_datetime):
         mock_datetime.datetime.now.return_value = datetime.datetime(2016, 1, 2, 3, 4)
         with mock.patch('builtins.input', mock.Mock(return_value='y')):
@@ -1280,7 +1280,7 @@ class MakeMigrationsTests(MigrationTestBase):
         # Monkeypatch interactive questioner to auto accept
         with mock.patch('builtins.input', mock.Mock(return_value='N')):
             out = io.StringIO()
-            with mock.patch('django.core.management.color.supports_color', lambda *args: False):
+            with mock.patch('djmodels.core.management.color.supports_color', lambda *args: False):
                 call_command(
                     "makemigrations", "conflicting_app_with_dependencies",
                     merge=True, interactive=True, stdout=out
@@ -1383,7 +1383,7 @@ class MakeMigrationsTests(MigrationTestBase):
                 call_command("makemigrations")
 
     @mock.patch('builtins.input', return_value='1')
-    @mock.patch('django.db.migrations.questioner.sys.stdin', mock.MagicMock(encoding=sys.getdefaultencoding()))
+    @mock.patch('djmodels.db.migrations.questioner.sys.stdin', mock.MagicMock(encoding=sys.getdefaultencoding()))
     def test_makemigrations_auto_now_add_interactive(self, *args):
         """
         makemigrations prompts the user when adding auto_now_add to an existing
@@ -1397,7 +1397,7 @@ class MakeMigrationsTests(MigrationTestBase):
                 app_label = 'migrations'
 
         # Monkeypatch interactive questioner to auto accept
-        with mock.patch('django.db.migrations.questioner.sys.stdout', new_callable=io.StringIO) as prompt_stdout:
+        with mock.patch('djmodels.db.migrations.questioner.sys.stdout', new_callable=io.StringIO) as prompt_stdout:
             out = io.StringIO()
             with self.temporary_migration_module(module='migrations.test_auto_now_add'):
                 call_command('makemigrations', 'migrations', interactive=True, stdout=out)
@@ -1508,12 +1508,12 @@ class AppLabelErrorTests(TestCase):
     """
     This class inherits TestCase because MigrationTestBase uses
     `availabe_apps = ['migrations']` which means that it's the only installed
-    app. 'django.contrib.auth' must be in INSTALLED_APPS for some of these
+    app. 'djmodels.contrib.auth' must be in INSTALLED_APPS for some of these
     tests.
     """
     nonexistent_app_error = "No installed app with label 'nonexistent_app'."
     did_you_mean_auth_error = (
-        "No installed app with label 'django.contrib.auth'. Did you mean "
+        "No installed app with label 'djmodels.contrib.auth'. Did you mean "
         "'auth'?"
     )
 
@@ -1526,7 +1526,7 @@ class AppLabelErrorTests(TestCase):
     def test_makemigrations_app_name_specified_as_label(self):
         err = io.StringIO()
         with self.assertRaises(SystemExit):
-            call_command('makemigrations', 'django.contrib.auth', stderr=err)
+            call_command('makemigrations', 'djmodels.contrib.auth', stderr=err)
         self.assertIn(self.did_you_mean_auth_error, err.getvalue())
 
     def test_migrate_nonexistent_app_label(self):
@@ -1535,7 +1535,7 @@ class AppLabelErrorTests(TestCase):
 
     def test_migrate_app_name_specified_as_label(self):
         with self.assertRaisesMessage(CommandError, self.did_you_mean_auth_error):
-            call_command('migrate', 'django.contrib.auth')
+            call_command('migrate', 'djmodels.contrib.auth')
 
     def test_sqlmigrate_nonexistent_app_label(self):
         with self.assertRaisesMessage(CommandError, self.nonexistent_app_error):
@@ -1543,7 +1543,7 @@ class AppLabelErrorTests(TestCase):
 
     def test_sqlmigrate_app_name_specified_as_label(self):
         with self.assertRaisesMessage(CommandError, self.did_you_mean_auth_error):
-            call_command('sqlmigrate', 'django.contrib.auth', '0002')
+            call_command('sqlmigrate', 'djmodels.contrib.auth', '0002')
 
     def test_squashmigrations_nonexistent_app_label(self):
         with self.assertRaisesMessage(CommandError, self.nonexistent_app_error):
@@ -1551,4 +1551,4 @@ class AppLabelErrorTests(TestCase):
 
     def test_squashmigrations_app_name_specified_as_label(self):
         with self.assertRaisesMessage(CommandError, self.did_you_mean_auth_error):
-            call_command('squashmigrations', 'django.contrib.auth', '0002')
+            call_command('squashmigrations', 'djmodels.contrib.auth', '0002')

@@ -1,9 +1,9 @@
 import unittest
 from contextlib import contextmanager
 
-from django.core.exceptions import ImproperlyConfigured
-from django.db import connection
-from django.test import TestCase, override_settings
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.db import connection
+from djmodels.test import TestCase, override_settings
 
 
 @contextmanager

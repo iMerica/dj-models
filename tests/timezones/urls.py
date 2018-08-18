@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from djmodels.conf.urls import url
 
 from . import admin as tz_admin  # NOQA: register tz_admin
 

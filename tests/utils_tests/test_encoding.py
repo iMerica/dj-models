@@ -3,14 +3,14 @@ import unittest
 from unittest import mock
 from urllib.parse import quote_plus
 
-from django.test import SimpleTestCase
-from django.utils.encoding import (
+from djmodels.test import SimpleTestCase
+from djmodels.utils.encoding import (
     DjangoUnicodeDecodeError, escape_uri_path, filepath_to_uri, force_bytes,
     force_text, get_system_encoding, iri_to_uri, smart_bytes, smart_text,
     uri_to_iri,
 )
-from django.utils.functional import SimpleLazyObject
-from django.utils.translation import gettext_lazy
+from djmodels.utils.functional import SimpleLazyObject
+from djmodels.utils.translation import gettext_lazy
 
 
 class TestEncodingUtils(SimpleTestCase):

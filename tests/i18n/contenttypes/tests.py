@@ -1,8 +1,8 @@
 import os
 
-from django.contrib.contenttypes.models import ContentType
-from django.test import TestCase, override_settings
-from django.utils import translation
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.test import TestCase, override_settings
+from djmodels.utils import translation
 
 
 @override_settings(

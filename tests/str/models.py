@@ -8,7 +8,7 @@ because objects' representations are used throughout Django's
 automatically-generated admin.
 """
 
-from django.db import models
+from djmodels.db import models
 
 
 class InternationalArticle(models.Model):

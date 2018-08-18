@@ -1,5 +1,5 @@
-from django.core.serializers.json import DjangoJSONEncoder
-from django.db import models
+from djmodels.core.serializers.json import DjangoJSONEncoder
+from djmodels.db import models
 
 from .fields import (
     ArrayField, BigIntegerRangeField, CICharField, CIEmailField, CITextField,

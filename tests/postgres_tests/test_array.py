@@ -3,14 +3,14 @@ import json
 import unittest
 import uuid
 
-from django import forms
-from django.core import checks, exceptions, serializers, validators
-from django.core.exceptions import FieldError
-from django.core.management import call_command
-from django.db import IntegrityError, connection, models
-from django.test import TransactionTestCase, modify_settings, override_settings
-from django.test.utils import isolate_apps
-from django.utils import timezone
+from djmodels import forms
+from djmodels.core import checks, exceptions, serializers, validators
+from djmodels.core.exceptions import FieldError
+from djmodels.core.management import call_command
+from djmodels.db import IntegrityError, connection, models
+from djmodels.test import TransactionTestCase, modify_settings, override_settings
+from djmodels.test.utils import isolate_apps
+from djmodels.utils import timezone
 
 from . import PostgreSQLTestCase, PostgreSQLWidgetTestCase
 from .models import (
@@ -20,8 +20,8 @@ from .models import (
 )
 
 try:
-    from django.contrib.postgres.fields import ArrayField
-    from django.contrib.postgres.forms import (
+    from djmodels.contrib.postgres.fields import ArrayField
+    from djmodels.contrib.postgres.forms import (
         SimpleArrayField, SplitArrayField, SplitArrayWidget,
     )
     from psycopg2.extras import NumericRange
@@ -536,7 +536,7 @@ class TestMigrations(TransactionTestCase):
     def test_subclass_deconstruct(self):
         field = ArrayField(models.IntegerField())
         name, path, args, kwargs = field.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.fields.ArrayField')
+        self.assertEqual(path, 'djmodels.contrib.postgres.fields.ArrayField')
 
         field = ArrayFieldSubclass()
         name, path, args, kwargs = field.deconstruct()
@@ -840,7 +840,7 @@ class TestSplitFormField(PostgreSQLTestCase):
             SplitArrayField(forms.IntegerField(max_value=100), size=2).clean([0, 101])
 
     # To locate the widget's template.
-    @modify_settings(INSTALLED_APPS={'append': 'django.contrib.postgres'})
+    @modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.postgres'})
     def test_rendering(self):
         class SplitForm(forms.Form):
             array = SplitArrayField(forms.CharField(), size=3)
@@ -899,7 +899,7 @@ class TestSplitFormWidget(PostgreSQLWidgetTestCase):
                             'required': False,
                             'value': 'val1',
                             'attrs': {},
-                            'template_name': 'django/forms/widgets/text.html',
+                            'template_name': 'djmodels/forms/widgets/text.html',
                             'type': 'text',
                         },
                         {
@@ -908,7 +908,7 @@ class TestSplitFormWidget(PostgreSQLWidgetTestCase):
                             'required': False,
                             'value': 'val2',
                             'attrs': {},
-                            'template_name': 'django/forms/widgets/text.html',
+                            'template_name': 'djmodels/forms/widgets/text.html',
                             'type': 'text',
                         },
                     ]

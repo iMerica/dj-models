@@ -1,8 +1,8 @@
 from decimal import Decimal
 from sys import float_info
 
-from django.test import SimpleTestCase
-from django.utils.numberformat import format as nformat
+from djmodels.test import SimpleTestCase
+from djmodels.utils.numberformat import format as nformat
 
 
 class TestNumberFormat(SimpleTestCase):

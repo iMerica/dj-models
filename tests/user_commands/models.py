@@ -9,6 +9,6 @@ subdirectory of this test application. It is a simple command that responds
 with a printed message when invoked.
 
 For more details on how to define your own ``manage.py`` commands, look at the
-``django.core.management.commands`` directory. This directory contains the
+``djmodels.core.management.commands`` directory. This directory contains the
 definitions for the base Django ``manage.py`` commands.
 """

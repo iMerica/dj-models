@@ -6,15 +6,15 @@ import warnings
 from io import StringIO
 from unittest import mock
 
-from django.apps import apps
-from django.contrib.sites.models import Site
-from django.core import management
-from django.core.files.temp import NamedTemporaryFile
-from django.core.management import CommandError
-from django.core.management.commands.dumpdata import ProxyModelWarning
-from django.core.serializers.base import ProgressBar
-from django.db import IntegrityError, connection
-from django.test import TestCase, TransactionTestCase, skipUnlessDBFeature
+from djmodels.apps import apps
+from djmodels.contrib.sites.models import Site
+from djmodels.core import management
+from djmodels.core.files.temp import NamedTemporaryFile
+from djmodels.core.management import CommandError
+from djmodels.core.management.commands.dumpdata import ProxyModelWarning
+from djmodels.core.serializers.base import ProgressBar
+from djmodels.db import IntegrityError, connection
+from djmodels.test import TestCase, TransactionTestCase, skipUnlessDBFeature
 
 from .models import (
     Article, Category, NaturalKeyThing, PrimaryKeyUUIDModel, ProxySpy, Spy,
@@ -196,7 +196,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerysetEqual(Tag.objects.all(), [
             '<Tag: <Article: Copyright is fine the way it is> tagged "copyright">',
             '<Tag: <Article: Copyright is fine the way it is> tagged "legal">',
-            '<Tag: <Article: Django conquers world!> tagged "django">',
+            '<Tag: <Article: Django conquers world!> tagged "djmodels">',
             '<Tag: <Article: Django conquers world!> tagged "world domination">',
         ], ordered=False)
 
@@ -260,7 +260,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '"fixtures.tag", "fields": {"tagged_type": ["fixtures", "article"], "name": "copyright", "tagged_id": '
             '3}}, {"pk": 2, "model": "fixtures.tag", "fields": {"tagged_type": ["fixtures", "article"], "name": '
             '"legal", "tagged_id": 3}}, {"pk": 3, "model": "fixtures.tag", "fields": {"tagged_type": ["fixtures", '
-            '"article"], "name": "django", "tagged_id": 4}}, {"pk": 4, "model": "fixtures.tag", "fields": '
+            '"article"], "name": "djmodels", "tagged_id": 4}}, {"pk": 4, "model": "fixtures.tag", "fields": '
             '{"tagged_type": ["fixtures", "article"], "name": "world domination", "tagged_id": 4}}, {"pk": 1, '
             '"model": "fixtures.person", "fields": {"name": "Django Reinhardt"}}, {"pk": 2, "model": '
             '"fixtures.person", "fields": {"name": "Stephane Grappelli"}}, {"pk": 3, "model": "fixtures.person", '
@@ -278,7 +278,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         # Dump the current contents of the database as an XML fixture
         self._dumpdata_assert(
             ['fixtures'],
-            '<?xml version="1.0" encoding="utf-8"?><django-objects version="1.0"><object pk="1" '
+            '<?xml version="1.0" encoding="utf-8"?><djmodels-objects version="1.0"><object pk="1" '
             'model="fixtures.category"><field type="CharField" name="title">News Stories</field><field '
             'type="TextField" name="description">Latest news stories</field></object><object pk="2" '
             'model="fixtures.article"><field type="CharField" name="headline">Poker on TV is great!</field><field '
@@ -296,7 +296,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '</field><field to="contenttypes.contenttype" name="tagged_type" rel="ManyToOneRel"><natural>'
             'fixtures</natural><natural>article</natural></field><field type="PositiveIntegerField" '
             'name="tagged_id">3</field></object><object pk="3" model="fixtures.tag"><field type="CharField" '
-            'name="name">django</field><field to="contenttypes.contenttype" name="tagged_type" '
+            'name="name">djmodels</field><field to="contenttypes.contenttype" name="tagged_type" '
             'rel="ManyToOneRel"><natural>fixtures</natural><natural>article</natural></field><field '
             'type="PositiveIntegerField" name="tagged_id">4</field></object><object pk="4" model="fixtures.tag">'
             '<field type="CharField" name="name">world domination</field><field to="contenttypes.contenttype" '
@@ -322,7 +322,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             'model="fixtures.book"><field type="CharField" name="name">Music for all ages</field><field '
             'to="fixtures.person" name="authors" rel="ManyToManyRel"><object><natural>Artist formerly known as '
             '"Prince"</natural></object><object><natural>Django Reinhardt</natural></object></field></object>'
-            '</django-objects>',
+            '</djmodels-objects>',
             format='xml', natural_foreign_keys=True
         )
 
@@ -639,7 +639,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         # Dump the current contents of the database as an XML fixture
         self._dumpdata_assert(
             ['fixtures'],
-            '<?xml version="1.0" encoding="utf-8"?><django-objects version="1.0"><object pk="1" '
+            '<?xml version="1.0" encoding="utf-8"?><djmodels-objects version="1.0"><object pk="1" '
             'model="fixtures.category"><field type="CharField" name="title">News Stories</field><field '
             'type="TextField" name="description">Latest news stories</field></object><object pk="2" '
             'model="fixtures.article"><field type="CharField" name="headline">Poker has no place on ESPN</field>'
@@ -655,7 +655,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '</object><object pk="1" model="fixtures.person"><field type="CharField" name="name">Django Reinhardt'
             '</field></object><object pk="2" model="fixtures.person"><field type="CharField" name="name">Stephane '
             'Grappelli</field></object><object pk="3" model="fixtures.person"><field type="CharField" name="name">'
-            'Prince</field></object></django-objects>',
+            'Prince</field></object></djmodels-objects>',
             format='xml', natural_foreign_keys=True
         )
 
@@ -695,7 +695,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         fixture_json = os.path.join(tests_dir, 'fixtures', 'fixture1.json')
         fixture_xml = os.path.join(tests_dir, 'fixtures', 'fixture3.xml')
 
-        with mock.patch('django.core.management.commands.loaddata.sys.stdin', open(fixture_json, 'r')):
+        with mock.patch('djmodels.core.management.commands.loaddata.sys.stdin', open(fixture_json, 'r')):
             management.call_command('loaddata', '--format=json', '-', verbosity=0)
             self.assertEqual(Article.objects.count(), 2)
             self.assertQuerysetEqual(Article.objects.all(), [
@@ -703,7 +703,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
                 '<Article: Poker has no place on ESPN>',
             ])
 
-        with mock.patch('django.core.management.commands.loaddata.sys.stdin', open(fixture_xml, 'r')):
+        with mock.patch('djmodels.core.management.commands.loaddata.sys.stdin', open(fixture_xml, 'r')):
             management.call_command('loaddata', '--format=xml', '-', verbosity=0)
             self.assertEqual(Article.objects.count(), 3)
             self.assertQuerysetEqual(Article.objects.all(), [
@@ -723,8 +723,8 @@ class NonexistentFixtureTests(TestCase):
         with self.assertRaisesMessage(CommandError, "No fixture named 'this_fixture_doesnt_exist' found."):
             management.call_command('loaddata', 'this_fixture_doesnt_exist', stdout=stdout_output)
 
-    @mock.patch('django.db.connection.enable_constraint_checking')
-    @mock.patch('django.db.connection.disable_constraint_checking')
+    @mock.patch('djmodels.db.connection.enable_constraint_checking')
+    @mock.patch('djmodels.db.connection.disable_constraint_checking')
     def test_nonexistent_fixture_no_constraint_checking(
             self, disable_constraint_checking, enable_constraint_checking):
         """
@@ -741,7 +741,7 @@ class FixtureTransactionTests(DumpDataAssertMixin, TransactionTestCase):
 
     available_apps = [
         'fixtures',
-        'django.contrib.sites',
+        'djmodels.contrib.sites',
     ]
 
     @skipUnlessDBFeature('supports_forward_references')

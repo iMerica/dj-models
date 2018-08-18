@@ -3,10 +3,10 @@ from contextlib import contextmanager
 from io import StringIO
 from unittest import mock
 
-from django.db import connection
-from django.db.backends.base.creation import BaseDatabaseCreation
-from django.db.utils import DatabaseError
-from django.test import SimpleTestCase
+from djmodels.db import connection
+from djmodels.db.backends.base.creation import BaseDatabaseCreation
+from djmodels.db.utils import DatabaseError
+from djmodels.test import SimpleTestCase
 
 try:
     import psycopg2  # NOQA
@@ -14,7 +14,7 @@ except ImportError:
     pass
 else:
     from psycopg2 import errorcodes
-    from django.db.backends.postgresql.creation import DatabaseCreation
+    from djmodels.db.backends.postgresql.creation import DatabaseCreation
 
 
 @unittest.skipUnless(connection.vendor == 'postgresql', 'PostgreSQL tests')

@@ -1,11 +1,11 @@
-from django.apps.registry import apps as global_apps
-from django.db import connection
-from django.db.migrations.exceptions import InvalidMigrationPlan
-from django.db.migrations.executor import MigrationExecutor
-from django.db.migrations.graph import MigrationGraph
-from django.db.migrations.recorder import MigrationRecorder
-from django.db.utils import DatabaseError
-from django.test import TestCase, modify_settings, override_settings
+from djmodels.apps.registry import apps as global_apps
+from djmodels.db import connection
+from djmodels.db.migrations.exceptions import InvalidMigrationPlan
+from djmodels.db.migrations.executor import MigrationExecutor
+from djmodels.db.migrations.graph import MigrationGraph
+from djmodels.db.migrations.recorder import MigrationRecorder
+from djmodels.db.utils import DatabaseError
+from djmodels.test import TestCase, modify_settings, override_settings
 
 from .test_base import MigrationTestBase
 
@@ -19,7 +19,7 @@ class ExecutorTests(MigrationTestBase):
     test failures first, as they may be propagating into here.
     """
 
-    available_apps = ["migrations", "migrations2", "django.contrib.auth", "django.contrib.contenttypes"]
+    available_apps = ["migrations", "migrations2", "djmodels.contrib.auth", "djmodels.contrib.contenttypes"]
 
     @override_settings(MIGRATION_MODULES={"migrations": "migrations.test_migrations"})
     def test_run(self):
@@ -308,7 +308,7 @@ class ExecutorTests(MigrationTestBase):
     @override_settings(
         MIGRATION_MODULES={
             "migrations": "migrations.test_migrations_custom_user",
-            "django.contrib.auth": "django.contrib.auth.migrations",
+            "djmodels.contrib.auth": "djmodels.contrib.auth.migrations",
         },
         AUTH_USER_MODEL="migrations.Author",
     )

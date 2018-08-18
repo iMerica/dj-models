@@ -1,11 +1,11 @@
 import json
 import sys
 
-from django.test import SimpleTestCase
-from django.utils import text
-from django.utils.functional import lazystr
-from django.utils.text import format_lazy
-from django.utils.translation import gettext_lazy, override
+from djmodels.test import SimpleTestCase
+from djmodels.utils import text
+from djmodels.utils.functional import lazystr
+from djmodels.utils.text import format_lazy
+from djmodels.utils.translation import gettext_lazy, override
 
 IS_WIDE_BUILD = (len('\U0001F4A9') == 1)
 
@@ -223,15 +223,15 @@ class TestUtilsText(SimpleTestCase):
         self.assertTrue(compressed_length < actual_length)
 
     def test_format_lazy(self):
-        self.assertEqual('django/test', format_lazy('{}/{}', 'django', lazystr('test')))
-        self.assertEqual('django/test', format_lazy('{0}/{1}', *('django', 'test')))
-        self.assertEqual('django/test', format_lazy('{a}/{b}', **{'a': 'django', 'b': 'test'}))
-        self.assertEqual('django/test', format_lazy('{a[0]}/{a[1]}', a=('django', 'test')))
+        self.assertEqual('djmodels/test', format_lazy('{}/{}', 'djmodels', lazystr('test')))
+        self.assertEqual('djmodels/test', format_lazy('{0}/{1}', *('djmodels', 'test')))
+        self.assertEqual('djmodels/test', format_lazy('{a}/{b}', **{'a': 'djmodels', 'b': 'test'}))
+        self.assertEqual('djmodels/test', format_lazy('{a[0]}/{a[1]}', a=('djmodels', 'test')))
 
         t = {}
         s = format_lazy('{0[a]}-{p[a]}', t, p=t)
-        t['a'] = lazystr('django')
-        self.assertEqual('django-django', s)
+        t['a'] = lazystr('djmodels')
+        self.assertEqual('djmodels-djmodels', s)
         t['a'] = 'update'
         self.assertEqual('update-update', s)
 

@@ -1,10 +1,10 @@
 from unittest import skipIf, skipUnless
 
-from django.db import connection
-from django.db.models import Index
-from django.db.models.deletion import CASCADE
-from django.db.models.fields.related import ForeignKey
-from django.test import TestCase, TransactionTestCase
+from djmodels.db import connection
+from djmodels.db.models import Index
+from djmodels.db.models.deletion import CASCADE
+from djmodels.db.models.fields.related import ForeignKey
+from djmodels.test import TestCase, TransactionTestCase
 
 from .models import (
     Article, ArticleTranslation, IndexedArticle2, IndexTogetherSingleList,

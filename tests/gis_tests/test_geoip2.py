@@ -1,13 +1,13 @@
 import os
 from unittest import mock, skipUnless
 
-from django.conf import settings
-from django.contrib.gis.geoip2 import HAS_GEOIP2
-from django.contrib.gis.geos import GEOSGeometry
-from django.test import SimpleTestCase
+from djmodels.conf import settings
+from djmodels.contrib.gis.geoip2 import HAS_GEOIP2
+from djmodels.contrib.gis.geos import GEOSGeometry
+from djmodels.test import SimpleTestCase
 
 if HAS_GEOIP2:
-    from django.contrib.gis.geoip2 import GeoIP2, GeoIP2Exception
+    from djmodels.contrib.gis.geoip2 import GeoIP2, GeoIP2Exception
 
 
 # Note: Requires both the GeoIP country and city datasets.

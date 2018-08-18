@@ -4,23 +4,23 @@ import unittest
 import uuid
 from copy import deepcopy
 
-from django.core.exceptions import FieldError
-from django.db import DatabaseError, connection, models, transaction
-from django.db.models import CharField, Q, TimeField, UUIDField
-from django.db.models.aggregates import (
+from djmodels.core.exceptions import FieldError
+from djmodels.db import DatabaseError, connection, models, transaction
+from djmodels.db.models import CharField, Q, TimeField, UUIDField
+from djmodels.db.models.aggregates import (
     Avg, Count, Max, Min, StdDev, Sum, Variance,
 )
-from django.db.models.expressions import (
+from djmodels.db.models.expressions import (
     Case, Col, Combinable, Exists, ExpressionList, ExpressionWrapper, F, Func,
     OrderBy, OuterRef, Random, RawSQL, Ref, Subquery, Value, When,
 )
-from django.db.models.functions import (
+from djmodels.db.models.functions import (
     Coalesce, Concat, Length, Lower, Substr, Upper,
 )
-from django.db.models.sql import constants
-from django.db.models.sql.datastructures import Join
-from django.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from django.test.utils import Approximate
+from djmodels.db.models.sql import constants
+from djmodels.db.models.sql.datastructures import Join
+from djmodels.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from djmodels.test.utils import Approximate
 
 from .models import (
     UUID, UUIDPK, Company, Employee, Experiment, Number, Result, SimulationRun,
@@ -740,7 +740,7 @@ class FTests(SimpleTestCase):
     def test_deconstruct(self):
         f = F('name')
         path, args, kwargs = f.deconstruct()
-        self.assertEqual(path, 'django.db.models.expressions.F')
+        self.assertEqual(path, 'djmodels.db.models.expressions.F')
         self.assertEqual(args, (f.name,))
         self.assertEqual(kwargs, {})
 
@@ -1356,14 +1356,14 @@ class ValueTests(TestCase):
     def test_deconstruct(self):
         value = Value('name')
         path, args, kwargs = value.deconstruct()
-        self.assertEqual(path, 'django.db.models.expressions.Value')
+        self.assertEqual(path, 'djmodels.db.models.expressions.Value')
         self.assertEqual(args, (value.value,))
         self.assertEqual(kwargs, {})
 
     def test_deconstruct_output_field(self):
         value = Value('name', output_field=CharField())
         path, args, kwargs = value.deconstruct()
-        self.assertEqual(path, 'django.db.models.expressions.Value')
+        self.assertEqual(path, 'djmodels.db.models.expressions.Value')
         self.assertEqual(args, (value.value,))
         self.assertEqual(len(kwargs), 1)
         self.assertEqual(kwargs['output_field'].deconstruct(), CharField().deconstruct())

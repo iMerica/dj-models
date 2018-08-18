@@ -4,13 +4,13 @@ from io import StringIO
 from operator import attrgetter
 from unittest.mock import Mock
 
-from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
-from django.core import management
-from django.db import DEFAULT_DB_ALIAS, connections, router, transaction
-from django.db.models import signals
-from django.db.utils import ConnectionRouter
-from django.test import SimpleTestCase, TestCase, override_settings
+from djmodels.contrib.auth.models import User
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.core import management
+from djmodels.db import DEFAULT_DB_ALIAS, connections, router, transaction
+from djmodels.db.models import signals
+from djmodels.db.utils import ConnectionRouter
+from djmodels.test import SimpleTestCase, TestCase, override_settings
 
 from .models import Book, Person, Pet, Review, UserProfile
 from .routers import AuthRouter, TestRouter, WriteRouter
@@ -1842,8 +1842,8 @@ class MigrateTestCase(TestCase):
     # Limit memory usage when calling 'migrate'.
     available_apps = [
         'multiple_database',
-        'django.contrib.auth',
-        'django.contrib.contenttypes'
+        'djmodels.contrib.auth',
+        'djmodels.contrib.contenttypes'
     ]
     multi_db = True
 

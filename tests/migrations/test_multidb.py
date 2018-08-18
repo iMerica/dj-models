@@ -1,8 +1,8 @@
 import unittest
 
-from django.db import connection, migrations, models
-from django.db.migrations.state import ProjectState
-from django.test import override_settings
+from djmodels.db import connection, migrations, models
+from djmodels.db.migrations.state import ProjectState
+from djmodels.test import override_settings
 
 from .test_operations import OperationTestBase
 

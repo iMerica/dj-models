@@ -1,10 +1,10 @@
-from django.apps.registry import apps
-from django.conf import settings
-from django.contrib.contenttypes import management as contenttypes_management
-from django.contrib.contenttypes.models import ContentType
-from django.core.management import call_command
-from django.db import migrations, models
-from django.test import TransactionTestCase, override_settings
+from djmodels.apps.registry import apps
+from djmodels.conf import settings
+from djmodels.contrib.contenttypes import management as contenttypes_management
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.core.management import call_command
+from djmodels.db import migrations, models
+from djmodels.test import TransactionTestCase, override_settings
 
 
 @override_settings(
@@ -16,7 +16,7 @@ from django.test import TransactionTestCase, override_settings
 class ContentTypeOperationsTests(TransactionTestCase):
     available_apps = [
         'contenttypes_tests',
-        'django.contrib.contenttypes',
+        'djmodels.contrib.contenttypes',
     ]
 
     def setUp(self):

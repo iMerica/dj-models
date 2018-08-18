@@ -1,12 +1,12 @@
 import json
 import pickle
 
-from django.contrib.gis.gdal import (
+from djmodels.contrib.gis.gdal import (
     CoordTransform, GDALException, OGRGeometry, OGRGeomType, SpatialReference,
 )
-from django.template import Context
-from django.template.engine import Engine
-from django.test import SimpleTestCase
+from djmodels.template import Context
+from djmodels.template.engine import Engine
+from djmodels.test import SimpleTestCase
 
 from ..test_data import TestDataMixin
 

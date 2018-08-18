@@ -1,10 +1,10 @@
 from io import StringIO
 
-from django.apps import apps
-from django.core import management
-from django.db import migrations
-from django.db.models import signals
-from django.test import TransactionTestCase, override_settings
+from djmodels.apps import apps
+from djmodels.core import management
+from djmodels.db import migrations
+from djmodels.db.models import signals
+from djmodels.test import TransactionTestCase, override_settings
 
 APP_CONFIG = apps.get_app_config('migrate_signals')
 SIGNAL_ARGS = ['app_config', 'verbosity', 'interactive', 'using', 'plan', 'apps']

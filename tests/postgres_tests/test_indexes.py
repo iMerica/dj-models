@@ -1,11 +1,11 @@
 from unittest import mock
 
-from django.contrib.postgres.indexes import (
+from djmodels.contrib.postgres.indexes import (
     BrinIndex, BTreeIndex, GinIndex, GistIndex, HashIndex, SpGistIndex,
 )
-from django.db import connection
-from django.db.utils import NotSupportedError
-from django.test import skipUnlessDBFeature
+from djmodels.db import connection
+from djmodels.db.utils import NotSupportedError
+from djmodels.test import skipUnlessDBFeature
 
 from . import PostgreSQLTestCase
 from .models import CharFieldModel, IntegerArrayModel
@@ -21,7 +21,7 @@ class IndexTestMixin:
     def test_deconstruction_no_customization(self):
         index = self.index_class(fields=['title'], name='test_title_%s' % self.index_class.suffix)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.indexes.%s' % self.index_class.__name__)
+        self.assertEqual(path, 'djmodels.contrib.postgres.indexes.%s' % self.index_class.__name__)
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {'fields': ['title'], 'name': 'test_title_%s' % self.index_class.suffix})
 
@@ -36,7 +36,7 @@ class BrinIndexTests(IndexTestMixin, PostgreSQLTestCase):
     def test_deconstruction(self):
         index = BrinIndex(fields=['title'], name='test_title_brin', autosummarize=True, pages_per_range=16)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.indexes.BrinIndex')
+        self.assertEqual(path, 'djmodels.contrib.postgres.indexes.BrinIndex')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {
             'fields': ['title'],
@@ -59,7 +59,7 @@ class BTreeIndexTests(IndexTestMixin, PostgreSQLTestCase):
     def test_deconstruction(self):
         index = BTreeIndex(fields=['title'], name='test_title_btree', fillfactor=80)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.indexes.BTreeIndex')
+        self.assertEqual(path, 'djmodels.contrib.postgres.indexes.BTreeIndex')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {'fields': ['title'], 'name': 'test_title_btree', 'fillfactor': 80})
 
@@ -78,7 +78,7 @@ class GinIndexTests(IndexTestMixin, PostgreSQLTestCase):
             gin_pending_list_limit=128,
         )
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.indexes.GinIndex')
+        self.assertEqual(path, 'djmodels.contrib.postgres.indexes.GinIndex')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {
             'fields': ['title'],
@@ -97,7 +97,7 @@ class GistIndexTests(IndexTestMixin, PostgreSQLTestCase):
     def test_deconstruction(self):
         index = GistIndex(fields=['title'], name='test_title_gist', buffering=False, fillfactor=80)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.indexes.GistIndex')
+        self.assertEqual(path, 'djmodels.contrib.postgres.indexes.GistIndex')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {
             'fields': ['title'],
@@ -116,7 +116,7 @@ class HashIndexTests(IndexTestMixin, PostgreSQLTestCase):
     def test_deconstruction(self):
         index = HashIndex(fields=['title'], name='test_title_hash', fillfactor=80)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.indexes.HashIndex')
+        self.assertEqual(path, 'djmodels.contrib.postgres.indexes.HashIndex')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {'fields': ['title'], 'name': 'test_title_hash', 'fillfactor': 80})
 
@@ -130,7 +130,7 @@ class SpGistIndexTests(IndexTestMixin, PostgreSQLTestCase):
     def test_deconstruction(self):
         index = SpGistIndex(fields=['title'], name='test_title_spgist', fillfactor=80)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, 'django.contrib.postgres.indexes.SpGistIndex')
+        self.assertEqual(path, 'djmodels.contrib.postgres.indexes.SpGistIndex')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {'fields': ['title'], 'name': 'test_title_spgist', 'fillfactor': 80})
 
@@ -190,7 +190,7 @@ class SchemaTests(PostgreSQLTestCase):
         index = GinIndex(fields=['field'], name=index_name, gin_pending_list_limit=64)
         msg = 'GIN option gin_pending_list_limit requires PostgreSQL 9.5+.'
         with self.assertRaisesMessage(NotSupportedError, msg):
-            with mock.patch('django.db.connection.features.has_gin_pending_list_limit', False):
+            with mock.patch('djmodels.db.connection.features.has_gin_pending_list_limit', False):
                 with connection.schema_editor() as editor:
                     editor.add_index(IntegerArrayModel, index)
         self.assertNotIn(index_name, self.get_constraints(IntegerArrayModel._meta.db_table))
@@ -225,7 +225,7 @@ class SchemaTests(PostgreSQLTestCase):
         index_name = 'brin_index_exception'
         index = BrinIndex(fields=['field'], name=index_name)
         with self.assertRaisesMessage(NotSupportedError, 'BRIN indexes require PostgreSQL 9.5+.'):
-            with mock.patch('django.db.connection.features.has_brin_index_support', False):
+            with mock.patch('djmodels.db.connection.features.has_brin_index_support', False):
                 with connection.schema_editor() as editor:
                     editor.add_index(CharFieldModel, index)
         self.assertNotIn(index_name, self.get_constraints(CharFieldModel._meta.db_table))
@@ -235,7 +235,7 @@ class SchemaTests(PostgreSQLTestCase):
         index_name = 'brin_options_exception'
         index = BrinIndex(fields=['field'], name=index_name, autosummarize=True)
         with self.assertRaisesMessage(NotSupportedError, 'BRIN option autosummarize requires PostgreSQL 10+.'):
-            with mock.patch('django.db.connection.features.has_brin_autosummarize', False):
+            with mock.patch('djmodels.db.connection.features.has_brin_autosummarize', False):
                 with connection.schema_editor() as editor:
                     editor.add_index(CharFieldModel, index)
         self.assertNotIn(index_name, self.get_constraints(CharFieldModel._meta.db_table))

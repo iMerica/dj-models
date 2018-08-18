@@ -1,5 +1,5 @@
-from django.db import IntegrityError, models
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.db import IntegrityError, models
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from .models import Product
 
@@ -19,7 +19,7 @@ class CheckConstraintTests(TestCase):
         name = 'price_gt_discounted_price'
         check = models.CheckConstraint(constraint, name)
         path, args, kwargs = check.deconstruct()
-        self.assertEqual(path, 'django.db.models.CheckConstraint')
+        self.assertEqual(path, 'djmodels.db.models.CheckConstraint')
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {'constraint': constraint, 'name': name})
 

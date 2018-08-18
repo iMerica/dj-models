@@ -1,11 +1,11 @@
-from django import forms
-from django.forms.formsets import DELETION_FIELD_NAME, BaseFormSet
-from django.forms.models import (
+from djmodels import forms
+from djmodels.forms.formsets import DELETION_FIELD_NAME, BaseFormSet
+from djmodels.forms.models import (
     BaseModelFormSet, inlineformset_factory, modelform_factory,
     modelformset_factory,
 )
-from django.forms.utils import ErrorDict, ErrorList
-from django.test import TestCase
+from djmodels.forms.utils import ErrorDict, ErrorList
+from djmodels.test import TestCase
 
 from .models import (
     Host, Manager, Network, ProfileNetwork, Restaurant, User, UserProfile,

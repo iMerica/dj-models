@@ -1,10 +1,10 @@
-"""Tests for django.db.utils."""
+"""Tests for djmodels.db.utils."""
 import unittest
 
-from django.core.exceptions import ImproperlyConfigured
-from django.db import DEFAULT_DB_ALIAS, connection
-from django.db.utils import ConnectionHandler, ProgrammingError, load_backend
-from django.test import SimpleTestCase, TestCase
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.db import DEFAULT_DB_ALIAS, connection
+from djmodels.db.utils import ConnectionHandler, ProgrammingError, load_backend
+from djmodels.test import SimpleTestCase, TestCase
 
 
 class ConnectionHandlerTests(SimpleTestCase):
@@ -13,7 +13,7 @@ class ConnectionHandlerTests(SimpleTestCase):
         """Empty DATABASES setting defaults to the dummy backend."""
         DATABASES = {}
         conns = ConnectionHandler(DATABASES)
-        self.assertEqual(conns[DEFAULT_DB_ALIAS].settings_dict['ENGINE'], 'django.db.backends.dummy')
+        self.assertEqual(conns[DEFAULT_DB_ALIAS].settings_dict['ENGINE'], 'djmodels.db.backends.dummy')
         msg = (
             'settings.DATABASES is improperly configured. Please supply the '
             'ENGINE value. Check settings documentation for more details.'
@@ -41,7 +41,7 @@ class LoadBackendTests(SimpleTestCase):
     def test_load_backend_invalid_name(self):
         msg = (
             "'foo' isn't an available database backend.\n"
-            "Try using 'django.db.backends.XXX', where XXX is one of:\n"
+            "Try using 'djmodels.db.backends.XXX', where XXX is one of:\n"
             "    'mysql', 'oracle', 'postgresql', 'sqlite3'"
         )
         with self.assertRaisesMessage(ImproperlyConfigured, msg) as cm:

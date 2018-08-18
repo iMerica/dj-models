@@ -3,7 +3,7 @@ Various complex queries that have been problematic in the past.
 """
 import threading
 
-from django.db import models
+from djmodels.db import models
 
 
 class DumbCategory(models.Model):

@@ -4,16 +4,16 @@ from unittest import mock
 
 from multiple_database.routers import TestRouter
 
-from django.core.exceptions import FieldError
-from django.db import (
+from djmodels.core.exceptions import FieldError
+from djmodels.db import (
     DatabaseError, NotSupportedError, connection, connections, router,
     transaction,
 )
-from django.test import (
+from djmodels.test import (
     TransactionTestCase, override_settings, skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from django.test.utils import CaptureQueriesContext
+from djmodels.test.utils import CaptureQueriesContext
 
 from .models import City, Country, Person, PersonProfile
 

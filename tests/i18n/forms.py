@@ -1,4 +1,4 @@
-from django import forms
+from djmodels import forms
 
 from .models import Company
 

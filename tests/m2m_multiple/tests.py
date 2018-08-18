@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.test import TestCase
+from djmodels.test import TestCase
 
 from .models import Article, Category
 

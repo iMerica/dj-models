@@ -1,8 +1,8 @@
 import datetime
 from decimal import Decimal
 
-from django.db.models import Case, Count, F, Q, Sum, When
-from django.test import TestCase
+from djmodels.db.models import Case, Count, F, Q, Sum, When
+from djmodels.test import TestCase
 
 from .models import Author, Book, Publisher
 

@@ -4,11 +4,11 @@ from decimal import Decimal
 from operator import attrgetter, itemgetter
 from uuid import UUID
 
-from django.core.exceptions import FieldError
-from django.db import models
-from django.db.models import F, Max, Min, Q, Sum, Value
-from django.db.models.expressions import Case, When
-from django.test import SimpleTestCase, TestCase
+from djmodels.core.exceptions import FieldError
+from djmodels.db import models
+from djmodels.db.models import F, Max, Min, Q, Sum, Value
+from djmodels.db.models.expressions import Case, When
+from djmodels.test import SimpleTestCase, TestCase
 
 from .models import CaseTestModel, Client, FKCaseTestModel, O2OCaseTestModel
 

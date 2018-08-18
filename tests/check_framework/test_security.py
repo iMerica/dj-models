@@ -1,23 +1,23 @@
-from django.conf import settings
-from django.core.checks.security import base, csrf, sessions
-from django.test import SimpleTestCase
-from django.test.utils import override_settings
+from djmodels.conf import settings
+from djmodels.core.checks.security import base, csrf, sessions
+from djmodels.test import SimpleTestCase
+from djmodels.test.utils import override_settings
 
 
 class CheckSessionCookieSecureTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.sessions import check_session_cookie_secure
+        from djmodels.core.checks.security.sessions import check_session_cookie_secure
         return check_session_cookie_secure
 
     @override_settings(
         SESSION_COOKIE_SECURE=False,
-        INSTALLED_APPS=["django.contrib.sessions"],
+        INSTALLED_APPS=["djmodels.contrib.sessions"],
         MIDDLEWARE=[],
     )
     def test_session_cookie_secure_with_installed_app(self):
         """
-        Warn if SESSION_COOKIE_SECURE is off and "django.contrib.sessions" is
+        Warn if SESSION_COOKIE_SECURE is off and "djmodels.contrib.sessions" is
         in INSTALLED_APPS.
         """
         self.assertEqual(self.func(None), [sessions.W010])
@@ -25,20 +25,20 @@ class CheckSessionCookieSecureTest(SimpleTestCase):
     @override_settings(
         SESSION_COOKIE_SECURE=False,
         INSTALLED_APPS=[],
-        MIDDLEWARE=['django.contrib.sessions.middleware.SessionMiddleware'],
+        MIDDLEWARE=['djmodels.contrib.sessions.middleware.SessionMiddleware'],
     )
     def test_session_cookie_secure_with_middleware(self):
         """
         Warn if SESSION_COOKIE_SECURE is off and
-        "django.contrib.sessions.middleware.SessionMiddleware" is in
+        "djmodels.contrib.sessions.middleware.SessionMiddleware" is in
         MIDDLEWARE.
         """
         self.assertEqual(self.func(None), [sessions.W011])
 
     @override_settings(
         SESSION_COOKIE_SECURE=False,
-        INSTALLED_APPS=["django.contrib.sessions"],
-        MIDDLEWARE=['django.contrib.sessions.middleware.SessionMiddleware'],
+        INSTALLED_APPS=["djmodels.contrib.sessions"],
+        MIDDLEWARE=['djmodels.contrib.sessions.middleware.SessionMiddleware'],
     )
     def test_session_cookie_secure_both(self):
         """
@@ -49,8 +49,8 @@ class CheckSessionCookieSecureTest(SimpleTestCase):
 
     @override_settings(
         SESSION_COOKIE_SECURE=True,
-        INSTALLED_APPS=["django.contrib.sessions"],
-        MIDDLEWARE=['django.contrib.sessions.middleware.SessionMiddleware'],
+        INSTALLED_APPS=["djmodels.contrib.sessions"],
+        MIDDLEWARE=['djmodels.contrib.sessions.middleware.SessionMiddleware'],
     )
     def test_session_cookie_secure_true(self):
         """
@@ -62,17 +62,17 @@ class CheckSessionCookieSecureTest(SimpleTestCase):
 class CheckSessionCookieHttpOnlyTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.sessions import check_session_cookie_httponly
+        from djmodels.core.checks.security.sessions import check_session_cookie_httponly
         return check_session_cookie_httponly
 
     @override_settings(
         SESSION_COOKIE_HTTPONLY=False,
-        INSTALLED_APPS=["django.contrib.sessions"],
+        INSTALLED_APPS=["djmodels.contrib.sessions"],
         MIDDLEWARE=[],
     )
     def test_session_cookie_httponly_with_installed_app(self):
         """
-        Warn if SESSION_COOKIE_HTTPONLY is off and "django.contrib.sessions"
+        Warn if SESSION_COOKIE_HTTPONLY is off and "djmodels.contrib.sessions"
         is in INSTALLED_APPS.
         """
         self.assertEqual(self.func(None), [sessions.W013])
@@ -80,20 +80,20 @@ class CheckSessionCookieHttpOnlyTest(SimpleTestCase):
     @override_settings(
         SESSION_COOKIE_HTTPONLY=False,
         INSTALLED_APPS=[],
-        MIDDLEWARE=['django.contrib.sessions.middleware.SessionMiddleware'],
+        MIDDLEWARE=['djmodels.contrib.sessions.middleware.SessionMiddleware'],
     )
     def test_session_cookie_httponly_with_middleware(self):
         """
         Warn if SESSION_COOKIE_HTTPONLY is off and
-        "django.contrib.sessions.middleware.SessionMiddleware" is in
+        "djmodels.contrib.sessions.middleware.SessionMiddleware" is in
         MIDDLEWARE.
         """
         self.assertEqual(self.func(None), [sessions.W014])
 
     @override_settings(
         SESSION_COOKIE_HTTPONLY=False,
-        INSTALLED_APPS=["django.contrib.sessions"],
-        MIDDLEWARE=['django.contrib.sessions.middleware.SessionMiddleware'],
+        INSTALLED_APPS=["djmodels.contrib.sessions"],
+        MIDDLEWARE=['djmodels.contrib.sessions.middleware.SessionMiddleware'],
     )
     def test_session_cookie_httponly_both(self):
         """
@@ -104,8 +104,8 @@ class CheckSessionCookieHttpOnlyTest(SimpleTestCase):
 
     @override_settings(
         SESSION_COOKIE_HTTPONLY=True,
-        INSTALLED_APPS=["django.contrib.sessions"],
-        MIDDLEWARE=['django.contrib.sessions.middleware.SessionMiddleware'],
+        INSTALLED_APPS=["djmodels.contrib.sessions"],
+        MIDDLEWARE=['djmodels.contrib.sessions.middleware.SessionMiddleware'],
     )
     def test_session_cookie_httponly_true(self):
         """
@@ -117,7 +117,7 @@ class CheckSessionCookieHttpOnlyTest(SimpleTestCase):
 class CheckCSRFMiddlewareTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.csrf import check_csrf_middleware
+        from djmodels.core.checks.security.csrf import check_csrf_middleware
         return check_csrf_middleware
 
     @override_settings(MIDDLEWARE=[])
@@ -127,7 +127,7 @@ class CheckCSRFMiddlewareTest(SimpleTestCase):
         """
         self.assertEqual(self.func(None), [csrf.W003])
 
-    @override_settings(MIDDLEWARE=['django.middleware.csrf.CsrfViewMiddleware'])
+    @override_settings(MIDDLEWARE=['djmodels.middleware.csrf.CsrfViewMiddleware'])
     def test_with_csrf_middleware(self):
         self.assertEqual(self.func(None), [])
 
@@ -135,11 +135,11 @@ class CheckCSRFMiddlewareTest(SimpleTestCase):
 class CheckCSRFCookieSecureTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.csrf import check_csrf_cookie_secure
+        from djmodels.core.checks.security.csrf import check_csrf_cookie_secure
         return check_csrf_cookie_secure
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.csrf.CsrfViewMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.csrf.CsrfViewMiddleware"],
         CSRF_COOKIE_SECURE=False,
     )
     def test_with_csrf_cookie_secure_false(self):
@@ -150,7 +150,7 @@ class CheckCSRFCookieSecureTest(SimpleTestCase):
         self.assertEqual(self.func(None), [csrf.W016])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.csrf.CsrfViewMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.csrf.CsrfViewMiddleware"],
         CSRF_USE_SESSIONS=True,
         CSRF_COOKIE_SECURE=False,
     )
@@ -170,7 +170,7 @@ class CheckCSRFCookieSecureTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.csrf.CsrfViewMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.csrf.CsrfViewMiddleware"],
         CSRF_COOKIE_SECURE=True,
     )
     def test_with_csrf_cookie_secure_true(self):
@@ -180,7 +180,7 @@ class CheckCSRFCookieSecureTest(SimpleTestCase):
 class CheckSecurityMiddlewareTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_security_middleware
+        from djmodels.core.checks.security.base import check_security_middleware
         return check_security_middleware
 
     @override_settings(MIDDLEWARE=[])
@@ -190,7 +190,7 @@ class CheckSecurityMiddlewareTest(SimpleTestCase):
         """
         self.assertEqual(self.func(None), [base.W001])
 
-    @override_settings(MIDDLEWARE=['django.middleware.security.SecurityMiddleware'])
+    @override_settings(MIDDLEWARE=['djmodels.middleware.security.SecurityMiddleware'])
     def test_with_security_middleware(self):
         self.assertEqual(self.func(None), [])
 
@@ -198,11 +198,11 @@ class CheckSecurityMiddlewareTest(SimpleTestCase):
 class CheckStrictTransportSecurityTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_sts
+        from djmodels.core.checks.security.base import check_sts
         return check_sts
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_HSTS_SECONDS=0,
     )
     def test_no_sts(self):
@@ -220,7 +220,7 @@ class CheckStrictTransportSecurityTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_HSTS_SECONDS=3600,
     )
     def test_with_sts(self):
@@ -230,11 +230,11 @@ class CheckStrictTransportSecurityTest(SimpleTestCase):
 class CheckStrictTransportSecuritySubdomainsTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_sts_include_subdomains
+        from djmodels.core.checks.security.base import check_sts_include_subdomains
         return check_sts_include_subdomains
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_HSTS_INCLUDE_SUBDOMAINS=False,
         SECURE_HSTS_SECONDS=3600,
     )
@@ -256,7 +256,7 @@ class CheckStrictTransportSecuritySubdomainsTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_SSL_REDIRECT=False,
         SECURE_HSTS_SECONDS=None,
     )
@@ -267,7 +267,7 @@ class CheckStrictTransportSecuritySubdomainsTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_HSTS_INCLUDE_SUBDOMAINS=True,
         SECURE_HSTS_SECONDS=3600,
     )
@@ -278,11 +278,11 @@ class CheckStrictTransportSecuritySubdomainsTest(SimpleTestCase):
 class CheckStrictTransportSecurityPreloadTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_sts_preload
+        from djmodels.core.checks.security.base import check_sts_preload
         return check_sts_preload
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_HSTS_PRELOAD=False,
         SECURE_HSTS_SECONDS=3600,
     )
@@ -300,7 +300,7 @@ class CheckStrictTransportSecurityPreloadTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_SSL_REDIRECT=False,
         SECURE_HSTS_SECONDS=None,
     )
@@ -311,7 +311,7 @@ class CheckStrictTransportSecurityPreloadTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_HSTS_PRELOAD=True,
         SECURE_HSTS_SECONDS=3600,
     )
@@ -322,7 +322,7 @@ class CheckStrictTransportSecurityPreloadTest(SimpleTestCase):
 class CheckXFrameOptionsMiddlewareTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_xframe_options_middleware
+        from djmodels.core.checks.security.base import check_xframe_options_middleware
         return check_xframe_options_middleware
 
     @override_settings(MIDDLEWARE=[])
@@ -332,7 +332,7 @@ class CheckXFrameOptionsMiddlewareTest(SimpleTestCase):
         """
         self.assertEqual(self.func(None), [base.W002])
 
-    @override_settings(MIDDLEWARE=["django.middleware.clickjacking.XFrameOptionsMiddleware"])
+    @override_settings(MIDDLEWARE=["djmodels.middleware.clickjacking.XFrameOptionsMiddleware"])
     def test_middleware_installed(self):
         self.assertEqual(self.func(None), [])
 
@@ -340,11 +340,11 @@ class CheckXFrameOptionsMiddlewareTest(SimpleTestCase):
 class CheckXFrameOptionsDenyTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_xframe_deny
+        from djmodels.core.checks.security.base import check_xframe_deny
         return check_xframe_deny
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.clickjacking.XFrameOptionsMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.clickjacking.XFrameOptionsMiddleware"],
         X_FRAME_OPTIONS='SAMEORIGIN',
     )
     def test_x_frame_options_not_deny(self):
@@ -363,7 +363,7 @@ class CheckXFrameOptionsDenyTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.clickjacking.XFrameOptionsMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.clickjacking.XFrameOptionsMiddleware"],
         X_FRAME_OPTIONS='DENY',
     )
     def test_xframe_deny(self):
@@ -373,11 +373,11 @@ class CheckXFrameOptionsDenyTest(SimpleTestCase):
 class CheckContentTypeNosniffTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_content_type_nosniff
+        from djmodels.core.checks.security.base import check_content_type_nosniff
         return check_content_type_nosniff
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_CONTENT_TYPE_NOSNIFF=False,
     )
     def test_no_content_type_nosniff(self):
@@ -395,7 +395,7 @@ class CheckContentTypeNosniffTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_CONTENT_TYPE_NOSNIFF=True,
     )
     def test_with_content_type_nosniff(self):
@@ -405,11 +405,11 @@ class CheckContentTypeNosniffTest(SimpleTestCase):
 class CheckXssFilterTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_xss_filter
+        from djmodels.core.checks.security.base import check_xss_filter
         return check_xss_filter
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_BROWSER_XSS_FILTER=False,
     )
     def test_no_xss_filter(self):
@@ -427,7 +427,7 @@ class CheckXssFilterTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_BROWSER_XSS_FILTER=True,
     )
     def test_with_xss_filter(self):
@@ -437,11 +437,11 @@ class CheckXssFilterTest(SimpleTestCase):
 class CheckSSLRedirectTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_ssl_redirect
+        from djmodels.core.checks.security.base import check_ssl_redirect
         return check_ssl_redirect
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_SSL_REDIRECT=False,
     )
     def test_no_ssl_redirect(self):
@@ -459,7 +459,7 @@ class CheckSSLRedirectTest(SimpleTestCase):
         self.assertEqual(self.func(None), [])
 
     @override_settings(
-        MIDDLEWARE=["django.middleware.security.SecurityMiddleware"],
+        MIDDLEWARE=["djmodels.middleware.security.SecurityMiddleware"],
         SECURE_SSL_REDIRECT=True,
     )
     def test_with_ssl_redirect(self):
@@ -469,7 +469,7 @@ class CheckSSLRedirectTest(SimpleTestCase):
 class CheckSecretKeyTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_secret_key
+        from djmodels.core.checks.security.base import check_secret_key
         return check_secret_key
 
     @override_settings(SECRET_KEY=('abcdefghijklmnopqrstuvwx' * 2) + 'ab')
@@ -506,7 +506,7 @@ class CheckSecretKeyTest(SimpleTestCase):
 class CheckDebugTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_debug
+        from djmodels.core.checks.security.base import check_debug
         return check_debug
 
     @override_settings(DEBUG=True)
@@ -524,7 +524,7 @@ class CheckDebugTest(SimpleTestCase):
 class CheckAllowedHostsTest(SimpleTestCase):
     @property
     def func(self):
-        from django.core.checks.security.base import check_allowed_hosts
+        from djmodels.core.checks.security.base import check_allowed_hosts
         return check_allowed_hosts
 
     @override_settings(ALLOWED_HOSTS=[])

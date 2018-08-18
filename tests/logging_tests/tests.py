@@ -4,15 +4,15 @@ from io import StringIO
 
 from admin_scripts.tests import AdminScriptTestCase
 
-from django.conf import settings
-from django.core import mail
-from django.core.exceptions import PermissionDenied
-from django.core.files.temp import NamedTemporaryFile
-from django.core.management import color
-from django.http.multipartparser import MultiPartParserError
-from django.test import RequestFactory, SimpleTestCase, override_settings
-from django.test.utils import LoggingCaptureMixin
-from django.utils.log import (
+from djmodels.conf import settings
+from djmodels.core import mail
+from djmodels.core.exceptions import PermissionDenied
+from djmodels.core.files.temp import NamedTemporaryFile
+from djmodels.core.management import color
+from djmodels.http.multipartparser import MultiPartParserError
+from djmodels.test import RequestFactory, SimpleTestCase, override_settings
+from djmodels.test.utils import LoggingCaptureMixin
+from djmodels.utils.log import (
     DEFAULT_LOGGING, AdminEmailHandler, CallbackFilter, RequireDebugFalse,
     RequireDebugTrue, ServerFormatter,
 )
@@ -27,11 +27,11 @@ OLD_LOGGING = {
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'djmodels.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
-        'django.request': {
+        'djmodels.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
@@ -84,7 +84,7 @@ class DefaultLoggingTests(SetupDefaultLoggingMixin, LoggingCaptureMixin, SimpleT
 
     def test_django_logger(self):
         """
-        The 'django' base logger only output anything when DEBUG=True.
+        The 'djmodels' base logger only output anything when DEBUG=True.
         """
         self.logger.error("Hey, this is an error.")
         self.assertEqual(self.logger_output.getvalue(), '')
@@ -111,7 +111,7 @@ class DefaultLoggingTests(SetupDefaultLoggingMixin, LoggingCaptureMixin, SimpleT
 
 class LoggingAssertionMixin(object):
 
-    def assertLogsRequest(self, url, level, msg, status_code, logger='django.request', exc_class=None):
+    def assertLogsRequest(self, url, level, msg, status_code, logger='djmodels.request', exc_class=None):
         with self.assertLogs(logger, level) as cm:
             try:
                 self.client.get(url)
@@ -205,8 +205,8 @@ class HandlerLoggingTests(SetupDefaultLoggingMixin, LoggingAssertionMixin, Loggi
     USE_I18N=True,
     LANGUAGES=[('en', 'English')],
     MIDDLEWARE=[
-        'django.middleware.locale.LocaleMiddleware',
-        'django.middleware.common.CommonMiddleware',
+        'djmodels.middleware.locale.LocaleMiddleware',
+        'djmodels.middleware.common.CommonMiddleware',
     ],
     ROOT_URLCONF='logging_tests.urls_i18n',
 )
@@ -245,7 +245,7 @@ class CallbackFilterTest(SimpleTestCase):
 
 
 class AdminEmailHandlerTest(SimpleTestCase):
-    logger = logging.getLogger('django')
+    logger = logging.getLogger('djmodels')
 
     def get_admin_email_handler(self, logger):
         # AdminEmailHandler does not get filtered out
@@ -470,14 +470,14 @@ dictConfig.called = False
 
 class SetupConfigureLogging(SimpleTestCase):
     """
-    Calling django.setup() initializes the logging configuration.
+    Calling djmodels.setup() initializes the logging configuration.
     """
     @override_settings(
         LOGGING_CONFIG='logging_tests.tests.dictConfig',
         LOGGING=OLD_LOGGING,
     )
     def test_configure_initializes_logging(self):
-        from django import setup
+        from djmodels import setup
         setup()
         self.assertTrue(dictConfig.called)
 
@@ -491,7 +491,7 @@ class SecurityLoggerTest(LoggingAssertionMixin, SimpleTestCase):
             level='ERROR',
             msg='dubious',
             status_code=400,
-            logger='django.security.SuspiciousOperation',
+            logger='djmodels.security.SuspiciousOperation',
         )
 
     def test_suspicious_operation_uses_sublogger(self):
@@ -500,7 +500,7 @@ class SecurityLoggerTest(LoggingAssertionMixin, SimpleTestCase):
             level='ERROR',
             msg='dubious',
             status_code=400,
-            logger='django.security.DisallowedHost',
+            logger='djmodels.security.DisallowedHost',
         )
 
     @override_settings(
@@ -577,7 +577,7 @@ class LogFormattersTests(SimpleTestCase):
     def test_server_formatter_default_format(self):
         server_time = '2016-09-25 10:20:30'
         log_msg = 'log message'
-        logger = logging.getLogger('django.server')
+        logger = logging.getLogger('djmodels.server')
 
         @contextmanager
         def patch_django_server_logger():

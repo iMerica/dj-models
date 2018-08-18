@@ -2,19 +2,19 @@ import datetime
 import uuid
 from decimal import Decimal
 
-from django.core import checks, exceptions, serializers
-from django.core.serializers.json import DjangoJSONEncoder
-from django.db.models import Q
-from django.forms import CharField, Form, widgets
-from django.test.utils import isolate_apps
-from django.utils.html import escape
+from djmodels.core import checks, exceptions, serializers
+from djmodels.core.serializers.json import DjangoJSONEncoder
+from djmodels.db.models import Q
+from djmodels.forms import CharField, Form, widgets
+from djmodels.test.utils import isolate_apps
+from djmodels.utils.html import escape
 
 from . import PostgreSQLTestCase
 from .models import JSONModel, PostgreSQLModel
 
 try:
-    from django.contrib.postgres import forms
-    from django.contrib.postgres.fields import JSONField
+    from djmodels.contrib.postgres import forms
+    from djmodels.contrib.postgres.fields import JSONField
 except ImportError:
     pass
 

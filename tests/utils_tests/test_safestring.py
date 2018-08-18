@@ -1,8 +1,8 @@
-from django.template import Context, Template
-from django.test import SimpleTestCase
-from django.utils import html
-from django.utils.functional import lazy, lazystr
-from django.utils.safestring import SafeData, mark_safe
+from djmodels.template import Context, Template
+from djmodels.test import SimpleTestCase
+from djmodels.utils import html
+from djmodels.utils.functional import lazy, lazystr
+from djmodels.utils.safestring import SafeData, mark_safe
 
 
 class customescape(str):

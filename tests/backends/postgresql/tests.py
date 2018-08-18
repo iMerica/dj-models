@@ -1,9 +1,9 @@
 import unittest
 from unittest import mock
 
-from django.core.exceptions import ImproperlyConfigured
-from django.db import DatabaseError, connection, connections
-from django.test import TestCase
+from djmodels.core.exceptions import ImproperlyConfigured
+from djmodels.db import DatabaseError, connection, connections
+from djmodels.test import TestCase
 
 
 @unittest.skipUnless(connection.vendor == 'postgresql', 'PostgreSQL tests')
@@ -31,7 +31,7 @@ class Tests(TestCase):
             "database and will use the first PostgreSQL database instead."
         )
         with self.assertWarnsMessage(RuntimeWarning, msg):
-            with mock.patch('django.db.backends.base.base.BaseDatabaseWrapper.connect',
+            with mock.patch('djmodels.db.backends.base.base.BaseDatabaseWrapper.connect',
                             side_effect=mocked_connect, autospec=True):
                 with mock.patch.object(
                     connection,
@@ -43,7 +43,7 @@ class Tests(TestCase):
         self.assertEqual(nodb_conn.settings_dict['NAME'], connections['other'].settings_dict['NAME'])
 
     def test_database_name_too_long(self):
-        from django.db.backends.postgresql.base import DatabaseWrapper
+        from djmodels.db.backends.postgresql.base import DatabaseWrapper
         settings = connection.settings_dict.copy()
         max_name_length = connection.ops.max_name_length()
         settings['NAME'] = 'a' + (max_name_length * 'a')
@@ -116,7 +116,7 @@ class Tests(TestCase):
             ISOLATION_LEVEL_READ_COMMITTED as read_committed,
             ISOLATION_LEVEL_SERIALIZABLE as serializable,
         )
-        # Since this is a django.test.TestCase, a transaction is in progress
+        # Since this is a djmodels.test.TestCase, a transaction is in progress
         # and the isolation level isn't reported as 0. This test assumes that
         # PostgreSQL is configured with the default isolation level.
 
@@ -150,7 +150,7 @@ class Tests(TestCase):
         self.assertEqual(a[0], b[0])
 
     def test_lookup_cast(self):
-        from django.db.backends.postgresql.operations import DatabaseOperations
+        from djmodels.db.backends.postgresql.operations import DatabaseOperations
         do = DatabaseOperations(connection=None)
         lookups = (
             'iexact', 'contains', 'icontains', 'startswith', 'istartswith',
@@ -165,7 +165,7 @@ class Tests(TestCase):
                     self.assertIn('::citext', do.lookup_cast(lookup, internal_type=field_type))
 
     def test_correct_extraction_psycopg2_version(self):
-        from django.db.backends.postgresql.base import psycopg2_version
+        from djmodels.db.backends.postgresql.base import psycopg2_version
         with mock.patch('psycopg2.__version__', '4.2.1 (dt dec pq3 ext lo64)'):
             self.assertEqual(psycopg2_version(), (4, 2, 1))
         with mock.patch('psycopg2.__version__', '4.2b0.dev1 (dt dec pq3 ext lo64)'):

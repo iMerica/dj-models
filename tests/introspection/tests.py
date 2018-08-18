@@ -1,9 +1,9 @@
 from unittest import mock, skipUnless
 
-from django.db import connection
-from django.db.models import Index
-from django.db.utils import DatabaseError
-from django.test import TransactionTestCase, skipUnlessDBFeature
+from djmodels.db import connection
+from djmodels.db.models import Index
+from djmodels.db.utils import DatabaseError
+from djmodels.test import TransactionTestCase, skipUnlessDBFeature
 
 from .models import Article, ArticleReporter, City, District, Reporter
 

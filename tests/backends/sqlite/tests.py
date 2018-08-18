@@ -2,12 +2,12 @@ import re
 import threading
 import unittest
 
-from django.db import connection
-from django.db.models import Avg, StdDev, Sum, Variance
-from django.db.models.fields import CharField
-from django.db.utils import NotSupportedError
-from django.test import TestCase, TransactionTestCase, override_settings
-from django.test.utils import isolate_apps
+from djmodels.db import connection
+from djmodels.db.models import Avg, StdDev, Sum, Variance
+from djmodels.db.models.fields import CharField
+from djmodels.db.utils import NotSupportedError
+from djmodels.test import TestCase, TransactionTestCase, override_settings
+from djmodels.test.utils import isolate_apps
 
 from ..models import Author, Item, Object, Square
 
@@ -50,7 +50,7 @@ class Tests(TestCase):
 
     def test_memory_db_test_name(self):
         """A named in-memory db should be allowed where supported."""
-        from django.db.backends.sqlite3.base import DatabaseWrapper
+        from djmodels.db.backends.sqlite3.base import DatabaseWrapper
         settings_dict = {
             'TEST': {
                 'NAME': 'file:memorydb_test?mode=memory&cache=shared',

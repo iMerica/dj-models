@@ -1,6 +1,6 @@
 import unittest
 
-from django.utils import regex_helper
+from djmodels.utils import regex_helper
 
 
 class NormalizeTests(unittest.TestCase):

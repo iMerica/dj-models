@@ -1,12 +1,12 @@
 import os
 
-from django.apps import AppConfig, apps
-from django.apps.registry import Apps
-from django.contrib.admin.models import LogEntry
-from django.core.exceptions import AppRegistryNotReady, ImproperlyConfigured
-from django.db import models
-from django.test import SimpleTestCase, override_settings
-from django.test.utils import extend_sys_path, isolate_apps
+from djmodels.apps import AppConfig, apps
+from djmodels.apps.registry import Apps
+from djmodels.contrib.admin.models import LogEntry
+from djmodels.core.exceptions import AppRegistryNotReady, ImproperlyConfigured
+from djmodels.db import models
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.test.utils import extend_sys_path, isolate_apps
 
 from .default_config_app.apps import CustomConfig
 from .models import SoAlternative, TotallyNormal, new_apps
@@ -17,15 +17,15 @@ from .models import SoAlternative, TotallyNormal, new_apps
 SOME_INSTALLED_APPS = [
     'apps.apps.MyAdmin',
     'apps.apps.MyAuth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'djmodels.contrib.contenttypes',
+    'djmodels.contrib.sessions',
+    'djmodels.contrib.messages',
+    'djmodels.contrib.staticfiles',
 ]
 
 SOME_INSTALLED_APPS_NAMES = [
-    'django.contrib.admin',
-    'django.contrib.auth',
+    'djmodels.contrib.admin',
+    'djmodels.contrib.auth',
 ] + SOME_INSTALLED_APPS[2:]
 
 HERE = os.path.dirname(__file__)
@@ -107,27 +107,27 @@ class AppsTests(SimpleTestCase):
         Tests apps.get_app_config().
         """
         app_config = apps.get_app_config('admin')
-        self.assertEqual(app_config.name, 'django.contrib.admin')
+        self.assertEqual(app_config.name, 'djmodels.contrib.admin')
 
         app_config = apps.get_app_config('staticfiles')
-        self.assertEqual(app_config.name, 'django.contrib.staticfiles')
+        self.assertEqual(app_config.name, 'djmodels.contrib.staticfiles')
 
         with self.assertRaises(LookupError):
             apps.get_app_config('admindocs')
 
-        msg = "No installed app with label 'django.contrib.auth'. Did you mean 'myauth'"
+        msg = "No installed app with label 'djmodels.contrib.auth'. Did you mean 'myauth'"
         with self.assertRaisesMessage(LookupError, msg):
-            apps.get_app_config('django.contrib.auth')
+            apps.get_app_config('djmodels.contrib.auth')
 
     @override_settings(INSTALLED_APPS=SOME_INSTALLED_APPS)
     def test_is_installed(self):
         """
         Tests apps.is_installed().
         """
-        self.assertIs(apps.is_installed('django.contrib.admin'), True)
-        self.assertIs(apps.is_installed('django.contrib.auth'), True)
-        self.assertIs(apps.is_installed('django.contrib.staticfiles'), True)
-        self.assertIs(apps.is_installed('django.contrib.admindocs'), False)
+        self.assertIs(apps.is_installed('djmodels.contrib.admin'), True)
+        self.assertIs(apps.is_installed('djmodels.contrib.auth'), True)
+        self.assertIs(apps.is_installed('djmodels.contrib.staticfiles'), True)
+        self.assertIs(apps.is_installed('djmodels.contrib.admindocs'), False)
 
     @override_settings(INSTALLED_APPS=SOME_INSTALLED_APPS)
     def test_get_model(self):

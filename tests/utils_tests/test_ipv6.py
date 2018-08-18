@@ -1,6 +1,6 @@
 import unittest
 
-from django.utils.ipv6 import clean_ipv6_address, is_valid_ipv6_address
+from djmodels.utils.ipv6 import clean_ipv6_address, is_valid_ipv6_address
 
 
 class TestUtilsIPv6(unittest.TestCase):

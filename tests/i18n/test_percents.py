@@ -1,8 +1,8 @@
 import os
 
-from django.template import Context, Template
-from django.test import SimpleTestCase, override_settings
-from django.utils.translation import activate, get_language, trans_real
+from djmodels.template import Context, Template
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.utils.translation import activate, get_language, trans_real
 
 from .utils import POFileAssertionMixin
 
@@ -14,7 +14,7 @@ SAMPLEPROJECT_LOCALE = os.path.join(SAMPLEPROJECT_DIR, 'locale')
 class FrenchTestCase(SimpleTestCase):
     """Tests using the French translations of the sampleproject."""
 
-    PO_FILE = os.path.join(SAMPLEPROJECT_LOCALE, 'fr', 'LC_MESSAGES', 'django.po')
+    PO_FILE = os.path.join(SAMPLEPROJECT_LOCALE, 'fr', 'LC_MESSAGES', 'djmodels.po')
 
     def setUp(self):
         self._language = get_language()

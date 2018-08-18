@@ -5,11 +5,11 @@ These tests use dialogue from the 1975 film Monty Python and the Holy Grail.
 All text copyright Python (Monty) Pictures. Thanks to sacred-texts.com for the
 transcript.
 """
-from django.contrib.postgres.search import (
+from djmodels.contrib.postgres.search import (
     SearchQuery, SearchRank, SearchVector,
 )
-from django.db.models import F
-from django.test import SimpleTestCase, modify_settings
+from djmodels.db.models import F
+from djmodels.test import SimpleTestCase, modify_settings
 
 from . import PostgreSQLTestCase
 from .models import Character, Line, Scene
@@ -80,7 +80,7 @@ class GrailTestData:
         )
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.postgres'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.postgres'})
 class SimpleSearchTest(GrailTestData, PostgreSQLTestCase):
 
     def test_simple(self):
@@ -100,7 +100,7 @@ class SimpleSearchTest(GrailTestData, PostgreSQLTestCase):
         self.assertSequenceEqual(searched, [self.verse0])
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.postgres'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.postgres'})
 class SearchVectorFieldTest(GrailTestData, PostgreSQLTestCase):
     def test_existing_vector(self):
         Line.objects.update(dialogue_search_vector=SearchVector('dialogue'))
@@ -186,7 +186,7 @@ class MultipleFieldsTest(GrailTestData, PostgreSQLTestCase):
         self.assertSequenceEqual(searched, [self.french])
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.postgres'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.postgres'})
 class TestCombinations(GrailTestData, PostgreSQLTestCase):
 
     def test_vector_add(self):
@@ -252,7 +252,7 @@ class TestCombinations(GrailTestData, PostgreSQLTestCase):
             Line.objects.filter(dialogue__search=None & SearchQuery('kneecaps'))
 
 
-@modify_settings(INSTALLED_APPS={'append': 'django.contrib.postgres'})
+@modify_settings(INSTALLED_APPS={'append': 'djmodels.contrib.postgres'})
 class TestRankingAndWeights(GrailTestData, PostgreSQLTestCase):
 
     def test_ranking(self):

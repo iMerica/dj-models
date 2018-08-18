@@ -1,6 +1,6 @@
 from argparse import ArgumentError
 
-from django.core.management.base import BaseCommand, CommandError
+from djmodels.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):

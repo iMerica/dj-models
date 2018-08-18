@@ -1,7 +1,7 @@
 import logging
 
-from django.conf import settings
-from django.core.mail.backends.base import BaseEmailBackend
+from djmodels.conf import settings
+from djmodels.core.mail.backends.base import BaseEmailBackend
 
 
 class MyHandler(logging.Handler):

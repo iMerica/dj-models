@@ -4,16 +4,16 @@ from unittest import mock
 
 from admin_scripts.tests import AdminScriptTestCase
 
-from django.apps import apps
-from django.core import management
-from django.core.management import BaseCommand, CommandError, find_commands
-from django.core.management.utils import (
+from djmodels.apps import apps
+from djmodels.core import management
+from djmodels.core.management import BaseCommand, CommandError, find_commands
+from djmodels.core.management.utils import (
     find_command, get_random_secret_key, popen_wrapper,
 )
-from django.db import connection
-from django.test import SimpleTestCase, override_settings
-from django.test.utils import captured_stderr, extend_sys_path
-from django.utils import translation
+from djmodels.db import connection
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.test.utils import captured_stderr, extend_sys_path
+from djmodels.utils import translation
 
 from .management.commands import dance
 
@@ -21,8 +21,8 @@ from .management.commands import dance
 # A minimal set of apps to avoid system checks running on all apps.
 @override_settings(
     INSTALLED_APPS=[
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
+        'djmodels.contrib.auth',
+        'djmodels.contrib.contenttypes',
         'user_commands',
     ],
 )

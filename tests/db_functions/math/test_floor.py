@@ -1,9 +1,9 @@
 import math
 from decimal import Decimal
 
-from django.db.models import DecimalField
-from django.db.models.functions import Floor
-from django.test import TestCase
+from djmodels.db.models import DecimalField
+from djmodels.db.models.functions import Floor
+from djmodels.test import TestCase
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

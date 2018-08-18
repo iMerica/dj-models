@@ -10,9 +10,9 @@ import datetime
 import decimal
 import uuid
 
-from django.core import serializers
-from django.db import connection, models
-from django.test import TestCase
+from djmodels.core import serializers
+from djmodels.db import connection, models
+from djmodels.test import TestCase
 
 from .models import (
     Anchor, AutoNowDateTimeData, BigIntegerData, BinaryData, BooleanData,

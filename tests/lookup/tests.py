@@ -3,10 +3,10 @@ from datetime import datetime
 from math import ceil
 from operator import attrgetter
 
-from django.core.exceptions import FieldError
-from django.db import connection
-from django.db.models.functions import Substr
-from django.test import TestCase, skipUnlessDBFeature
+from djmodels.core.exceptions import FieldError
+from djmodels.db import connection
+from djmodels.db.models.functions import Substr
+from djmodels.test import TestCase, skipUnlessDBFeature
 
 from .models import (
     Article, Author, Game, IsNullWithNoneAsRHS, Player, Season, Tag,

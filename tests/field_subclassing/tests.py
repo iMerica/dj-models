@@ -1,5 +1,5 @@
-from django.db import connection
-from django.test import SimpleTestCase
+from djmodels.db import connection
+from djmodels.test import SimpleTestCase
 
 from .fields import CustomTypedField
 

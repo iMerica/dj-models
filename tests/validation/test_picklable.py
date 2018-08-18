@@ -1,7 +1,7 @@
 import pickle
 from unittest import TestCase
 
-from django.core.exceptions import ValidationError
+from djmodels.core.exceptions import ValidationError
 
 
 class PickableValidationErrorTestCase(TestCase):

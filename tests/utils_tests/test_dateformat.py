@@ -1,10 +1,10 @@
 from datetime import date, datetime
 
-from django.test import SimpleTestCase, override_settings
-from django.test.utils import TZ_SUPPORT, requires_tz_support
-from django.utils import dateformat, translation
-from django.utils.dateformat import format
-from django.utils.timezone import (
+from djmodels.test import SimpleTestCase, override_settings
+from djmodels.test.utils import TZ_SUPPORT, requires_tz_support
+from djmodels.utils import dateformat, translation
+from djmodels.utils.dateformat import format
+from djmodels.utils.timezone import (
     get_default_timezone, get_fixed_timezone, make_aware, utc,
 )
 

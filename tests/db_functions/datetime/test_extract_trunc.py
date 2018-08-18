@@ -2,20 +2,20 @@ from datetime import datetime, timedelta
 
 import pytz
 
-from django.conf import settings
-from django.db.models import (
+from djmodels.conf import settings
+from djmodels.db.models import (
     DateField, DateTimeField, IntegerField, Max, OuterRef, Subquery, TimeField,
 )
-from django.db.models.functions import (
+from djmodels.db.models.functions import (
     Extract, ExtractDay, ExtractHour, ExtractMinute, ExtractMonth,
     ExtractQuarter, ExtractSecond, ExtractWeek, ExtractWeekDay, ExtractYear,
     Trunc, TruncDate, TruncDay, TruncHour, TruncMinute, TruncMonth,
     TruncQuarter, TruncSecond, TruncTime, TruncWeek, TruncYear,
 )
-from django.test import (
+from djmodels.test import (
     TestCase, override_settings, skipIfDBFeature, skipUnlessDBFeature,
 )
-from django.utils import timezone
+from djmodels.utils import timezone
 
 from ..models import Author, DTModel, Fan
 

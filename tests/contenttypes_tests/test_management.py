@@ -1,11 +1,11 @@
 from unittest import mock
 
-from django.apps.registry import Apps, apps
-from django.contrib.contenttypes import management as contenttypes_management
-from django.contrib.contenttypes.models import ContentType
-from django.core.management import call_command
-from django.test import TestCase, modify_settings
-from django.test.utils import captured_stdout
+from djmodels.apps.registry import Apps, apps
+from djmodels.contrib.contenttypes import management as contenttypes_management
+from djmodels.contrib.contenttypes.models import ContentType
+from djmodels.core.management import call_command
+from djmodels.test import TestCase, modify_settings
+from djmodels.test.utils import captured_stdout
 
 from .models import ModelWithNullFKToSite, Post
 
@@ -13,7 +13,7 @@ from .models import ModelWithNullFKToSite, Post
 @modify_settings(INSTALLED_APPS={'append': ['no_models']})
 class RemoveStaleContentTypesTests(TestCase):
     # Speed up tests by avoiding retrieving ContentTypes for all test apps.
-    available_apps = ['contenttypes_tests', 'no_models', 'django.contrib.contenttypes']
+    available_apps = ['contenttypes_tests', 'no_models', 'djmodels.contrib.contenttypes']
 
     def setUp(self):
         self.before_count = ContentType.objects.count()

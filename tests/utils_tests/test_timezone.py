@@ -4,9 +4,9 @@ from unittest import mock
 
 import pytz
 
-from django.test import SimpleTestCase, ignore_warnings, override_settings
-from django.utils import timezone
-from django.utils.deprecation import RemovedInDjango31Warning
+from djmodels.test import SimpleTestCase, ignore_warnings, override_settings
+from djmodels.utils import timezone
+from djmodels.utils.deprecation import RemovedInDjango31Warning
 
 CET = pytz.timezone("Europe/Paris")
 EAT = timezone.get_fixed_timezone(180)      # Africa/Nairobi
@@ -33,7 +33,7 @@ class TimezoneTests(SimpleTestCase):
         with timezone.override(EAT):
             self.assertEqual(timezone.localdate(aware), datetime.date(2014, 12, 31))
 
-        with mock.patch('django.utils.timezone.now', return_value=aware):
+        with mock.patch('djmodels.utils.timezone.now', return_value=aware):
             self.assertEqual(timezone.localdate(timezone=EAT), datetime.date(2014, 12, 31))
             with timezone.override(EAT):
                 self.assertEqual(timezone.localdate(), datetime.date(2014, 12, 31))

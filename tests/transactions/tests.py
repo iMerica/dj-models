@@ -3,11 +3,11 @@ import threading
 import time
 from unittest import skipIf, skipUnless
 
-from django.db import (
+from djmodels.db import (
     DatabaseError, Error, IntegrityError, OperationalError, connection,
     transaction,
 )
-from django.test import (
+from djmodels.test import (
     TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature,
 )
 

@@ -1,11 +1,11 @@
 import datetime
 from copy import deepcopy
 
-from django.core.exceptions import FieldError, MultipleObjectsReturned
-from django.db import models, transaction
-from django.db.utils import IntegrityError
-from django.test import TestCase
-from django.utils.translation import gettext_lazy
+from djmodels.core.exceptions import FieldError, MultipleObjectsReturned
+from djmodels.db import models, transaction
+from djmodels.db.utils import IntegrityError
+from djmodels.test import TestCase
+from djmodels.utils.translation import gettext_lazy
 
 from .models import (
     Article, Category, Child, City, District, First, Parent, Record, Relation,
