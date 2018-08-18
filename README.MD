@@ -1,4 +1,4 @@
-## DJ Models
+# DJ Models
 
 Drop-in Django Models into any Python WSGI framework.
 
