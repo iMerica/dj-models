@@ -18,16 +18,20 @@ Create an app directory for your models and settings (DB Connection Details)
 Add your database settings to the settings module. See Django's Docs on this for more info.
 
 ```python
+SECRET_KEY = '<ACTUAL SECRET KEY>'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'mydatabaseuser',
-        'NAME': 'mydatabase',
-        'TEST': {
-            'NAME': 'mytestdatabase',
-        },
-    },
+        'ENGINE': 'djmodels.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'mysecretpassword',
+        'HOST': '0.0.0.0',
+        'PORT': '5432',
+    }
 }
+
+INSTALLED_APPS = ['app']
+
 ```
     
 
@@ -41,15 +45,19 @@ class Person(models.Model):
     age = models.PositiveIntegerField()
 
 ```
+Export your settings module
+
+    export DJANGO_SETTINGS_MODULE=app.settings
+
 
 Create migrations
 
-    DJANGO_SETTINGS_MODULE=app.settings djmodels-admin makemigrations app/models.py
+    djmodels-admin makemigrations app
     
 
 Run Migrate
 
-    DJANGO_SETTINGS_MODULE=app.settings djmodels-admin migrate app/models.py
+    djmodels-admin migrate app
     
 
 Import the model and make queries
