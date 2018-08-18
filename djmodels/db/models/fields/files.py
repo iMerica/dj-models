@@ -1,7 +1,6 @@
 import datetime
 import posixpath
 
-from djmodels import forms
 from djmodels.core import checks
 from djmodels.core.files.base import File
 from djmodels.core.files.images import ImageFile
@@ -316,12 +315,6 @@ class FileField(Field):
             # database, so leaving False as-is is not acceptable.
             setattr(instance, self.name, data or '')
 
-    def formfield(self, **kwargs):
-        return super().formfield(**{
-            'form_class': forms.FileField,
-            'max_length': self.max_length,
-            **kwargs,
-        })
 
 
 class ImageFileDescriptor(FileDescriptor):
@@ -459,8 +452,3 @@ class ImageField(FileField):
         if self.height_field:
             setattr(instance, self.height_field, height)
 
-    def formfield(self, **kwargs):
-        return super().formfield(**{
-            'form_class': forms.ImageField,
-            **kwargs,
-        })

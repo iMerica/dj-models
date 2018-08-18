@@ -2,7 +2,6 @@ import functools
 import inspect
 from functools import partial
 
-from djmodels import forms
 from djmodels.apps import apps
 from djmodels.core import checks, exceptions
 from djmodels.db import connection, router
@@ -944,17 +943,6 @@ class ForeignKey(ForeignObject):
         if self.remote_field.field_name is None:
             self.remote_field.field_name = cls._meta.pk.name
 
-    def formfield(self, *, using=None, **kwargs):
-        if isinstance(self.remote_field.model, str):
-            raise ValueError("Cannot create form field for %r yet, because "
-                             "its related model %r has not been loaded yet" %
-                             (self.name, self.remote_field.model))
-        return super().formfield(**{
-            'form_class': forms.ModelChoiceField,
-            'queryset': self.remote_field.model._default_manager.using(using),
-            'to_field_name': self.remote_field.field_name,
-            **kwargs,
-        })
 
     def db_check(self, connection):
         return []
@@ -1615,20 +1603,6 @@ class ManyToManyField(RelatedField):
     def save_form_data(self, instance, data):
         getattr(instance, self.attname).set(data)
 
-    def formfield(self, *, using=None, **kwargs):
-        defaults = {
-            'form_class': forms.ModelMultipleChoiceField,
-            'queryset': self.remote_field.model._default_manager.using(using),
-            **kwargs,
-        }
-        # If initial is passed in, it's a list of related objects, but the
-        # MultipleChoiceField takes a list of IDs.
-        if defaults.get('initial') is not None:
-            initial = defaults['initial']
-            if callable(initial):
-                initial = initial()
-            defaults['initial'] = [i.pk for i in initial]
-        return super().formfield(**defaults)
 
     def db_check(self, connection):
         return None
