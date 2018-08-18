@@ -13,12 +13,7 @@ def setup(set_prefix=True):
     """
     from djmodels.apps import apps
     from djmodels.conf import settings
-    from djmodels.urls import set_script_prefix
     from djmodels.utils.log import configure_logging
 
     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
-    if set_prefix:
-        set_script_prefix(
-            '/' if settings.FORCE_SCRIPT_NAME is None else settings.FORCE_SCRIPT_NAME
-        )
     apps.populate(settings.INSTALLED_APPS)
