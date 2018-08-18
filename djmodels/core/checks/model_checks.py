@@ -45,7 +45,7 @@ def _check_lazy_references(apps, ignore=None):
     if not pending_models:
         return []
 
-    from django.db.models import signals
+    from djmodels.db.models import signals
     model_signals = {
         signal: name for name, signal in vars(signals).items()
         if isinstance(signal, signals.ModelSignal)
@@ -132,9 +132,9 @@ def _check_lazy_references(apps, ignore=None):
     # defined above. If a key maps to None, no error will be produced.
     # default_error() will be used for usages that don't appear in this dict.
     known_lazy = {
-        ('django.db.models.fields.related', 'resolve_related_class'): field_error,
-        ('django.db.models.fields.related', 'set_managed'): None,
-        ('django.dispatch.dispatcher', 'connect'): signal_connect_error,
+        ('djmodels.db.models.fields.related', 'resolve_related_class'): field_error,
+        ('djmodels.db.models.fields.related', 'set_managed'): None,
+        ('djmodels.dispatch.dispatcher', 'connect'): signal_connect_error,
     }
 
     def build_error(model_key, func, args, keywords):

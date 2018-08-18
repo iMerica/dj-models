@@ -1,4 +1,4 @@
-from django.db import connections
+from djmodels.db import connections
 
 from . import Tags, register
 
