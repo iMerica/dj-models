@@ -15,7 +15,7 @@ Create an app directory for your models and settings (DB Connection Details)
     touch app/{__init__.py,models.py,settings.py}
     
 
-Add an model to `app/models.py`
+Add a model to `app/models.py`
 
 ```python
 from djmodels.db import models
@@ -33,7 +33,7 @@ Create migrations
 
 Run Migrate
 
-    DJANGO_SETTINGS_MODULE=app.settings djmodels-admin makemigrations app/models.py
+    DJANGO_SETTINGS_MODULE=app.settings djmodels-admin migrate app/models.py
     
 
 Import the model and make queries
