@@ -202,12 +202,15 @@ def translation(language):
 
 def activate(language):
     """
+    @Todo: THIS IS A HACK. FIX ME!
     Fetch the translation object for a given language and install it as the
     current translation object for the current thread.
     """
-    if not language:
-        return
-    _active.value = translation(language)
+
+    return
+    # if not language:
+    #     return
+    # _active.value = translation(language)
 
 
 def deactivate():
