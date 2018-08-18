@@ -14,6 +14,22 @@ Create an app directory for your models and settings (DB Connection Details)
     mkdir app
     touch app/{__init__.py,models.py,settings.py}
     
+    
+Add your database settings to the settings module. See Django's Docs on this for more info.
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'mydatabaseuser',
+        'NAME': 'mydatabase',
+        'TEST': {
+            'NAME': 'mytestdatabase',
+        },
+    },
+}
+```
+    
 
 Add a model to `app/models.py`
 
