@@ -1,11 +1,14 @@
 ## DJ Models
 
-Django Models and Nothing Else. Use Django's ORM with any non-async web framework!
+Drop-in Django Models into any Python WSGI framework.
 
-## Notes
-- ⚠️  This does not work yet. Once it does, I'll publish to PyPi ⚠️  
+## ⚠️ Notes ⚠️
+- This is not ready yet. Once it is, I'll publish to PyPi.
 - All Praise to the Django Dev Team
 
+
+## Bugs
+- Migration files are currently being saved to a directory that is relative to the library itself rather than locally in main app/project directory. 
 
 ## Getting Started
 
@@ -52,15 +55,21 @@ Export your settings module
 
 Create migrations
 
-    djmodels-admin makemigrations app
+    $ djmodels-admin makemigrations app
+    # Migrations for 'app':
+    #   - Create model Person 
     
 
 Run Migrate
 
-    djmodels-admin migrate app
+    $ djmodels-admin migrate app
+    # Operations to perform:
+    #   Apply all migrations: app
+    #   Running migrations:
+    #       Applying app.0001_initial... OK
     
 
-Import the model and make queries
+Import the model into any webframework and make queries. For example, Flask.
 
 ```python
 
