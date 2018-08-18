@@ -483,7 +483,7 @@ SESSION_SERIALIZER = 'djmodels.contrib.sessions.serializers.JSONSerializer'
 # The cache backends to use.
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
     }
 }
 CACHE_MIDDLEWARE_KEY_PREFIX = ''

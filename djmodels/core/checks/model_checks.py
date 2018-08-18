@@ -2,8 +2,8 @@ import inspect
 import types
 from itertools import chain
 
-from django.apps import apps
-from django.core.checks import Error, Tags, register
+from djmodels.apps import apps
+from djmodels.core.checks import Error, Tags, register
 
 
 @register(Tags.models)

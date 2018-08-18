@@ -52,7 +52,9 @@ if "install" in sys.argv:
             break
 
 
-EXCLUDE_FROM_PACKAGES = []
+EXCLUDE_FROM_PACKAGES = ['django.conf.project_template',
+                         'django.conf.app_template',
+                         'django.bin']
 
 
 version = "0.0.1"
