@@ -1,20 +1,21 @@
 # DJ Models
 
-Drop-in Django Models into any Python WSGI framework.
+Use the Django ORM in any Python web framework.
 
 ## ⚠️ Notes ⚠️
 - This is not ready yet. Once it is, I'll publish to PyPi.
-- All Praise to the Django Dev Team
+- Async is not supported.
+- All Praise to the Django dev team 
 
 ## Getting Started
 
-Create an app directory for your models and settings (DB Connection Details) 
+Create an app directory for your models and settings (DB connection details).
 
     mkdir app
     touch app/{__init__.py,models.py,settings.py}
     
     
-Add your database settings to the settings module. See Django's Docs on this for more info.
+Add your database settings to the settings module. See Django's docs on this for more info.
 
 ```python
 SECRET_KEY = '<ACTUAL SECRET KEY>'
