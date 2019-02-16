@@ -85,6 +85,10 @@ def get_random_person():
 
 ``` 
 
+### Example Apps
+
+- [Flask + DjModels](https://github.com/iMerica/dj-models-demo)
+
 ## Gotchas
 
 - Make sure to set DJMODELS_SETTINGS_MODULE is set!
