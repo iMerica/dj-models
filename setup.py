@@ -8,8 +8,7 @@ CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3, 5)
 
 # This check and everything above must remain compatible with Python 2.7.
-if CURRENT_PYTHON < REQUIRED_PYTHON:
-    sys.stderr.write("""
+error_message = """
 ==========================
 Unsupported Python version
 ==========================
@@ -29,7 +28,9 @@ version of Python. If you can't upgrade your pip (or Python), request
 an older version of Django:
 
     $ python -m pip install "djmodels<2"
-""".format(*(REQUIRED_PYTHON + CURRENT_PYTHON)))
+"""
+if CURRENT_PYTHON < REQUIRED_PYTHON:
+    sys.stderr.write(error_message.format(*(REQUIRED_PYTHON + CURRENT_PYTHON)))
     sys.exit(1)
 
 
