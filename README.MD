@@ -11,8 +11,9 @@ Use the Django ORM in any Python web framework.
 
 Create an app directory for your models and settings (DB connection details).
 
-    mkdir app
-    touch app/{__init__.py,models.py,settings.py}
+    mkdir -p project/base
+    touch project/base/{__init__.py,models.py}
+    touch settings.py
     
     
 Add your database settings to the settings module. See Django's docs on this for more info.
@@ -30,7 +31,7 @@ DATABASES = {
     }
 }
 
-INSTALLED_APPS = ['app']
+INSTALLED_APPS = ['base']
 
 ```
     
@@ -52,18 +53,18 @@ Export your settings module
 
 Create migrations
 
-    $ djmodels-admin makemigrations app
+    $ /manage.py makemigrations base
     # Migrations for 'app':
     #   - Create model Person 
     
 
 Run Migrate
 
-    $ djmodels-admin migrate app
+    $ /manage.py makemigrations base
     # Operations to perform:
-    #   Apply all migrations: app
+    #   Apply all migrations: base
     #   Running migrations:
-    #       Applying app.0001_initial... OK
+    #       Applying base.0001_initial... OK
     
 
 Import the model into any webframework and make queries. For example, Flask.
@@ -71,6 +72,9 @@ Import the model into any webframework and make queries. For example, Flask.
 ```python
 
 from flask import Flask
+import djmodels
+
+djmodels.setup()
 from app.models import Person
 app = Flask(__name__)
 
@@ -83,7 +87,7 @@ def get_random_person():
 
 ## Gotchas
 
-- Make sure to set DJMODELS_SETTINGS_MODULE
+- Make sure to set DJMODELS_SETTINGS_MODULE is set!
 
 
 ## LICENSE
