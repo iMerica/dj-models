@@ -2,11 +2,11 @@
 
 Use the Django ORM in any Python web framework.
 
-## ⚠️ Notes ⚠️
-- This is not ready yet. Once it is, I'll publish to PyPi.
-- Async is not supported.
-- All Praise to the Django dev team 
+## Install
 
+    pip3 install djmodels
+
+ 
 ## Getting Started
 
 Create an app directory for your models and settings (DB connection details).
