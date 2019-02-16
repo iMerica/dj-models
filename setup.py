@@ -58,7 +58,7 @@ EXCLUDE_FROM_PACKAGES = ['django.conf.project_template',
                          'django.bin']
 
 
-version = "0.0.4"
+version = "0.0.5"
 
 
 def read(fname):
@@ -74,6 +74,7 @@ setup(
     author='@iMerica',
     description='Use Django Models in any Python Web Framework',
     long_description=read('README.MD'),
+    long_description_content_type='text/markdown',
     license='BSD',
     packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
     include_package_data=True,
