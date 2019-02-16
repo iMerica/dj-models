@@ -58,7 +58,7 @@ EXCLUDE_FROM_PACKAGES = ['django.conf.project_template',
                          'django.bin']
 
 
-version = "0.0.5"
+version = "0.0.6"
 
 
 def read(fname):

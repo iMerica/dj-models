@@ -7,7 +7,7 @@ Use the Django ORM in any Python web framework.
     pip3 install djmodels
 
  
-## Getting Started
+## Example App Configuration
 
 Create an app directory for your models and settings (DB connection details).
 
@@ -58,7 +58,7 @@ Create migrations
     #   - Create model Person 
     
 
-Run Migrate
+Run Migrations
 
     $ /manage.py makemigrations base
     # Operations to perform:
@@ -67,7 +67,7 @@ Run Migrate
     #       Applying base.0001_initial... OK
     
 
-Import the model into any webframework and make queries. For example, Flask.
+Import the model into any web framework and make queries. For example, Flask.
 
 ```python
 
@@ -91,7 +91,7 @@ def get_random_person():
 
 ## Gotchas
 
-- Make sure to set DJMODELS_SETTINGS_MODULE is set!
+- Make sure `DJMODELS_SETTINGS_MODULE` is set!
 
 
 ## LICENSE
