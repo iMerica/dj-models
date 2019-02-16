@@ -83,7 +83,7 @@ def get_random_person():
 
 ## Gotchas
 
-- Make sure to set 
+- Make sure to set DJMODELS_SETTINGS_MODULE
 
 
 ## LICENSE
