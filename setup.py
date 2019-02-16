@@ -90,7 +90,8 @@ setup(
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',
-        'Framework :: Any',
+        'Framework :: Django'
+        'Framework :: Flask',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
@@ -104,6 +105,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Database :: Database Engines/Servers'
     ],
     project_urls={
         'Documentation': 'https://github.com/iMerica/dj-models',
