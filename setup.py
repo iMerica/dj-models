@@ -58,7 +58,7 @@ EXCLUDE_FROM_PACKAGES = ['django.conf.project_template',
                          'django.bin']
 
 
-version = "0.0.3"
+version = "0.0.4"
 
 
 def read(fname):
@@ -81,7 +81,7 @@ setup(
     entry_points={'console_scripts': [
         'djmodels-admin = djmodels.core.management:execute_from_command_line',
     ]},
-    install_requires=['pytz'],
+    install_requires=['pytz', 'psycopg2'],
     extras_require={
         "bcrypt": ["bcrypt"],
         "argon2": ["argon2-cffi >= 16.1.0"],
