@@ -5,9 +5,9 @@ Classes representing uploaded files.
 import os
 from io import BytesIO
 
-from django.conf import settings
-from django.core.files import temp as tempfile
-from django.core.files.base import File
+from djmodels.conf import settings
+from djmodels.core.files import temp as tempfile
+from djmodels.core.files.base import File
 
 __all__ = ('UploadedFile', 'TemporaryUploadedFile', 'InMemoryUploadedFile',
            'SimpleUploadedFile')

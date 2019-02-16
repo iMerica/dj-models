@@ -4,11 +4,11 @@ Base file upload handler classes, and the built-in concrete subclasses
 
 from io import BytesIO
 
-from django.conf import settings
-from django.core.files.uploadedfile import (
+from djmodels.conf import settings
+from djmodels.core.files.uploadedfile import (
     InMemoryUploadedFile, TemporaryUploadedFile,
 )
-from django.utils.module_loading import import_string
+from djmodels.utils.module_loading import import_string
 
 __all__ = [
     'UploadFileException', 'StopUpload', 'SkipFile', 'FileUploadHandler',
@@ -199,7 +199,7 @@ def load_handler(path, *args, **kwargs):
     E.g.::
         >>> from django.http import HttpRequest
         >>> request = HttpRequest()
-        >>> load_handler('django.core.files.uploadhandler.TemporaryFileUploadHandler', request)
+        >>> load_handler('djmodels.core.files.uploadhandler.TemporaryFileUploadHandler', request)
         <TemporaryFileUploadHandler object at 0x...>
     """
     return import_string(path)(*args, **kwargs)

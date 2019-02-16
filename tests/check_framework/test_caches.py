@@ -6,12 +6,12 @@ from djmodels.test.utils import override_settings
 class CheckCacheSettingsAppDirsTest(SimpleTestCase):
     VALID_CACHES_CONFIGURATION = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         },
     }
     INVALID_CACHES_CONFIGURATION = {
         'other': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         },
     }
 

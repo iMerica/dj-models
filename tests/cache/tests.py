@@ -66,7 +66,7 @@ KEY_ERRORS_WITH_MEMCACHED_MSG = (
 
 @override_settings(CACHES={
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'djmodels.core.cache.backends.dummy.DummyCache',
     }
 })
 class DummyCacheTests(SimpleTestCase):
@@ -1063,17 +1063,17 @@ class DBCacheRouter:
     """A router that puts the cache table on the 'other' database."""
 
     def db_for_read(self, model, **hints):
-        if model._meta.app_label == 'django_cache':
+        if model._meta.app_label == 'djmodels._cache':
             return 'other'
         return None
 
     def db_for_write(self, model, **hints):
-        if model._meta.app_label == 'django_cache':
+        if model._meta.app_label == 'djmodels._cache':
             return 'other'
         return None
 
     def allow_migrate(self, db, app_label, **hints):
-        if app_label == 'django_cache':
+        if app_label == 'djmodels._cache':
             return db == 'other'
         return None
 
@@ -1081,7 +1081,7 @@ class DBCacheRouter:
 @override_settings(
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+            'BACKEND': 'djmodels.core.cache.backends.db.DatabaseCache',
             'LOCATION': 'my_cache_table',
         },
     },
@@ -1146,9 +1146,9 @@ class LocMemCacheTests(BaseCacheTests, TestCase):
         caches['custom_key2']._expire_info = cache._expire_info
 
     @override_settings(CACHES={
-        'default': {'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'},
+        'default': {'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache'},
         'other': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
             'LOCATION': 'other'
         },
     })
@@ -1498,7 +1498,7 @@ class CacheClosingTests(SimpleTestCase):
 
 DEFAULT_MEMORY_CACHES_SETTINGS = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
     }
 }
@@ -1576,7 +1576,7 @@ class DefaultNonExpiringCacheKeyTests(SimpleTestCase):
     CACHE_MIDDLEWARE_SECONDS=1,
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         },
     },
     USE_I18N=False,
@@ -1715,7 +1715,7 @@ class CacheUtils(SimpleTestCase):
 @override_settings(
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
             'KEY_PREFIX': 'cacheprefix',
         },
     },
@@ -1729,7 +1729,7 @@ class PrefixedCacheUtils(CacheUtils):
     CACHE_MIDDLEWARE_KEY_PREFIX='test',
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         },
     },
 )
@@ -1777,7 +1777,7 @@ class CacheHEADTest(SimpleTestCase):
     CACHE_MIDDLEWARE_KEY_PREFIX='settingsprefix',
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         },
     },
     LANGUAGES=[
@@ -1981,7 +1981,7 @@ class CacheI18nTest(TestCase):
 @override_settings(
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
             'KEY_PREFIX': 'cacheprefix'
         },
     },
@@ -2004,10 +2004,10 @@ def csrf_view(request):
     CACHE_MIDDLEWARE_SECONDS=30,
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         },
         'other': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
             'LOCATION': 'other',
             'TIMEOUT': '1',
         },
@@ -2212,7 +2212,7 @@ class CacheMiddlewareTest(SimpleTestCase):
     CACHE_MIDDLEWARE_SECONDS=1,
     CACHES={
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'djmodels.core.cache.backends.locmem.LocMemCache',
         },
     },
     USE_I18N=False,

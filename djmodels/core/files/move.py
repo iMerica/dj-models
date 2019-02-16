@@ -1,7 +1,7 @@
 """
 Move a file in the safest way possible::
 
-    >>> from django.core.files.move import file_move_safe
+    >>> from djmodels.core.files.move import file_move_safe
     >>> file_move_safe("/tmp/old_file", "/tmp/new_file")
 """
 
@@ -9,7 +9,7 @@ import errno
 import os
 from shutil import copystat
 
-from django.core.files import locks
+from djmodels.core.files import locks
 
 __all__ = ['file_move_safe']
 

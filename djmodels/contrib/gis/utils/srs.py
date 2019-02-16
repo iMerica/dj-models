@@ -29,7 +29,7 @@ def add_srs_entry(srs, auth_name='EPSG', auth_srid=None, ref_sys_name=None,
 
      database:
       The name of the database connection to use; the default is the value
-      of `django.db.DEFAULT_DB_ALIAS` (at the time of this writing, its value
+      of `djmodels.db.DEFAULT_DB_ALIAS` (at the time of this writing, its value
       is 'default').
     """
     database = database or DEFAULT_DB_ALIAS

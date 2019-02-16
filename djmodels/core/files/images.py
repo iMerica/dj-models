@@ -11,7 +11,7 @@ from djmodels.core.files import File
 
 class ImageFile(File):
     """
-    A mixin for use alongside django.core.files.base.File, which provides
+    A mixin for use alongside djmodels.core.files.base.File, which provides
     additional features for dealing with images.
     """
     @property

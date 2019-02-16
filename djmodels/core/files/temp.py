@@ -19,7 +19,7 @@ arguments available in tempfile.NamedTemporaryFile.
 import os
 import tempfile
 
-from django.core.files.utils import FileProxyMixin
+from djmodels.core.files.utils import FileProxyMixin
 
 __all__ = ('NamedTemporaryFile', 'gettempdir',)
 

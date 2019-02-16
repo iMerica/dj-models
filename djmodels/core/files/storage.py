@@ -2,19 +2,19 @@ import os
 from datetime import datetime
 from urllib.parse import urljoin
 
-from django.conf import settings
-from django.core.exceptions import SuspiciousFileOperation
-from django.core.files import File, locks
-from django.core.files.move import file_move_safe
-from django.core.signals import setting_changed
-from django.utils import timezone
-from django.utils._os import safe_join
-from django.utils.crypto import get_random_string
-from django.utils.deconstruct import deconstructible
-from django.utils.encoding import filepath_to_uri
-from django.utils.functional import LazyObject, cached_property
-from django.utils.module_loading import import_string
-from django.utils.text import get_valid_filename
+from djmodels.conf import settings
+from djmodels.core.exceptions import SuspiciousFileOperation
+from djmodels.core.files import File, locks
+from djmodels.core.files.move import file_move_safe
+from djmodels.core.signals import setting_changed
+from djmodels.utils import timezone
+from djmodels.utils._os import safe_join
+from djmodels.utils.crypto import get_random_string
+from djmodels.utils.deconstruct import deconstructible
+from djmodels.utils.encoding import filepath_to_uri
+from djmodels.utils.functional import LazyObject, cached_property
+from djmodels.utils.module_loading import import_string
+from djmodels.utils.text import get_valid_filename
 
 __all__ = ('Storage', 'FileSystemStorage', 'DefaultStorage', 'default_storage')
 
