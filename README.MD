@@ -47,7 +47,7 @@ class Person(models.Model):
 ```
 Export your settings module
 
-    export DJANGO_SETTINGS_MODULE=app.settings
+    export DJMODELS_SETTINGS_MODULE=app.settings
 
 
 Create migrations
@@ -81,8 +81,9 @@ def get_random_person():
 
 ``` 
 
-## Bugs
-- Migration files are currently being saved to a directory that is relative to the library itself rather than locally in main app/project directory. 
+## Gotchas
+
+- Make sure to set 
 
 
 ## LICENSE

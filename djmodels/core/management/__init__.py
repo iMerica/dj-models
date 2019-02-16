@@ -203,7 +203,7 @@ class ManagementUtility:
         try:
             app_name = commands[subcommand]
         except KeyError:
-            if os.environ.get('DJANGO_SETTINGS_MODULE'):
+            if os.environ.get('DJMODELS_SETTINGS_MODULE'):
                 # If `subcommand` is missing due to misconfigured settings, the
                 # following line will retrigger an ImproperlyConfigured exception
                 # (get_commands() swallows the original one) so the user is
@@ -274,7 +274,7 @@ class ManagementUtility:
                     # Get the last part of the dotted path as the app name.
                     options.extend((app_config.label, 0) for app_config in app_configs)
                 except ImportError:
-                    # Fail silently if DJANGO_SETTINGS_MODULE isn't set. The
+                    # Fail silently if DJMODELS_SETTINGS_MODULE isn't set. The
                     # user will find out once they execute the command.
                     pass
             parser = subcommand_cls.create_parser('', cwords[0])

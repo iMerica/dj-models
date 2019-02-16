@@ -1,7 +1,7 @@
 """
 Settings and configuration for Django.
 
-Read values from the module specified by the DJANGO_SETTINGS_MODULE environment
+Read values from the module specified by the DJMODELS_SETTINGS_MODULE environment
 variable, and then from djmodels.conf.global_settings; see the global_settings.py
 for a list of all possible variables.
 """
@@ -17,14 +17,14 @@ from djmodels.core.exceptions import ImproperlyConfigured
 from djmodels.utils.deprecation import RemovedInDjango30Warning
 from djmodels.utils.functional import LazyObject, empty
 
-ENVIRONMENT_VARIABLE = "DJANGO_SETTINGS_MODULE"
+ENVIRONMENT_VARIABLE = "DJMODELS_SETTINGS_MODULE"
 
 
 class LazySettings(LazyObject):
     """
     A lazy proxy for either global Django settings or a custom settings object.
     The user can manually configure settings prior to using them. Otherwise,
-    Django uses the settings module pointed to by DJANGO_SETTINGS_MODULE.
+    DjModels uses the settings module pointed to by DJMODELS_SETTINGS_MODULE.
     """
     def _setup(self, name=None):
         """

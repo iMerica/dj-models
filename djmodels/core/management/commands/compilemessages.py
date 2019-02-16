@@ -59,7 +59,7 @@ class Command(BaseCommand):
                                "tools 0.15 or newer installed." % self.program)
 
         basedirs = [os.path.join('conf', 'locale'), 'locale']
-        if os.environ.get('DJANGO_SETTINGS_MODULE'):
+        if os.environ.get('DJMODELS_SETTINGS_MODULE'):
             from djmodels.conf import settings
             basedirs.extend(settings.LOCALE_PATHS)
 

@@ -68,7 +68,7 @@ def handle_default_options(options):
     user commands.
     """
     if options.settings:
-        os.environ['DJANGO_SETTINGS_MODULE'] = options.settings
+        os.environ['DJMODELS_SETTINGS_MODULE'] = options.settings
     if options.pythonpath:
         sys.path.insert(0, options.pythonpath)
 
@@ -268,7 +268,7 @@ class BaseCommand:
             help=(
                 'The Python path to a settings module, e.g. '
                 '"myproject.settings.main". If this isn\'t provided, the '
-                'DJANGO_SETTINGS_MODULE environment variable will be used.'
+                'DJMODELS_SETTINGS_MODULE environment variable will be used.'
             ),
         )
         parser.add_argument(

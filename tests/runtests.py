@@ -15,7 +15,6 @@ from djmodels.conf import settings
 from djmodels.db import connection, connections
 from djmodels.test import TestCase, TransactionTestCase
 from djmodels.test.runner import default_test_processes
-from djmodels.test.selenium import SeleniumTestCaseBase
 from djmodels.test.utils import get_runner
 from djmodels.utils.deprecation import (
     RemovedInDjango30Warning, RemovedInDjango31Warning,
@@ -115,12 +114,6 @@ def setup(verbosity, test_labels, parallel):
         bits = label.split('.')[:1]
         test_labels_set.add('.'.join(bits))
 
-    if verbosity >= 1:
-        msg = "Testing against Django installed in '%s'" % os.path.dirname(djmodels.__file__)
-        max_parallel = default_test_processes() if parallel == 0 else parallel
-        if max_parallel > 1:
-            msg += " with up to %d processes" % max_parallel
-        print(msg)
 
     # Force declaring available_apps in TransactionTestCase for faster tests.
     def no_available_apps(self):
@@ -247,20 +240,6 @@ def actual_test_processes(parallel):
             return 1
     else:
         return parallel
-
-
-class ActionSelenium(argparse.Action):
-    """
-    Validate the comma-separated list of requested browsers.
-    """
-    def __call__(self, parser, namespace, values, option_string=None):
-        browsers = values.split(',')
-        for browser in browsers:
-            try:
-                SeleniumTestCaseBase.import_webdriver(browser)
-            except ImportError:
-                raise argparse.ArgumentError(self, "Selenium browser specification '%s' is not valid." % browser)
-        setattr(namespace, self.dest, browsers)
 
 
 def django_tests(verbosity, interactive, failfast, keepdb, reverse,
@@ -415,7 +394,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--settings',
         help='Python path to settings module, e.g. "myproject.settings". If '
-             'this isn\'t provided, either the DJANGO_SETTINGS_MODULE '
+             'this isn\'t provided, either the DJMODELS_SETTINGS_MODULE '
              'environment variable or "test_sqlite" will be used.',
     )
     parser.add_argument(
@@ -431,10 +410,6 @@ if __name__ == "__main__":
         '--reverse', action='store_true',
         help='Sort test suites and test cases in opposite order to debug '
              'test side effects not apparent with normal execution lineup.',
-    )
-    parser.add_argument(
-        '--selenium', action=ActionSelenium, metavar='BROWSERS',
-        help='A comma-separated list of browsers to run the Selenium tests against.',
     )
     parser.add_argument(
         '--debug-sql', action='store_true',
@@ -460,17 +435,10 @@ if __name__ == "__main__":
     options.modules = [os.path.normpath(labels) for labels in options.modules]
 
     if options.settings:
-        os.environ['DJANGO_SETTINGS_MODULE'] = options.settings
+        os.environ['DJMODELS_SETTINGS_MODULE'] = options.settings
     else:
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'test_sqlite')
-        options.settings = os.environ['DJANGO_SETTINGS_MODULE']
-
-    if options.selenium:
-        if not options.tags:
-            options.tags = ['selenium']
-        elif 'selenium' not in options.tags:
-            options.tags.append('selenium')
-        SeleniumTestCaseBase.browsers = options.selenium
+        os.environ.setdefault('DJMODELS_SETTINGS_MODULE', 'test_sqlite')
+        options.settings = os.environ['DJMODELS_SETTINGS_MODULE']
 
     if options.bisect:
         bisect_tests(options.bisect, options, options.modules, options.parallel)

@@ -7,7 +7,7 @@ from djmodels.contrib.gis.utils.srs import add_srs_entry  # NOQA
 from djmodels.core.exceptions import ImproperlyConfigured
 
 try:
-    # LayerMapping requires DJANGO_SETTINGS_MODULE to be set,
+    # LayerMapping requires DJMODELS_SETTINGS_MODULE to be set,
     # and ImproperlyConfigured is raised if that's not the case.
     from djmodels.contrib.gis.utils.layermapping import LayerMapping, LayerMapError  # NOQA
 except ImproperlyConfigured:
